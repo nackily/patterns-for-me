@@ -1,6 +1,6 @@
 ## 这个仓库是干啥的？
 
-23 种设计模式之从入门到放弃（Java版），对《Design patterns- Elements of reusable object-oriented software》一书中提及的 23 种设计模式进行更加浅显的解释，配合着通俗易懂的例子进行说明，旨在降低设计模式入门的难度。
+23 种设计模式之入门宝典（Java版），对《Design patterns- Elements of reusable object-oriented software》一书中提及的 23 种设计模式进行更加浅显的解释，配合着通俗易懂的例子进行说明，旨在降低设计模式入门的难度。
 
 ## 适宜人群说明
 
@@ -60,14 +60,14 @@
 
 
 
-[builder_doc]:https://www.yuque.com/docs/share/cf9d6e82-231b-4da6-85ea-5be089f8e993
-[factory_method_doc]:https://www.yuque.com/docs/share/169b34ee-634e-47ec-b4c4-c9ed2883a11f
-[prototype_doc]:https://www.yuque.com/docs/share/9a8b8ffe-d346-4966-bdd7-bf6f7f1bc9b1
-[singleton_doc]:https://www.yuque.com/docs/share/f0d7e9b6-d77c-4fba-b597-ab89bdd9cb3a
-[adaptor_doc]:https://www.yuque.com/docs/share/844a742b-77ea-4922-85c3-d55e05758364
-[decorator_doc]:https://www.yuque.com/docs/share/f05dc27c-f575-4e35-a76f-fd5173f6f9bb
-[observer_doc]:https://www.yuque.com/docs/share/7f7a885e-a83b-44b4-af72-b8de62267f45
-[template_method_doc]:https://www.yuque.com/docs/share/651c4844-3145-4bd3-801c-deacf6c284b8
+[builder_doc]:https://www.yuque.com/coderran/pd/dkzsxv
+[factory_method_doc]:https://www.yuque.com/coderran/pd/dq7au9
+[prototype_doc]:https://www.yuque.com/coderran/pd/eqz0qg
+[singleton_doc]:https://www.yuque.com/coderran/pd/dvedfa
+[adaptor_doc]:https://www.yuque.com/coderran/pd/zy4og8
+[decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
+[observer_doc]:https://www.yuque.com/coderran/pd/gpcb3a
+[template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
 
 
 [builder_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/builder
