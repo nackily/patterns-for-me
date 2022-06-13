@@ -3,7 +3,7 @@ package com.aoligei.structural.adapter;
 /**
  * 游戏机数据线
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-06-01 17:28:53
  * @since 1.0.0
  */

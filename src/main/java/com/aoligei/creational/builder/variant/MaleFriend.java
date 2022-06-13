@@ -3,7 +3,7 @@ package com.aoligei.creational.builder.variant;
 /**
  * 男性朋友
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-31 15:11:30
  * @since 1.0.0
  */

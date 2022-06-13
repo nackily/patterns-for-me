@@ -3,7 +3,7 @@ package com.aoligei.creational.prototype;
 /**
  * 买卖合同
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-06-06 15:35:24
  * @since 1.0.0
  */

@@ -3,7 +3,7 @@ package com.aoligei.behavioral.observer;
 /**
  * 观察者
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-13 09:56:05
  * @since 1.0.0
  */public interface Observer {

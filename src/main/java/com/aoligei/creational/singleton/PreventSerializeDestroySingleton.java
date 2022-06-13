@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * 阻止序列化破坏单例的案例
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-26 14:56:50
  * @since 1.0.0
  */

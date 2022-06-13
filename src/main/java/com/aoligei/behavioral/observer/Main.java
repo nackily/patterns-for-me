@@ -3,7 +3,7 @@ package com.aoligei.behavioral.observer;
 /**
  * Main
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-13 09:17:43
  * @since 1.0.0
  */

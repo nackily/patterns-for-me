@@ -3,7 +3,7 @@ package com.aoligei.creational.singleton;
 /**
  * 静态内部类
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-25 17:16:04
  * @since 1.0.0
  */

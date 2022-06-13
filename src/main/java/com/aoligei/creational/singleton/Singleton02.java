@@ -3,7 +3,7 @@ package com.aoligei.creational.singleton;
 /**
  * 懒汉式
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-25 17:08:25
  * @since 1.0.0
  */

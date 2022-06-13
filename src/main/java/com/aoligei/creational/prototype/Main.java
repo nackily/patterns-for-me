@@ -4,7 +4,7 @@ package com.aoligei.creational.prototype;
 /**
  * Main
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-06-06 10:38:06
  * @since 1.0.0
  */

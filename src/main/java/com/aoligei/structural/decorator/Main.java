@@ -3,7 +3,7 @@ package com.aoligei.structural.decorator;
 /**
  * Main
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-24 16:01:55
  * @since 1.0.0
  */

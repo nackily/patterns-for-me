@@ -3,7 +3,7 @@ package com.aoligei.structural.adapter;
 /**
  * 插头
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-06-01 09:21:48
  * @since 1.0.0
  */

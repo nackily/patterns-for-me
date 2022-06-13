@@ -3,7 +3,7 @@ package com.aoligei.creational.singleton;
 /**
  * 阻止克隆破坏单例的案例
  *
- * @author xg-ran
+ * @author coder
  * @date 2022-05-26 14:52:57
  * @since 1.0.0
  */
