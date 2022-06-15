@@ -44,7 +44,7 @@
 | 6   | 备忘录（Memento）                 | 更新中...                     | 更新中...                      |
 | 7   | 观察者（Observer）                | [传送门][observer_doc]        | [传送门][observer_code]        |
 | 8   | 状态（State）                    | 更新中...                     | 更新中...                      |
-| 9   | 策略（Strategy）                 | 更新中...                     | 更新中...                      |
+| 9   | 策略（Strategy）                 | [传送门][strategy_doc]        | [传送门][strategy_code]        |
 | 10  | 模板方法（Template Method）        | [传送门][template_method_doc] | [传送门][template_method_code] |
 | 11  | 访问者（Visitor）                 | 更新中...                     | 更新中...                      |
 
@@ -101,6 +101,7 @@
 [decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
 [observer_doc]:https://www.yuque.com/coderran/pd/gpcb3a
 [template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
+[strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 
 
 [builder_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/builder
@@ -111,3 +112,4 @@
 [decorator_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/decorator
 [observer_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/observer
 [template_method_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/template_method
+[strategy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/strategy
