@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.aoligei</groupId>
-    <artifactId>dp4java</artifactId>
+    <artifactId>DesignPatterns</artifactId>
     <version>1.0.1</version>
 
     <dependencies>
