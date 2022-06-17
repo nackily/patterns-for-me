@@ -13,13 +13,13 @@
 对于每一种设计模式，提供了一篇在线文档以及示例代码。<br>
 ### 创建型模式
 
-| 序号  | 模式名称 | 在线文档                      | 示例代码                       |
-|-----|------------------------|---------------------------|----------------------------|
-| 1   | 抽象工厂（Abstract Factory） | 更新中...                    | 更新中...                        |
-| 2   | 建造者（Builder）           | [传送门][builder_doc]        | [传送门][builder_code]        |
+| 序号  | 模式名称 | 在线文档   | 示例代码     |
+|-----|---------------------|------------------------|----------------------------|
+| 1   | 抽象工厂（Abstract Factory） | 更新中...  | 更新中...   |
+| 2   | 建造者（Builder）| [传送门][builder_doc]     | [传送门][builder_code]        |
 | 3 | 工厂方法（Factory Method） | [传送门][factory_method_doc] | [传送门][factory_method_code] |
-| 4 | 原型（Prototype）| [传送门][prototype_doc]      | [传送门][prototype_code]      |
-| 5 | 单例（Singleton）| [传送门][singleton_doc]      | [传送门][singleton_code]      |
+| 4 | 原型（Prototype）| [传送门][prototype_doc]   | [传送门][prototype_code]      |
+| 5 | 单例（Singleton）| [传送门][singleton_doc]   | [传送门][singleton_code]      |
 
 ### 结构型模式
 
@@ -115,4 +115,4 @@
 [observer_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/observer
 [template_method_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/template_method
 [strategy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/strategy
-[facade_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/facade
+[facade_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/facade
