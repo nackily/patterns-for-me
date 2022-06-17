@@ -1,4 +1,5 @@
 > Once you understand the design patterns and have had an "Aha!" (and not just a "Huh?") experience with them, you won't ever think about object-oriented design in the same way.
+---
 ## 项目介绍
 
 23 种设计模式之入门宝典（Java版），对《Design patterns- Elements of reusable object-oriented software》一书中提及的 23 种设计模式进行更加浅显的解释，配合着通俗易懂的例子进行说明，旨在降低设计模式入门的难度。
@@ -25,12 +26,12 @@
 | 序号  | 模式名称           | 在线文档                 | 示例代码                  |
 |-----|----------------|----------------------|-----------------------|
 | 1   | 适配器（Adaptor）   | [传送门][adaptor_doc]   | [传送门][adaptor_code]   |
-| 2   | 桥接（Bridge）     | 更新中...              | 更新中...               |
-| 3   | 组合（Composite）  | 更新中...              | 更新中...               |
+| 2   | 桥接（Bridge）     | 更新中...               | 更新中...                |
+| 3   | 组合（Composite）  | 更新中...               | 更新中...                |
 | 4   | 装饰器（Decorator） | [传送门][decorator_doc] | [传送门][decorator_code] |
-| 5   | 外观（Facade）     | 更新中...              | 更新中...               |
-| 6   | 享元（Flyweight）  | 更新中...              | 更新中...               |
-| 7   | 代理（Proxy）      | 更新中...              | 更新中...               |
+| 5   | 门面（Facade）     | [传送门][facade_doc]    | [传送门][facade_code]    |
+| 6   | 享元（Flyweight）  | 更新中...               | 更新中...                |
+| 7   | 代理（Proxy）      | 更新中...               | 更新中...                |
 
 ### 行为型模式
 
@@ -48,31 +49,31 @@
 | 10  | 模板方法（Template Method）        | [传送门][template_method_doc] | [传送门][template_method_code] |
 | 11  | 访问者（Visitor）                 | 更新中...                     | 更新中...                      |
 
-## 毕业建议
-### 远离那些试图阻止你的人
+## 进阶建议
+
+**(1). 远离那些试图阻止你的人**
+
 事实上，每一种设计模式都并不复杂。只要你使用面向对象的语言，就或多或少与设计模式打过交道，设计模式也没什么神秘的。设计模式并不是只能由高级开发者使用，只要你有面向对象的基础，你一样可以在设计模式中汲取前人的经验。<br>
 > ”放弃吧，设计模式没个几万行的代码基础压根学不会的！“<br>
 > ”学什么设计模式？没有设计模式老夫照样一把刷...“<br>
-> “还不如不学，眼睛会了手不会，用不起来等于没学。”<br>
+> “还不如不学，眼睛会了手不会，不能应用等于没学。”<br>
 
 如果有一天咱听到这样的话，记得远离他。最好是大家都不学，到时候就只有咱自己独步天下呐，岂不美哉？
 
-### 进阶建议
-
-**(1). 学无止境，温故知新**
+**(2). 学无止境，温故知新**
 
 如果你已经学习了某一种模式，想知道更多关于该设计模式的内容，可以参阅设计模式相关的书籍，例如《Head First 设计模式》等（此处并不是推荐这本书，如有购书需求，请自行斟酌）。书籍中的内容会比本项目更细致，更全面。
 
 多看书，看好书，不管处于哪个阶段，温故知新总是没错的。比如《Design patterns- Elements of reusable object-oriented software》一书，过一段时间再去看，和上次看的感受就可能完全不一样了。
 
-**(2). 不断实践，不断总结**
+**(3). 不断实践，不断总结**
 
 如果你已经了解了某一种模式，唯一的提升途径就是：**一边实践，一边总结**。尝试在实践中使用这种设计模式，并不断的进行总结，总结引入设计模式后的优缺点、寻找是否还有更好的方案。**注意，如果你的代码隶属于公司，如果没有十足的把握以及迫不得已的需求，不要提交到远程仓库**。
 
-**(3). 厚积薄发，有的放矢**
+**(3). 选错了大不了重来一次**
 
 设计模式的最终目的是为了规划合理的结构和改善既有的代码，为了这样的目标我们借助于设计模式所提供的 23 种套路。但在面对实际需求时，最困难的部分是选择合适的套路（甚至是应不应该引入套路）。有时候我们发现可以套用一个设计模式（或几个模式的组合），又觉得另一个设计模式（或其他模式的组合）同样能套用在此处。而此时，就是你总结经验的最佳时机。
-尽管，你会因为选择错误而付出代价，但在下次遇到同样问题的时候，你已经有失败过一次的经验了。不必为选择错误而感到担心，没有人是完美的。
+尽管，你会因为选择错误而付出代价，但在下次遇到类似问题的时候，你已经有失败过一次的经验了。不必为选择错误而感到担心，没有人是完美的，选错了大不了重来一次。
 
 ## 写在最后
 **(1). 声明** <br>
@@ -102,6 +103,7 @@
 [observer_doc]:https://www.yuque.com/coderran/pd/gpcb3a
 [template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
+[facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 
 
 [builder_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/builder
@@ -113,3 +115,4 @@
 [observer_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/observer
 [template_method_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/template_method
 [strategy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/strategy
+[facade_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/facade
