@@ -31,7 +31,7 @@
 | 4   | 装饰器（Decorator） | [传送门][decorator_doc] | [传送门][decorator_code] |
 | 5   | 门面（Facade）     | [传送门][facade_doc]    | [传送门][facade_code]    |
 | 6   | 享元（Flyweight）  | 更新中...               | 更新中...                |
-| 7   | 代理（Proxy）      | 更新中...               | 更新中...                |
+| 7   | 代理（Proxy）      | [传送门][proxy_doc]     | [传送门][proxy_code]     |
 
 ### 行为型模式
 
@@ -104,6 +104,7 @@
 [template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
+[proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
 
 
 [builder_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/builder
@@ -116,3 +117,4 @@
 [template_method_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/template_method
 [strategy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/strategy
 [facade_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/facade
+[proxy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/proxy
