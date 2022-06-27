@@ -38,7 +38,7 @@
 | 序号  | 模式名称                         | 在线文档                       | 示例代码                        |
 |-----|------------------------------|----------------------------|-----------------------------|
 | 1   | 责任链（Chain Of Responsibility） | 更新中...                     | 更新中...                      |
-| 2   | 命令（Command）                  | 更新中...                     | 更新中...                      |
+| 2   | 命令（Command）                  | [传送门][command_doc]         | [传送门][command_code]         |
 | 3   | 解释器（Interpreter）             | 更新中...                     | 更新中...                      |
 | 4   | 迭代器（Iterator）                | 更新中...                     | 更新中...                      |
 | 5   | 中介者（Mediator）                | 更新中...                     | 更新中...                      |
@@ -105,6 +105,7 @@
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
+[command_doc]:https://www.yuque.com/coderran/pd/xn73iv
 
 
 [builder_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/builder
@@ -118,3 +119,4 @@
 [strategy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/strategy
 [facade_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/facade
 [proxy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/proxy
+[command_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/command
