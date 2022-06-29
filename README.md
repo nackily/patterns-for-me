@@ -13,73 +13,188 @@
 
 ## 开始学习
 
+对于每一种设计模式，提供一篇在线文档及文档中的示例代码。对于容易混淆的模式，除此之外提供单独的在线文档对他们对比、区分及总结。<br>
+
 ### 结构型模式
 
-| 序号  | 模式名称           | 在线文档                 | 示例代码                  |
-|-----|----------------|----------------------|-----------------------|
-| 1   | 适配器（Adaptor）   | [传送门][adaptor_doc]   | [传送门][adaptor_code]   |
-| 2   | 桥接（Bridge）     | 更新中...               | 更新中...                |
-| 3   | 组合（Composite）  | 更新中...               | 更新中...                |
-| 4   | 装饰器（Decorator） | [传送门][decorator_doc] | [传送门][decorator_code] |
-| 5   | 门面（Facade）     | [传送门][facade_doc]    | [传送门][facade_code]    |
-| 6   | 享元（Flyweight）  | 更新中...               | 更新中...                |
-| 7   | 代理（Proxy）      | [传送门][proxy_doc]     | [传送门][proxy_code]     |
+**（S-1）Adaptor - 适配器模式**
+<br>
+<br>**流行指数**：★★★★★
+<br>**难度等级**：★★★☆☆
+<br>**助记关键字**：转接头、不同国家的标准电压不一样
+<br>**在线文档**：将一个类的接口转换成客户希望的另外一个接口，适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作...[**查看更多**][adaptor_doc]
+<br>**代码目录**：[**点击**][adaptor_code]跳转。
+<br>
 
-### 行为型模式
+**（S-2）Bridge - 桥接模式**
+<br>
+正在努力更新中...
+<br>
 
-| 序号  | 模式名称                         | 在线文档                       | 示例代码                        |
-|-----|------------------------------|----------------------------|-----------------------------|
-| 1   | 责任链（Chain Of Responsibility） | 更新中...                     | 更新中...                      |
-| 2   | 命令（Command）                  | [传送门][command_doc]         | [传送门][command_code]         |
-| 3   | 解释器（Interpreter）             | 更新中...                     | 更新中...                      |
-| 4   | 迭代器（Iterator）                | 更新中...                     | 更新中...                      |
-| 5   | 中介者（Mediator）                | 更新中...                     | 更新中...                      |
-| 6   | 备忘录（Memento）                 | 更新中...                     | 更新中...                      |
-| 7   | 观察者（Observer）                | [传送门][observer_doc]        | [传送门][observer_code]        |
-| 8   | 状态（State）                    | 更新中...                     | 更新中...                      |
-| 9   | 策略（Strategy）                 | [传送门][strategy_doc]        | [传送门][strategy_code]        |
-| 10  | 模板方法（Template Method）        | [传送门][template_method_doc] | [传送门][template_method_code] |
-| 11  | 访问者（Visitor）                 | 更新中...                     | 更新中...                      |
+**（S-3）Composite - 组合模式**
+<br>
+正在努力更新中...
+<br>
 
+**（S-4）Decorator - 装饰器模式**
+<br>
+<br>**流行指数**：★★★★★
+<br>**难度等级**：★★★★☆
+<br>**助记关键字**：俄罗斯套娃
+<br>**在线文档**：在不改变原有对象结构的基础情况下，动态地给该对象增加一些额外功能的职责...[**查看更多**][decorator_doc]
+<br>**代码目录**：[**点击**][decorator_code]跳转。
+<br>
 
-对于每一种设计模式，提供一篇在线文档及文档中的示例代码。对于容易混淆的模式，除此之外提供单独的在线文档对他们对比、区分及总结。<br>
-### 创建型模式
+**（S-5）Facade - 门面模式**
+<br>
+<br>**流行指数**：★★★☆☆
+<br>**难度等级**：★★☆☆☆
+<br>**助记关键字**：景区检票口、银行业务接待员
+<br>**在线文档**：为子系统中的一组接口提供一个一致的界面，门面模式定义了一个高层接口，这个接口使得这一子系统更加容易使用...[**查看更多**][facade_doc]
+<br>**代码目录**：[**点击**][facade_code]跳转。
+<br>
 
-#### （C-1）Singleton - 单例模式
+**（S-6）Flyweight - 享元模式**
+<br>
+正在努力更新中...
+<br>
+
+**（S-7）Proxy - 代理模式**
+<br>
 <br>**流行指数**：★★★★★
 <br>**难度等级**：★★★☆☆
 <br>**助记关键字**：全局唯一、工具类
-<br>**在线文档**：单例模式应该是最简单的设计模式了，这个设计模式应该是面试中最被的最多的设计模式了。如果现在你仍不能随手写出两种单例实现，那么你该多努努力了...[查看更多][singleton_doc]
-<br>**代码目录**：[点击][singleton_code]跳转。
+<br>**在线文档**：代理模式为其他对象提供一种代理以控制对这个对象的访问...[**查看更多**][proxy_doc]
+<br>**代码目录**：[**点击**][proxy_code]跳转。
+<br>
 
-#### （C-2）Prototype - 原型模式
+
+### 行为型模式
+
+**（B-1）Chain Of Responsibility - 责任链模式**
+<br>
+正在努力更新中...
+<br>
+
+**（B-2）Command - 命令模式**
+<br>
+<br>**流行指数**：★★★☆☆
+<br>**难度等级**：★★★★★
+<br>**助记关键字**：封装请求
+<br>**在线文档**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消的操作...[**查看更多**][command_doc]
+<br>**代码目录**：[**点击**][command_code]跳转。
+<br>
+
+**（B-3）Interpreter - 解释器模式**
+<br>
+正在努力更新中...
+<br>
+
+**（B-4）Iterator - 迭代器模式**
+<br>
+正在努力更新中...
+<br>
+
+**（B-5）Mediator - 中介者模式**
+<br>
+正在努力更新中...
+<br>
+
+**（B-6）Memento - 备忘录模式**
+<br>
+<br>**流行指数**：★★☆☆☆
+<br>**难度等级**：★★★☆☆
+<br>**助记关键字**：撤销、回滚
+<br>**在线文档**：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先保存的状态...[**查看更多**][memento_doc]
+<br>**代码目录**：[**点击**][memento_code]跳转。
+<br>
+
+**（B-7）Observer - 观察者模式**
+<br>
+<br>**流行指数**：★★★★★
+<br>**难度等级**：★★★☆☆
+<br>**助记关键字**：你不必找我，我来找你
+<br>**在线文档**：定义对象间的一种一对多的依赖关系 ,当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并被自动更新...[**查看更多**][observer_doc]
+<br>**代码目录**：[**点击**][observer_code]跳转。
+<br>
+
+**（B-8）State - 状态模式**
+<br>
+正在努力更新中...
+<br>
+
+**（B-9）Strategy - 策略模式**
+<br>
+<br>**流行指数**：★★★★★
+<br>**难度等级**：★☆☆☆☆
+<br>**助记关键字**：公交/地铁/共享单车都能回家
+<br>**在线文档**：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。本模式使得算法可独立于使用它的客户而变化...[**查看更多**][strategy_doc]
+<br>**代码目录**：[**点击**][strategy_code]跳转。
+<br>
+
+**（B-10）Template Method - 模板方法模式**
+<br>
+<br>**流行指数**：★★★★★
+<br>**难度等级**：★☆☆☆☆
+<br>**助记关键字**：封装公用部分，扩展变化部分
+<br>**在线文档**：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤...[**查看更多**][template_method_doc]
+<br>**代码目录**：[**点击**][template_method_code]跳转。
+<br>
+
+**（B-11）Visitor - 访问者模式**
+<br>
+正在努力更新中...
+<br>
+
+### 创建型模式
+
+**（C-1）Singleton - 单例模式**
+<br>
+<br>**流行指数**：★★★★★
+<br>**难度等级**：★★★☆☆
+<br>**助记关键字**：全局唯一、工具类
+<br>**在线文档**：单例模式应该是最简单的设计模式了，这个设计模式应该是面试中最被的最多的设计模式了。如果现在你仍不能随手写出两种单例实现，那么你该多努努力了...[**查看更多**][singleton_doc]
+<br>**代码目录**：[**点击**][singleton_code]跳转。
+<br>
+
+**（C-2）Prototype - 原型模式**
+<br>
 <br>**流行指数**：★★★★☆
 <br>**难度等级**：★★☆☆☆
 <br>**助记关键字**：细胞分裂
-<br>**在线文档**：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象...[查看更多][prototype_doc]
-<br>**代码目录**：[点击][prototype_code]跳转。
+<br>**在线文档**：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象...[**查看更多**][prototype_doc]
+<br>**代码目录**：[**点击**][prototype_code]跳转。
+<br>
 
-#### （C-3）Builder - 建造者模式
+**（C-3）Builder - 建造者模式**
+<br>
 <br>**流行指数**：★★★★★
 <br>**难度等级**：★★☆☆☆
 <br>**助记关键字**：外卖套餐，车间流水线
-<br>**在线文档**：建造者模式我们都接触过，在开发中，经常见到 XXXBuilder 这样的类，通常以这种方式命名的类就使用了建造者模式...[查看更多][builder_doc]
-<br>**代码目录**：[点击][builder_code]跳转。
+<br>**在线文档**：建造者模式我们都接触过，在开发中，经常见到 XXXBuilder 这样的类，通常以这种方式命名的类就使用了建造者模式...[**查看更多**][builder_doc]
+<br>**代码目录**：[**点击**][builder_code]跳转。
+<br>
 
-#### （C-4）Factory Method - 工厂方法模式
+**（C-4）Factory Method - 工厂方法模式**
+<br>
 <br>**流行指数**：★★★★★
 <br>**难度等级**：★★★★☆
 <br>**助记关键字**：煤厂产煤，鞋厂造鞋
-<br>**在线文档**：我们都知道设计模式实际上是一些指导思想，这些指导思想是由前人总结和提炼出来的，主要目的是为了解决在代码设计和维护时暴露出来的问题。这些问题往往围绕着耦合性、扩展性等展开...[查看更多][factory_method_doc]
-<br>**代码目录**：[点击][factory_method_code]跳转。
+<br>**在线文档**：我们都知道设计模式实际上是一些指导思想，这些指导思想是由前人总结和提炼出来的，主要目的是为了解决在代码设计和维护时暴露出来的问题。这些问题往往围绕着耦合性、扩展性等展开...[**查看更多**][factory_method_doc]
+<br>**代码目录**：[**点击**][factory_method_code]跳转。
+<br>
 
-#### （C-5）Abstract Method - 抽象工厂模式
+**（C-5）Abstract Method - 抽象工厂模式**
+<br>
 正在努力更新中...
+<br>
 
 ### 模式对比
 
-####（1）结构四姐妹
+**（1）结构四姐妹**
+<br>
 正在努力更新中...
+<br>
 
 ## 进阶建议
 
@@ -136,6 +251,7 @@
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
 [command_doc]:https://www.yuque.com/coderran/pd/xn73iv
+[memento_doc]:https://www.yuque.com/coderran/pd/gm1ox9
 
 
 [builder_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/builder
@@ -150,3 +266,4 @@
 [facade_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/facade
 [proxy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/proxy
 [command_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/command
+[memento_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/memento
