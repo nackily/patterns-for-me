@@ -1,15 +1,10 @@
 > Once you understand the design patterns and have had an "Aha!" (and not just a "Huh?") experience with them, you won't ever think about object-oriented design in the same way.
----
+> 
+> 一旦你理解了设计模式，并且有了一种“妙啊！”的体验（相较于之前的“？？？”），此时你已打开一扇全新的面向对象设计思维方式的大门。
 ## 项目介绍
 
 设计模式之入门宝典（Java版），包含《Design patterns- Elements of reusable object-oriented software》一书中提及的 23 种设计模式，结合真实的生活场景，对每一种设计模式进行讲解。
 
-## 适宜人群
-
-本项目适用于以下开发者：
-+ 没了解过设计模式，但熟悉面向对象开发；
-+ 理解某个模式的目的，但在实际开发中不知道如何打开；
-+ 正打算学习设计模式或已经在其他地方学过设计模式；
 
 ## 开始学习
 
