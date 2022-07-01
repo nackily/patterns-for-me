@@ -2,13 +2,13 @@ package com.aoligei.creational.prototype;
 
 
 /**
- * Main
+ * Client
  *
  * @author coder
  * @date 2022-06-06 10:38:06
  * @since 1.0.0
  */
-public class Main {
+public class Client {
 
     public static void main(String[] args) throws CloneNotSupportedException {
         classic();

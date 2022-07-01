@@ -1,13 +1,13 @@
 package com.aoligei.structural.decorator;
 
 /**
- * Main
+ * Client
  *
  * @author coder
  * @date 2022-05-24 16:01:55
  * @since 1.0.0
  */
-public class Main {
+public class Client {
 
     public static void main(String[] args) {
         System.out.println("Tom 点了一份牛肉面");

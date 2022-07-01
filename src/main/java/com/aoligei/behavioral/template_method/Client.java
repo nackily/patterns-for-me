@@ -1,13 +1,13 @@
 package com.aoligei.behavioral.template_method;
 
 /**
- * Main
+ * Client
  *
  * @author coder
  * @date 2022-05-27 09:53:54
  * @since 1.0.0
  */
-public class Main {
+public class Client {
 
     public static void main(String[] args) {
         AbstractDomicile domicile4Tom = new EducationEntryDomicile("Tom");

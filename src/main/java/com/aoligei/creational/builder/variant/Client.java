@@ -1,13 +1,13 @@
 package com.aoligei.creational.builder.variant;
 
 /**
- * Main
+ * Client
  *
  * @author coder
  * @date 2022-05-31 15:37:26
  * @since 1.0.0
  */
-public class Main {
+public class Client {
 
     public static void main(String[] args) {
         System.out.println("满意类型：");

@@ -26,9 +26,12 @@
 <br>
 
 **【S-3】Composite - 组合模式**
-<br>
-> 正在努力更新中...
-<br>
+> **流行指数**：★★★★☆
+> <br>**难度等级**：★★☆☆☆
+> <br>**助记关键字**：树形结构、递归小能手
+> <br>**在线文档**：如果一个应用的核心模型是树形结构，那么我们就能用组合模式来表示它，组合模式就是为树形结构量身定制的...[**查看更多**][composite_doc]
+> <br>**代码目录**：[**点击**][composite_code]跳转。
+> <br>
 
 **【S-4】Decorator - 装饰器模式**
 > **流行指数**：★★★★★
@@ -234,18 +237,20 @@
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
 [command_doc]:https://www.yuque.com/coderran/pd/xn73iv
 [memento_doc]:https://www.yuque.com/coderran/pd/gm1ox9
+[composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
 
 
-[builder_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/builder
-[factory_method_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/factory_method
-[prototype_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/prototype
-[singleton_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/creational/singleton
-[adaptor_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/adapter
-[decorator_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/decorator
-[observer_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/observer
-[template_method_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/template_method
-[strategy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/behavioral/strategy
-[facade_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/facade
-[proxy_code]:https://gitee.com/ry_always/dp4java/tree/master/src/main/java/com/aoligei/structural/proxy
+[builder_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/builder
+[factory_method_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/factory_method
+[prototype_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/prototype
+[singleton_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/singleton
+[adaptor_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/adapter
+[decorator_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/decorator
+[observer_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/observer
+[template_method_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/template_method
+[strategy_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/strategy
+[facade_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/facade
+[proxy_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/proxy
 [command_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/command
 [memento_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/memento
+[composite_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/composite
