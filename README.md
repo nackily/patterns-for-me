@@ -43,16 +43,19 @@
 
 **【S-5】Facade - 门面模式**
 > **流行指数**：★★★☆☆
-> <br>**难度等级**：★★☆☆☆
+> <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：景区检票口、银行业务接待员
 > <br>**在线文档**：为子系统中的一组接口提供一个一致的界面，门面模式定义了一个高层接口，这个接口使得这一子系统更加容易使用...[**查看更多**][facade_doc]
 > <br>**代码目录**：[**点击**][facade_code]跳转。
 > <br>
 
 **【S-6】Flyweight - 享元模式**
-<br>
-> 正在努力更新中...
-<br>
+> **流行指数**：★★☆☆☆
+> <br>**难度等级**：★★★☆☆
+> <br>**助记关键字**：对象共享
+> <br>**在线文档**：运用共享技术有效地支持大量细粒度的对象...[**查看更多**][flyweight_doc]
+> <br>**代码目录**：[**点击**][flyweight_code]跳转。
+> <br>
 
 **【S-7】Proxy - 代理模式**
 > **流行指数**：★★★★★
@@ -238,6 +241,7 @@
 [command_doc]:https://www.yuque.com/coderran/pd/xn73iv
 [memento_doc]:https://www.yuque.com/coderran/pd/gm1ox9
 [composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
+[flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
 
 
 [builder_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/builder
@@ -254,3 +258,4 @@
 [command_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/command
 [memento_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/memento
 [composite_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/composite
+[flyweight_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/flyweight
