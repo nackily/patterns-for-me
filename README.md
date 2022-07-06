@@ -1,9 +1,9 @@
 > Once you understand the design patterns and have had an "Aha!" (and not just a "Huh?") experience with them, you won't ever think about object-oriented design in the same way.
 > 
-> 一旦你理解了设计模式，并且有了一种“妙啊！”的体验（相较于之前的“？？？”），此时你已打开一扇全新的面向对象设计思维方式的大门。
+> 一旦你理解了设计模式，并且有了一种“妙啊！”的体验（相较于之前的“为啥？”），此时你已打开一扇全新的面向对象设计思维方式的大门。
 ## 项目介绍
 
-设计模式之入门宝典（Java版），包含《Design patterns- Elements of reusable object-oriented software》一书中提及的 23 种设计模式，结合真实的生活场景，对每一种设计模式进行讲解。
+设计模式之入门宝典（Java版），包含《Design patterns- Elements of reusable object-oriented software》一书中提及的 23 种设计模式，结合真实的生活场景，对每一种设计模式进行剖析。
 
 
 ## 开始学习
@@ -28,7 +28,7 @@
 **【S-3】Composite - 组合模式**
 > **流行指数**：★★★★☆
 > <br>**难度等级**：★★☆☆☆
-> <br>**助记关键字**：树形结构、递归小能手
+> <br>**助记关键字**：树形结构
 > <br>**在线文档**：如果一个应用的核心模型是树形结构，那么我们就能用组合模式来表示它，组合模式就是为树形结构量身定制的...[**查看更多**][composite_doc]
 > <br>**代码目录**：[**点击**][composite_code]跳转。
 > <br>
