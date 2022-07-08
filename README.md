@@ -20,10 +20,13 @@
 > <br>**代码目录**：[**点击**][adaptor_code]跳转。
 > <br>
 
-**【S-2】Bridge - 桥接模式**
-<br>
-> 正在努力更新中...
-<br>
+**【S-2】Bridge - 桥模式**
+> **流行指数**：★★☆☆☆
+> <br>**难度等级**：★★★☆☆
+> <br>**助记关键字**：拱桥形状、解耦多个维度
+> <br>**在线文档**：当需要从多个维度对一个对象进行扩展时，我们可以使用桥模式来让各个维度分离，进而实现各自独立的变化...[**查看更多**][bridge_doc]
+> <br>**代码目录**：[**点击**][bridge_code]跳转。
+> <br>
 
 **【S-3】Composite - 组合模式**
 > **流行指数**：★★★★☆
@@ -242,6 +245,7 @@
 [memento_doc]:https://www.yuque.com/coderran/pd/gm1ox9
 [composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
+[bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
 
 
 [builder_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/builder
@@ -259,3 +263,4 @@
 [memento_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/memento
 [composite_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/composite
 [flyweight_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/flyweight
+[bridge_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/bridge
