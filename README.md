@@ -147,7 +147,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：全局唯一、工具类
-> <br>**在线文档**：单例模式应该是最简单的设计模式了，这个设计模式应该是面试中最被的最多的设计模式了。如果现在你仍不能随手写出两种单例实现，那么你该多努努力了...[**查看更多**][singleton_doc]
+> <br>**在线文档**：单例模式应该是所有设计模式中结构最简单的一个了，同时它也是面试中被考的最多的设计模式...[**查看更多**][singleton_doc]
 > <br>**代码目录**：[**点击**][singleton_code]跳转。
 > <br>
 
@@ -176,9 +176,12 @@
 > <br>
 
 **【C-5】Abstract Method - 抽象工厂模式**
-<br>
-> 正在努力更新中...
-<br>
+> **流行指数**：★★☆☆☆
+> <br>**难度等级**：★★★☆☆
+> <br>**助记关键字**：主题切换
+> <br>**在线文档**：很多时候，我们不应该被一个看起来很复杂的名词或概念所绊倒，因为往往看起来越复杂的东西其本质越简单。就像是抽象工厂模式...[**查看更多**][abstract_factory_doc]
+> <br>**代码目录**：[**点击**][abstract_factory_code]跳转。
+> <br>
 
 ### 模式对比
 
@@ -232,6 +235,7 @@
 
 [builder_doc]:https://www.yuque.com/coderran/pd/dkzsxv
 [factory_method_doc]:https://www.yuque.com/coderran/pd/dq7au9
+[abstract_factory_doc]:https://www.yuque.com/coderran/pd/ikqm88
 [prototype_doc]:https://www.yuque.com/coderran/pd/eqz0qg
 [singleton_doc]:https://www.yuque.com/coderran/pd/dvedfa
 [adaptor_doc]:https://www.yuque.com/coderran/pd/zy4og8
@@ -248,8 +252,10 @@
 [bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
 
 
+
 [builder_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/builder
 [factory_method_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/factory_method
+[abstract_factory_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/abstract_factory
 [prototype_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/prototype
 [singleton_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/singleton
 [adaptor_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/adapter
