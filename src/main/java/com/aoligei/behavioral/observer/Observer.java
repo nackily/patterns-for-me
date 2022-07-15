@@ -1,17 +1,23 @@
 package com.aoligei.behavioral.observer;
 
 /**
- * 观察者
+ * 被通知者
  *
  * @author coder
- * @date 2022-05-13 09:56:05
+ * @date 2022-07-14 17:36:24
  * @since 1.0.0
- */public interface Observer {
+ */
+public interface Observer {
 
     /**
-     * 每当观察到的对象发生变化时，都会调用此方法
-     * @param o 主题状态改变时通知的消息对象
+     * 获取顾客的身份信息
+     * @return 身份信息
      */
-    void update(Object o);
-}
+    String getIdentityInfo();
 
+    /**
+     * 接收通知
+     * @param info 通知内容
+     */
+    void accept(String info);
+}
