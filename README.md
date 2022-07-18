@@ -116,9 +116,12 @@
 > <br>
 
 **【B-8】State - 状态模式**
-<br>
-> 正在努力更新中...
-<br>
+> **流行指数**：★★★☆☆
+> <br>**难度等级**：★☆☆☆☆
+> <br>**助记关键字**：上坡加速，下坡减速
+> <br>**在线文档**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类...[**查看更多**][state_doc]
+> <br>**代码目录**：[**点击**][state_code]跳转。
+> <br>
 
 **【B-9】Strategy - 策略模式**
 > **流行指数**：★★★★★
@@ -243,6 +246,7 @@
 [observer_doc]:https://www.yuque.com/coderran/pd/gpcb3a
 [template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
+[state_doc]:https://www.yuque.com/coderran/pd/pmkced
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
 [command_doc]:https://www.yuque.com/coderran/pd/xn73iv
@@ -263,6 +267,7 @@
 [observer_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/observer
 [template_method_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/template_method
 [strategy_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/strategy
+[state_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/state
 [facade_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/facade
 [proxy_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/proxy
 [command_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/command
