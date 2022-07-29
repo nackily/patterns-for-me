@@ -17,7 +17,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：转接头、不同国家的标准电压不一样
 > <br>**在线文档**：将一个类的接口转换成客户希望的另外一个接口，适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作...[**查看更多**][adaptor_doc]
-> <br>**代码目录**：[**点击**][adaptor_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/adapter)跳转。
 > <br>
 
 **【S-2】Bridge - 桥模式**
@@ -25,7 +25,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：拱桥形状、解耦多个维度
 > <br>**在线文档**：当需要从多个维度对一个对象进行扩展时，我们可以使用桥模式来让各个维度分离，进而实现各自独立的变化...[**查看更多**][bridge_doc]
-> <br>**代码目录**：[**点击**][bridge_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/bridge)跳转。
 > <br>
 
 **【S-3】Composite - 组合模式**
@@ -33,7 +33,7 @@
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：树形结构
 > <br>**在线文档**：如果一个应用的核心模型是树形结构，那么我们就能用组合模式来表示它，组合模式就是为树形结构量身定制的...[**查看更多**][composite_doc]
-> <br>**代码目录**：[**点击**][composite_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/composite)跳转。
 > <br>
 
 **【S-4】Decorator - 装饰器模式**
@@ -41,7 +41,7 @@
 > <br>**难度等级**：★★★★☆
 > <br>**助记关键字**：俄罗斯套娃
 > <br>**在线文档**：在不改变原有对象结构的基础情况下，动态地给该对象增加一些额外功能的职责...[**查看更多**][decorator_doc]
-> <br>**代码目录**：[**点击**][decorator_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/decorator)跳转。
 > <br>
 
 **【S-5】Facade - 门面模式**
@@ -49,7 +49,7 @@
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：景区检票口、银行业务接待员
 > <br>**在线文档**：为子系统中的一组接口提供一个一致的界面，门面模式定义了一个高层接口，这个接口使得这一子系统更加容易使用...[**查看更多**][facade_doc]
-> <br>**代码目录**：[**点击**][facade_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/facade)跳转。
 > <br>
 
 **【S-6】Flyweight - 享元模式**
@@ -57,7 +57,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：对象共享
 > <br>**在线文档**：运用共享技术有效地支持大量细粒度的对象...[**查看更多**][flyweight_doc]
-> <br>**代码目录**：[**点击**][flyweight_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/flyweight)跳转。
 > <br>
 
 **【S-7】Proxy - 代理模式**
@@ -65,7 +65,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：全局唯一、工具类
 > <br>**在线文档**：代理模式为其他对象提供一种代理以控制对这个对象的访问...[**查看更多**][proxy_doc]
-> <br>**代码目录**：[**点击**][proxy_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/proxy)跳转。
 > <br>
 
 
@@ -76,7 +76,7 @@
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：过滤器
 > <br>**在线文档**：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止...[**查看更多**][chain_of_responsibility_doc]
-> <br>**代码目录**：[**点击**][chain_of_responsibility_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)跳转。
 > <br>
 
 **【B-2】Command - 命令模式**
@@ -84,7 +84,7 @@
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：封装请求
 > <br>**在线文档**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消的操作...[**查看更多**][command_doc]
-> <br>**代码目录**：[**点击**][command_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/command)跳转。
 > <br>
 
 **【B-3】Interpreter - 解释器模式**
@@ -92,7 +92,7 @@
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：谷歌翻译
 > <br>**在线文档**：给定一种语言， 定义它的文法的一种表示  ，以及一个解释器，这个解释器使用这个表示来解释该语言中的句子...[**查看更多**][interpreter_doc]
-> <br>**代码目录**：[**点击**][interpreter_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/interpreter)跳转。
 > <br>
 
 **【B-4】Iterator - 迭代器模式**
@@ -110,7 +110,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：撤销、回滚
 > <br>**在线文档**：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先保存的状态...[**查看更多**][memento_doc]
-> <br>**代码目录**：[**点击**][memento_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/memento)跳转。
 > <br>
 
 **【B-7】Observer - 观察者模式**
@@ -118,7 +118,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：你不必找我，我来找你
 > <br>**在线文档**：定义对象间的一种一对多的依赖关系 ,当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并被自动更新...[**查看更多**][observer_doc]
-> <br>**代码目录**：[**点击**][observer_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/observer)跳转。
 > <br>
 
 **【B-8】State - 状态模式**
@@ -126,7 +126,7 @@
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：上坡加速，下坡减速
 > <br>**在线文档**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类...[**查看更多**][state_doc]
-> <br>**代码目录**：[**点击**][state_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/state)跳转。
 > <br>
 
 **【B-9】Strategy - 策略模式**
@@ -134,7 +134,7 @@
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：公交/地铁/共享单车都能回家
 > <br>**在线文档**：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。本模式使得算法可独立于使用它的客户而变化...[**查看更多**][strategy_doc]
-> <br>**代码目录**：[**点击**][strategy_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/strategy)跳转。
 > <br>
 
 **【B-10】Template Method - 模板方法模式**
@@ -142,7 +142,7 @@
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：封装公用部分，扩展变化部分
 > <br>**在线文档**：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤...[**查看更多**][template_method_doc]
-> <br>**代码目录**：[**点击**][template_method_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/template_method)跳转。
 > <br>
 
 **【B-11】Visitor - 访问者模式**
@@ -157,7 +157,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：全局唯一、工具类
 > <br>**在线文档**：单例模式应该是所有设计模式中结构最简单的一个了，同时它也是面试中被考的最多的设计模式...[**查看更多**][singleton_doc]
-> <br>**代码目录**：[**点击**][singleton_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/singleton)跳转。
 > <br>
 
 **【C-2】Prototype - 原型模式**
@@ -165,7 +165,7 @@
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：细胞分裂
 > <br>**在线文档**：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象...[**查看更多**][prototype_doc]
-> <br>**代码目录**：[**点击**][prototype_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/prototype)跳转。
 > <br>
 
 **【C-3】Builder - 建造者模式**
@@ -173,7 +173,7 @@
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：外卖套餐，车间流水线
 > <br>**在线文档**：建造者模式我们都接触过，在开发中，经常见到 XXXBuilder 这样的类，通常以这种方式命名的类就使用了建造者模式...[**查看更多**][builder_doc]
-> <br>**代码目录**：[**点击**][builder_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/builder)跳转。
 > <br>
 
 **【C-4】Factory Method - 工厂方法模式**
@@ -181,7 +181,7 @@
 > <br>**难度等级**：★★★★☆
 > <br>**助记关键字**：煤厂产煤，鞋厂造鞋
 > <br>**在线文档**：我们都知道设计模式实际上是一些指导思想，这些指导思想是由前人总结和提炼出来的，主要目的是为了解决在代码设计和维护时暴露出来的问题。这些问题往往围绕着耦合性、扩展性等展开...[**查看更多**][factory_method_doc]
-> <br>**代码目录**：[**点击**][factory_method_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/factory_method)跳转。
 > <br>
 
 **【C-5】Abstract Method - 抽象工厂模式**
@@ -189,7 +189,7 @@
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：主题切换
 > <br>**在线文档**：很多时候，我们不应该被一个看起来很复杂的名词或概念所绊倒，因为往往看起来越复杂的东西其本质越简单。就像是抽象工厂模式...[**查看更多**][abstract_factory_doc]
-> <br>**代码目录**：[**点击**][abstract_factory_code]跳转。
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/abstract_factory)跳转。
 > <br>
 
 ### 模式对比
@@ -261,25 +261,3 @@
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
 [bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
 [interpreter_doc]:https://www.yuque.com/coderran/pd/tit80e
-
-
-
-[builder_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/builder
-[factory_method_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/factory_method
-[abstract_factory_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/abstract_factory
-[prototype_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/prototype
-[singleton_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/creational/singleton
-[adaptor_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/adapter
-[decorator_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/decorator
-[observer_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/observer
-[template_method_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/template_method
-[strategy_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/strategy
-[state_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/state
-[facade_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/facade
-[proxy_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/proxy
-[command_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/command
-[memento_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/behavioral/memento
-[composite_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/composite
-[flyweight_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/flyweight
-[bridge_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/bridge
-[interpreter_code]:/src/main/java/com/aoligei/behavioral/interpreter
