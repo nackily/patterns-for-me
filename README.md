@@ -88,9 +88,12 @@
 > <br>
 
 **【B-3】Interpreter - 解释器模式**
-<br>
-> 正在努力更新中...
-<br>
+> **流行指数**：★☆☆☆☆
+> <br>**难度等级**：★★★★★
+> <br>**助记关键字**：谷歌翻译
+> <br>**在线文档**：给定一种语言， 定义它的文法的一种表示  ，以及一个解释器，这个解释器使用这个表示来解释该语言中的句子...[**查看更多**][interpreter_doc]
+> <br>**代码目录**：[**点击**][interpreter_code]跳转。
+> <br>
 
 **【B-4】Iterator - 迭代器模式**
 <br>
@@ -257,6 +260,7 @@
 [composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
 [bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
+[interpreter_doc]:https://www.yuque.com/coderran/pd/tit80e
 
 
 
@@ -278,3 +282,4 @@
 [composite_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/composite
 [flyweight_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/flyweight
 [bridge_code]:https://gitee.com/ry_always/DesignPatterns/tree/master/src/main/java/com/aoligei/structural/bridge
+[interpreter_code]:/src/main/java/com/aoligei/behavioral/interpreter
