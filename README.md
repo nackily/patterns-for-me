@@ -101,9 +101,12 @@
 <br>
 
 **【B-5】Mediator - 中介者模式**
-<br>
-> 正在努力更新中...
-<br>
+> **流行指数**：★☆☆☆☆
+> <br>**难度等级**：★★★☆☆
+> <br>**助记关键字**：中介、消息队列
+> <br>**在线文档**：用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互...[**查看更多**][mediator_doc]
+> <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/mediator)跳转。
+> <br>
 
 **【B-6】Memento - 备忘录模式**
 > **流行指数**：★★☆☆☆
@@ -261,3 +264,4 @@
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
 [bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
 [interpreter_doc]:https://www.yuque.com/coderran/pd/tit80e
+[mediator_doc]:https://www.yuque.com/coderran/pd/ush7k7
