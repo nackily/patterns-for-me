@@ -1,7 +1,10 @@
-<center> 行为型 - 访问者（Visitor）设计模式
+## <center> 行为型 - 访问者（Visitor）设计模式
 ---
+
 如果对所有设计模式进行复杂度排名，访问者模式总是能位居前列；但对所有设计模式的普适度进行排名，那么访问者模式或许会垫底。相对于其他模式来说，访问者模式的类图结构并不复杂，它的复杂体现在很难真正理解它的意图。今天，我们就来探秘访问者模式，揭开访问者模式不为人知的真实面目。为方便理解，我们仍将通过一个例子开始。
+
 # 一、问题引入
+
 <div align="center">
    <img src="/doc/resource/visitor/ruoyi.png"/>
 </div>
@@ -14,11 +17,12 @@
 
 我们为这些资源类型建立了对象模型，如下图所示：
 <div align="center">
-   <img src="/doc/resource/visitor/resource-class-diagram.jpg"/>
+   <img src="/doc/resource/visitor/resource-class-diagram.jpg" width="50%"/>
 </div>
+
 > 某天，产品组的成员在商议过后通知开发组的组长：增加一个导出资源的功能，导出的格式为 XML。恰巧，这个需求最终交给了你。经过几分钟的考虑后，你决定动手。你在 AbstractResource 中增加了定义了抽象的导出行为`protected abstract String export()`，并且各个具体的资源也都实现了这一行为。这个功能一经上线后，得到了用户不错的反响，于是乎，产品组的同事召开了一个专题会议，会议决定：支持几种其他格式的导出功能，例如 JSON、CSV 等等格式。
 
-你仍然打算如法炮制之前的做法，但很快你开始意识到事情可能没那么简单。经过几轮迭代后，原先功能单一的类在不知不觉间已经变得相当臃肿，并且未来仍然会持续膨胀。这些类在最初的设计中仅仅是用来表示一个具体的资源，但现在它甚至承载了导出文档这样对资源表示无任何意义的职责，这看起来似乎不太合理。
+你仍然打算如法炮制之前的做法，但很快你开始意识到事情可能没那么简单。经过几轮迭代后，原先功能单一的类在不知不觉间已经变得相当臃肿，并且未来仍然会持续膨胀。这些类在最初的设计中仅仅是用来表示一个具体的资源，但现在它甚至承载了导出文档这样对资源表示无任何意义的职责，这看起来似乎不太合理。<br>
 并且每增加一个新的导出功能，势必会修改现有的类，这让测试的同事也犯了难，他们不得不因为某一次的修改而对原先既有的功能进行回归测试。
 # 二、解决方案
 经过一番痛苦的摸索无果后，你最终决定向技术小组长请求协助。技术组长在听完你的陈述后，想了一会问道：“知道访问者模式吗？”你摇了摇头。技术组长没有办法，承诺你他会帮你构建一个示例。半个小时后，技术组长来到了你的工位，拉取了最新的代码，并打开了该模块的类图结构，如下所示。
@@ -27,6 +31,7 @@
 </div>
 在组长耐心的给你进行了 10 分钟的讲解后，你终于弄明白了上面的类图设计。原来是将导出文档的行为抽象到了另外一个类层级（XMLExportVisitor），并且对这个类层次也进行了抽象（Visitor）。这样一来，对于资源的表示（AbstractResource）和对于资源的访问（Visitor）就独立到两个维度，将原来散布在各个资源类中的导出行为统一实现在访问器中，使得资源的表示更加纯粹。
 并且当需要导出新的文档格式时，只需要添加一个对应格式的导出访问器即可，不用改动现有的类，自然也就不会影响到既有的功能。
+
 # 三、案例实现
 ## 3.1 类图注述
 对于类图中各个部分的说明如下：
@@ -77,6 +82,7 @@ public abstract class AbstractResource {
 }
 ```
 **（2）具体资源**
+**（2-1）目录**
 ```java
 public class Catalog extends AbstractResource{
 
@@ -100,6 +106,7 @@ public class Catalog extends AbstractResource{
 
 }
 ```
+**（2-2）菜单**
 ```java
 public class Menu extends AbstractResource {
 
@@ -134,6 +141,7 @@ public class Menu extends AbstractResource {
 
 }
 ```
+**（2-3）按钮**
 ```java
 public class Button extends AbstractResource{
 
@@ -239,6 +247,7 @@ public class XmlExportVisitor implements Visitor {
 }
 ```
 **（5）客户端**
+**（5-1）Client**
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -255,6 +264,7 @@ public class Client {
     }
 }
 ```
+**（5-2）运行结果**
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <catalog>
@@ -296,7 +306,7 @@ public class Client {
 ## 4.2 通用类图
 典型访问者模式的类图结构如下所示：
 <div align="center">
-   <img src="/doc/resource/visitor/class-diagram.jpg"/>
+   <img src="/doc/resource/visitor/class-diagram.jpg" width="80%"/>
 </div>
 访问者模式的参与者有如下：
 
@@ -307,10 +317,11 @@ public class Client {
 - **ConcreteVisitor**：具体的访问者。实现对每一种类型元素的具体访问行为；
 ## 4.3 协作
 大多数情况下，元素并不是单独存在的，他们往往互相组合构成了复合结构对象（ObjectStructure）。正如上文案例中一样，资源呈现出树形结构，目录下可以挂载多个菜单，菜单下同样可以有多个按钮。但在案例中，我们并没有提供一个单独的类表示这种复合的关系，但本质是一样的，如果我们将资源的子节点这一表示抽离到单独的类中表示，那这个类就等同于此处的 ObjectStructure。不管复合对象内部的元素组成如何复杂，所有对于复合对象的访问都将经历对复合结构的遍历，并最终细化到对于各个元素对象的访问。
-下图演示了一个对象结构 anObjectStructure（内部包含了两个元素：element_a、element_b），和一个访问者（visitor）之间的协作关系：
+<br>下图演示了一个对象结构 anObjectStructure（内部包含了两个元素：element_a、element_b），和一个访问者（visitor）之间的协作关系：
 <div align="center">
    <img src="/doc/resource/visitor/timing-diagram.svg"/>
 </div>
+
 ## 5.1 特点
 **（1）易于增加新的操作**
 毋庸置疑，访问者模式使得我们更容易的新增一种对于元素的操作行为，并且这不会影响到现有的行为。我们只需要定义一个新的访问者对象，并且实现访问者的行为即可。
@@ -320,6 +331,7 @@ public class Client {
 职责的分离有时候会带来新的问题，比如对于封装性的破坏。有时候，为了保护元素对象状态的安全性，我们特意将其声明为私有，并且不给其他任何对象暴露这个状态的引用。但是，如果访问者需要访问这个对象状态，那么你就会处于一个两难的境地。此时，你应该权衡相对于扩展性和安全性来说，哪一个更为重要。
 **（4）增加新的 ConcreteElement 很困难**
 访问者模式的特点决定了它必须为每一种元素提供一个与之对应的访问行为，这一特点也直接导致了增加新的元素将极其麻烦。每添加一个新的 ConcreteElement 都需要在 Visitor 中定义一个新的访问行为，同时也将在所有的访问者类中实现这一行为。
+
 ## 5.2 使用技巧
 **（1）只有元素固定的场景下才适合访问者模式**
 在上面，我们提到访问者模式对于增加新的 ConcreteElement 相当困难，所以当你想把访问者模式引入到手头的项目结构中去时，务必要对这一点进行评估。并且正是由于这一特点的限制，才使得他在项目中的使用率极低。因为在很多真实案例中，这个缺点是致命的。但是，如果你笃定在某个场景中元素较为固定，那么你往往能从访问者模式中获益。为方便理解，此处列举两个真实的案例来说明什么场景下元素相对固定：
@@ -329,11 +341,13 @@ public class Client {
 
 **（2）如何遍历对象结构**
 一个访问者必须访问对象结构中的每一个元素，所以必须遍历对象结构中的元素集合。遍历的行为可以放到对象结构中，也可以放在访问者中，还可以放在一个单独的迭代器（Iterator）中进行。三种方式没有优劣之分，可根据实际情况选择。
+
 # 六、从源码中看访问者模式
 在 Java7 的 nio 包下有一个 Files 工具类，使用 Files#walkFileTree(start:Path, visitor:FileVisitor) 可以实现对于某个目录中的文件树进行访问。该方法的第一个参数表示需要访问的起始目录，第二个参数是指定一个文件访问器对象。而文件访问器定义如下所示：
 <div align="center">
    <img src="/doc/resource/visitor/FileVisitor.png"/>
 </div>
+
 如上图所示，在文件访问器中，定义了访问子目录和文件的行为，并且提供了在结束一个子目录访问时的行为方法，针对于访问文件失败的情况也提供了访问失败的行为方法。所有的这些方法都返回一个文件访问结果对象，FileVisitResult 是一个枚举类，它的定义如下所示：
 
 - `FileVisitResult._CONTINUE_`==>> 继续
@@ -341,10 +355,9 @@ public class Client {
 - `FileVisitResult._SKIP_SIBLINGS_`==>> 继续但不访问文件（或目录）的同级
 - `FileVisitResult._SKIP_SUBTREE_`==>> 继续但不访问子目录
 
-这样，就可以通过返回一个枚举实例来控制接下来的遍历行为，比如你可以返回一个`FileVisitResult._CONTINUE_`来让文件访问器接着工作，也可以返回一个`FileVisitResult._TERMINATE_`来让文件访问器停止访问文件系统。
-下面的程序片段演示了如何使用文件访问器来实现对某个目录的访问，并且在文件树中查找某个文件：
+这样，就可以通过返回一个枚举实例来控制接下来的遍历行为，比如你可以返回一个`FileVisitResult._CONTINUE_`来让文件访问器接着工作，也可以返回一个`FileVisitResult._TERMINATE_`来让文件访问器停止访问文件系统。 下面的程序片段演示了如何使用文件访问器来实现对某个目录的访问，并且在文件树中查找某个文件：
 ```java
-public class Main {
+public class FindFileTest {
     public static void main(String[] args) throws IOException {
         // 需要查找的文件
         String fileName = "what.txt";
@@ -408,6 +421,8 @@ public class Main {
 
 
 # 附录
-项目主页：[https://gitee.com/ry_always/DesignPatterns](/README.md)
+[回到主页](/README.md)
+
 案例中的截图参考自： [Ruoyi](http://demo.ruoyi.vip/)
+
 案例代码：[.../visitor](/src/main/java/com/aoligei/behavioral/visitor)
