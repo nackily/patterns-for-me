@@ -154,7 +154,7 @@
 **【B-11】Visitor - 访问者模式**
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★★★
-> <br>**在线文档**：表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作...[**查看更多**][visitor_doc]
+> <br>**在线文档**：表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作...[**查看更多**](/doc/behavioral/Visitor.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/visitor)跳转。
 > <br>
 
@@ -271,4 +271,3 @@
 [interpreter_doc]:https://www.yuque.com/coderran/pd/tit80e
 [mediator_doc]:https://www.yuque.com/coderran/pd/ush7k7
 [iterator_doc]:https://www.yuque.com/coderran/pd/zgt7bc
-[visitor_doc]:https://www.yuque.com/coderran/pd/bxzalg
