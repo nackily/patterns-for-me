@@ -6,7 +6,7 @@
 # 一、问题引入
 
 <div align="center">
-   <img src="/doc/resource/visitor/ruoyi.png"/>
+   <img src="/doc/resource/visitor/ruoyi.png" width="80%"/>
 </div>
 对于一个 WEB 系统的系统管理模块来说，应该有多种资源类型，比如：
 
@@ -17,7 +17,7 @@
 
 我们为这些资源类型建立了对象模型，如下图所示：
 <div align="center">
-   <img src="/doc/resource/visitor/resource-class-diagram.jpg" width="50%"/>
+   <img src="/doc/resource/visitor/resource-class-diagram.jpg" width="40%"/>
 </div>
 
 > 某天，产品组的成员在商议过后通知开发组的组长：增加一个导出资源的功能，导出的格式为 XML。恰巧，这个需求最终交给了你。经过几分钟的考虑后，你决定动手。你在 AbstractResource 中增加了定义了抽象的导出行为`protected abstract String export()`，并且各个具体的资源也都实现了这一行为。这个功能一经上线后，得到了用户不错的反响，于是乎，产品组的同事召开了一个专题会议，会议决定：支持几种其他格式的导出功能，例如 JSON、CSV 等等格式。
@@ -322,6 +322,7 @@ public class Client {
    <img src="/doc/resource/visitor/timing-diagram.svg"/>
 </div>
 
+# 五、深入
 ## 5.1 特点
 **（1）易于增加新的操作**
 毋庸置疑，访问者模式使得我们更容易的新增一种对于元素的操作行为，并且这不会影响到现有的行为。我们只需要定义一个新的访问者对象，并且实现访问者的行为即可。

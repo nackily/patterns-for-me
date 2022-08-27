@@ -12,7 +12,7 @@
 
 ## 【S】结构型模式
 
-### 【S-1】Adaptor - 适配器模式
+### 【S-1】适配器-Adaptor
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：转接头、不同国家的标准电压不一样
@@ -20,7 +20,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/adapter)跳转。
 > <br>
 
-### 【S-2】Bridge - 桥模式
+### 【S-2】桥-Bridge
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：拱桥形状、解耦多个维度
@@ -28,7 +28,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/bridge)跳转。
 > <br>
 
-### 【S-3】Composite - 组合模式
+### 【S-3】组合-Composite
 > **流行指数**：★★★★☆
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：树形结构
@@ -36,7 +36,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/composite)跳转。
 > <br>
 
-### 【S-4】Decorator - 装饰器模式
+### 【S-4】装饰器-Decorator
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★★☆
 > <br>**助记关键字**：俄罗斯套娃
@@ -44,7 +44,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/decorator)跳转。
 > <br>
 
-### 【S-5】Facade - 门面模式
+### 【S-5】门面-Facade
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：景区检票口、银行业务接待员
@@ -52,7 +52,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/facade)跳转。
 > <br>
 
-### 【S-6】Flyweight - 享元模式
+### 【S-6】享元-Flyweight
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：对象共享
@@ -60,7 +60,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/structural/flyweight)跳转。
 > <br>
 
-### 【S-7】Proxy - 代理模式
+### 【S-7】代理-Proxy
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：全局唯一、工具类
@@ -71,7 +71,7 @@
 
 ## 【B】行为型模式
 
-### 【B-1】Chain Of Responsibility - 责任链模式
+### 【B-1】责任链-Chain Of Responsibility
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：过滤器
@@ -79,7 +79,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)跳转。
 > <br>
 
-### 【B-2】Command - 命令模式
+### 【B-2】命令-Command
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：封装请求
@@ -87,7 +87,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/command)跳转。
 > <br>
 
-### 【B-3】Interpreter - 解释器模式
+### 【B-3】解释器-Interpreter
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：谷歌翻译
@@ -95,7 +95,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/interpreter)跳转。
 > <br>
 
-### 【B-4】Iterator - 迭代器模式
+### 【B-4】迭代器-Iterator
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：遍历
@@ -103,7 +103,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/iterator)跳转。
 > <br>
 
-### 【B-5】Mediator - 中介者模式
+### 【B-5】中介者-Mediator
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：中介、消息队列
@@ -111,7 +111,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/mediator)跳转。
 > <br>
 
-### 【B-6】Memento - 备忘录模式
+### 【B-6】备忘录-Memento
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：撤销、回滚
@@ -119,7 +119,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/memento)跳转。
 > <br>
 
-### 【B-7】Observer - 观察者模式
+### 【B-7】观察者-Observer
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：你不必找我，我来找你
@@ -127,7 +127,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/observer)跳转。
 > <br>
 
-### 【B-8】State - 状态模式
+### 【B-8】状态-State
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：上坡加速，下坡减速
@@ -135,7 +135,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/state)跳转。
 > <br>
 
-### 【B-9】Strategy - 策略模式
+### 【B-9】策略-Strategy
 > **流行指数**：★★★★★
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：公交/地铁/共享单车都能回家
@@ -143,7 +143,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/strategy)跳转。
 > <br>
 
-### 【B-10】Template Method - 模板方法模式
+### 【B-10】模板方法-Template Method
 > **流行指数**：★★★★★
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：封装公用部分，扩展变化部分
@@ -151,7 +151,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/template_method)跳转。
 > <br>
 
-### 【B-11】Visitor - 访问者模式
+### 【B-11】访问者-Visitor
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★★★
 > <br>**在线文档**：表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作...[**查看更多**](/doc/behavioral/Visitor.md)
@@ -160,7 +160,7 @@
 
 ## 【C】创建型模式
 
-### 【C-1】Singleton - 单例模式
+### 【C-1】单例-Singleton
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：全局唯一、工具类
@@ -168,7 +168,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/singleton)跳转。
 > <br>
 
-### 【C-2】Prototype - 原型模式
+### 【C-2】原型-Prototype
 > **流行指数**：★★★★☆
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：细胞分裂
@@ -176,7 +176,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/prototype)跳转。
 > <br>
 
-### 【C-3】Builder - 建造者模式
+### 【C-3】建造者-Builder
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：外卖套餐，车间流水线
@@ -184,7 +184,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/builder)跳转。
 > <br>
 
-### 【C-4】Factory Method - 工厂方法模式
+### 【C-4】工厂方法-Factory Method
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★★☆
 > <br>**助记关键字**：煤厂产煤，鞋厂造鞋
@@ -192,7 +192,7 @@
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/factory_method)跳转。
 > <br>
 
-### 【C-5】Abstract Method - 抽象工厂模式
+### 【C-5】抽象工厂-Abstract Method
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：主题切换
