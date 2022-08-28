@@ -91,7 +91,7 @@
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：谷歌翻译
-> <br>**在线文档**：给定一种语言， 定义它的文法的一种表示  ，以及一个解释器，这个解释器使用这个表示来解释该语言中的句子...[**查看更多**][interpreter_doc]
+> <br>**在线文档**：给定一种语言，定义它的文法的一种表示，以及一个解释器，这个解释器使用这个表示来解释该语言中的句子...[**查看更多**](/doc/behavioral/Interpreter.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/interpreter)跳转。
 > <br>
 
@@ -273,4 +273,3 @@
 [composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
 [bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
-[interpreter_doc]:https://www.yuque.com/coderran/pd/tit80e
