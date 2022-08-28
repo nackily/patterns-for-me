@@ -99,7 +99,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：遍历
-> <br>**在线文档**：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示...[**查看更多**][iterator_doc]
+> <br>**在线文档**：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示...[**查看更多**](/doc/behavioral/Iterator.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/iterator)跳转。
 > <br>
 
@@ -275,4 +275,3 @@
 [bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
 [interpreter_doc]:https://www.yuque.com/coderran/pd/tit80e
 [mediator_doc]:https://www.yuque.com/coderran/pd/ush7k7
-[iterator_doc]:https://www.yuque.com/coderran/pd/zgt7bc
