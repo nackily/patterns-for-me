@@ -83,7 +83,7 @@
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：封装请求
-> <br>**在线文档**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消的操作...[**查看更多**][command_doc]
+> <br>**在线文档**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消的操作...[**查看更多**](/doc/behavioral/Command.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/command)跳转。
 > <br>
 
@@ -131,7 +131,7 @@
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：上坡加速，下坡减速
-> <br>**在线文档**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类...[**查看更多**][state_doc]
+> <br>**在线文档**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类...[**查看更多**](/doc/behavioral/State.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/state)跳转。
 > <br>
 
@@ -265,10 +265,8 @@
 [observer_doc]:https://www.yuque.com/coderran/pd/gpcb3a
 [template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
-[state_doc]:https://www.yuque.com/coderran/pd/pmkced
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
-[command_doc]:https://www.yuque.com/coderran/pd/xn73iv
 [memento_doc]:https://www.yuque.com/coderran/pd/gm1ox9
 [composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z

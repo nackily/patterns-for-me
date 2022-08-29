@@ -1,0 +1,437 @@
+## <center> 行为型 - 状态（State）设计模式
+---
+
+> 小时候，每当我骑车上学时，妈妈总会叮嘱我：上坡要加速，下坡则要减速。
+
+如果将上坡和下坡看作是所处的状态，那么加速和减速就是与之对应的行为。刚好，状态模式就能很好的描述这个过程，它可以实现对象处在不同状态时，表现出不同的行为。接下来，我们将通过一个例子深入探讨状态模式。
+
+# 一、问题引入
+> 假如我们现在正在构建一款文稿工具，这个工具可以供用户编辑文稿并发布到平台中，以便让更多用户从这份文稿中获益。一个文稿的所有状态及转换关系如下图所示：
+
+<div align="center">
+   <img src="/doc/resource/state/文稿状态及转换关系.png" width="50%"/>
+</div>
+
+
+我们知道，状态也是文稿对象的一部分。所以，在最初的设计中，我们可能会为每一个状态设定一个状态值。确定一个文稿的状态，只需要知道文稿的状态值。
+```java
+public class Document {
+    private int state;						// 状态值
+    private String title;					// 标题
+    private String content;					// 正文
+}
+```
+另外，还应该为文稿类提供一些操作，这些操作既可能让用户修改文稿的数据，也可以转换文稿的所处状态。比如审核操作，系统根据一些原则对该文稿进行审核，如果审核通过，则该文稿将发布到平台中供其他用户查阅；但如果不符合通过的条件，则该文档将重新进入草稿状态，用户可以对其进行修改，以便再次投稿。
+```java
+public void audit() {
+    // 是否可以进行审核
+    if (state != '审核中') {
+        // 不允许其他状态进行审核操作
+        return;
+    }
+    // 系统审核是否通过
+    boolean passed;
+    ...
+    if (passed) {
+        // 审核通过
+        state = '已发布';
+    } else {
+        // 审核失败
+        state = '草稿';
+    }
+}
+```
+这个设计的问题是，条件分支臃肿且复杂。如果我们需要添加一个状态或者操作时，不得不改动条件分支，或者增加更多的条件分支，每次的改动都可能对整个类产生影响。尽管在项目初期，我们的状态和操作较少，看起来各个操作中的条件分支还算简洁，但是随着项目的进行，越来越多的状态和操作加入，这将导致行为中的条件分支越来越多，看起来就像是一团乱麻。
+
+# 二、解决方案
+想要解决问题，就得先分析问题。为什么条件分支会越来越臃肿？因为对于任意一个操作，我们必须对文稿当前所处的状态进行检查。比如说撤稿操作，对于系统来说，只允许文稿当前是‘已发布’和‘已下架’的状态进行，对于其他的状态来说，这一行为都是非法的。所以，每新增一个状态，我们就不得不考虑在这个状态下，每一个操作所表现出的行为。就像下图这样：
+<div align="center">
+   <img src="/doc/resource/state/新增状态.png" width="80%"/>
+</div>
+
+我们发现，每个操作都为不同的状态提供了相应的表现行为。也就是说，想要解决条件分支的问题，我们必须把状态从操作中抽离出来。我们可以将状态硬编码成为一个个的状态对象，每一个状态都包含了文稿对象的所有操作，每一个状态的每一个操作中，只需要表现出文稿对象处于当前状态下的行为。这就是状态模式所关注的核心。
+<div align="center">
+   <img src="/doc/resource/state/案例类图.jpg" width="70%"/>
+</div>
+
+如上类图所示，状态接口中定义了所有对于文稿对象的操作：
+
+- **【stateName():String】**：获取状态的名称；
+- 【**saveDraft(title, content)**】：保存草稿，提供参数包含文稿标题和文稿正文；
+- 【**contribute()**】：投稿；
+- **【audit()】**：审核，系统根据当前文稿是否包含敏感信息进行审核；
+- **【revoke()】**：撤稿；
+- **【remove()】**：下架；
+
+文稿对象（Document）持有一个当前状态对象（currentState）的引用，客户端对于文稿对象的所有操作都将被委托给当前状态对象执行。如果该操作涉及到状态的转换（比如对处于已发布状态的文稿对象发起下架操作后，当前文稿对象的状态将变成已下架），可使用文稿对象的状态转换方法（nextState()）改变对象的状态。值得一提的是，这个例子中，文稿对象和状态对象具有同样的行为，所以此处文稿类也继承自状态接口，但状态模式并未约定他们必须有此关系。
+
+# 三、案例实现
+对于上述类图的实现代码如下。
+
+**（1）状态定义**
+```java
+public interface State {
+
+    /**
+     * 获取状态名称
+     * @return 状态名称
+     */
+    String getStateName();
+
+    /**
+     * 保存草稿
+     * @param title 标题
+     * @param content 正文
+     */
+    void saveDraft(String title, String content);
+
+    /**
+     * 投稿
+     */
+    void contribute();
+
+    /**
+     * 审核
+     */
+    void audit();
+
+    /**
+     * 撤稿
+     */
+    void revoke();
+
+    /**
+     * 下架
+     */
+    void remove();
+}
+```
+**（2）所有状态**
+
+**（2-1）草稿状态**
+```java
+public class DraftState implements State {
+
+    private final Document doc;
+    public DraftState(Document doc) {
+        this.doc = doc;
+    }
+
+    @Override
+    public String getStateName() {
+        return "草稿";
+    }
+
+    @Override
+    public void saveDraft(String title, String content) {
+        doc.setTitle(title);
+        doc.setContent(content);
+    }
+
+    @Override
+    public void contribute() {
+        doc.nextState(new UnderReviewState(doc));
+    }
+
+    @Override
+    public void audit() {
+        System.out.println("        非法操作：草稿状态不允许审核");
+    }
+
+    @Override
+    public void revoke() {
+        System.out.println("        非法操作：草稿状态不允许撤稿");
+    }
+
+    @Override
+    public void remove() {
+        System.out.println("        非法操作：草稿状态不允许下架");
+    }
+}
+```
+**（2-2）审核中状态**
+```java
+public class UnderReviewState implements State {
+
+    private final Document doc;
+    public UnderReviewState(Document doc) {
+        this.doc = doc;
+    }
+
+    @Override
+    public String getStateName() {
+        return "审核中";
+    }
+
+    @Override
+    public void saveDraft(String title, String content) {
+        System.out.println("        非法操作：审核中状态不允许保存草稿");
+    }
+
+    @Override
+    public void contribute() {
+        System.out.println("        非法操作：当前文稿正在审核中，请勿重复投稿！");
+    }
+
+    @Override
+    public void audit() {
+        // 如果包含了某些敏感信息，审核不通过，其他情况审核通过
+        String[] sensitiveKeywords = new String[]{"资本", "社会", "恐怖"};
+        String title = doc.getTitle();
+        String content = doc.getContent();
+        boolean val1 = Arrays.stream(sensitiveKeywords)
+                .anyMatch(item -> title.contains(item) || content.contains(item));
+        if (val1) {
+            System.out.println("        包含敏感信息，审核失败");
+            doc.nextState(new DraftState(doc));
+        } else {
+            System.out.println("        审核通过");
+            doc.nextState(new PublishedState(doc));
+        }
+    }
+
+    @Override
+    public void revoke() {
+        System.out.println("        非法操作：审核中状态不允许撤稿");
+    }
+
+    @Override
+    public void remove() {
+        System.out.println("        非法操作：审核中状态不允许下架");
+    }
+}
+```
+**（2-3）已发布状态**
+```java
+public class PublishedState implements State {
+
+    private final Document doc;
+    public PublishedState(Document doc) {
+        this.doc = doc;
+    }
+
+    @Override
+    public String getStateName() {
+        return "已发布";
+    }
+
+    @Override
+    public void saveDraft(String title, String content) {
+        System.out.println("        非法操作：已发布状态不允许保存草稿");
+    }
+
+    @Override
+    public void contribute() {
+        System.out.println("        非法操作：已发布状态不允许投稿");
+    }
+
+    @Override
+    public void audit() {
+        System.out.println("        非法操作：已发布状态不需要审核");
+    }
+
+    @Override
+    public void revoke() {
+        doc.nextState(new DraftState(doc));
+    }
+
+    @Override
+    public void remove() {
+        doc.nextState(new RemovedState(doc));
+    }
+}
+```
+**（2-4）已下架状态**
+```java
+public class RemovedState implements State{
+
+    private final Document doc;
+    public RemovedState(Document doc) {
+        this.doc = doc;
+    }
+
+    @Override
+    public String getStateName() {
+        return "已下架";
+    }
+
+    @Override
+    public void saveDraft(String title, String content) {
+        System.out.println("        非法操作：已下架状态不允许保存草稿");
+    }
+
+    @Override
+    public void contribute() {
+        System.out.println("        非法操作：已下架状态不能再投稿");
+    }
+
+    @Override
+    public void audit() {
+        System.out.println("        非法操作：已下架状态不需要审核");
+    }
+
+    @Override
+    public void revoke() {
+        doc.nextState(new DraftState(doc));
+    }
+
+    @Override
+    public void remove() {
+        System.out.println("        非法操作：已下架状态不允许再次下架");
+    }
+}
+```
+**（3）文稿**
+```java
+public class Document implements State {
+    private String title;                       // 文稿标题
+    private String content;                     // 文稿正文
+    private State currentState;                 // 当前状态
+
+    public Document(String title, String content) {
+        this.title = title;
+        this.content = content;
+        // 新建文稿
+        currentState = new DraftState(this);
+    }
+
+    /**
+     * 切换状态
+     * @param nextState 下个状态
+     */
+    public void nextState(State nextState) {
+        System.out.println(MessageFormat.format("    状态转换：【{0}】 -> 【{1}】",
+                currentState.getStateName(), nextState.getStateName()));
+        currentState = nextState;
+    }
+
+    @Override
+    public String getStateName() {
+        return currentState.getStateName();
+    }
+
+    @Override
+    public void saveDraft(String title, String content) {
+        currentState.saveDraft(title, content);
+    }
+
+    @Override
+    public void contribute() {
+        currentState.contribute();
+    }
+
+    @Override
+    public void audit() {
+        currentState.audit();
+    }
+
+    @Override
+    public void revoke() {
+        currentState.revoke();
+    }
+
+    @Override
+    public void remove() {
+        currentState.remove();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+}
+```
+**（4）客户端**
+
+**（4-1）Client**
+```java
+public class Client {
+    public static void main(String[] args) {
+        System.out.println("|==> Start -------------------------------------------------------------------------|");
+        // 新建文稿
+        Document doc = new Document("四川13所高校外籍师生走进三星堆等地领略巴蜀文明", "ssss");
+        // 重新编辑 再次保存
+        doc.saveDraft("四川13所高校外籍师生走进三星堆等地领略巴蜀文明", "7月14日，“文化中国·锦绣" +
+                "四川——高校外籍师生巴蜀文化品悟之旅”活动走进四川德阳市绵竹年画村、广汉三星堆博物馆。" +
+                "来自四川13所高校的26个国家的48名外籍师生在绵竹年画村提笔绘制年画，体验中国非物质文化魅力...");
+        // 投稿
+        doc.contribute();
+        // 撤稿
+        doc.revoke();
+        // 审核
+        doc.audit();
+        // 下架
+        doc.remove();
+    }
+}
+```
+**（4-1）运行结果**
+```text
+|==> Start -------------------------------------------------------------------------|
+    状态转换：【草稿】 -> 【审核中】
+        非法操作：审核中状态不允许撤稿
+        审核通过
+    状态转换：【审核中】 -> 【已发布】
+    状态转换：【已发布】 -> 【已下架】
+```
+
+# 四、状态模式
+## 4.1 意图
+> **允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类。**
+
+结合上面的案例来说，状态模式的意图指的是一个对象，在不同的状态下进行同一操作，却具有不同的行为。就像是处于草稿状态（`DraftState`）的文稿对象，进行保存草稿操作（`saveDraft()`）和处于已发布状态（`PublishedState`）时变现出了不同的行为。前者会将文稿对象更新到最新，而后者只会得到一个非法操作的提示。
+
+## 4.2 类图分析
+
+<div align="center">
+   <img src="/doc/resource/state/经典状态模式类图.jpg" width="60%"/>
+</div>
+
+状态模式的类图结构如上所示，在状态模式中，有如下的参与角色：
+
+- **Context**：定义客户端感兴趣的接口，并且维护一个 State 的实例，这个实例表示着当前的状态，并且客户端对于 Context 的操作将委托给该实例进行执行；
+- **State**：状态定义，定义与 Context 的一个特定状态相关的行为；
+- **ConcreteState**：每一个状态的子类对 State 中定义的所有行为进行实现。
+
+# 五、深入理解
+## 5.1 适用场景
+
+**（1）对象需要根据自身当前的状态表现出不同的行为**
+
+模式建议你将所有独立于状态的代码抽取到一组独立的类中。这样一来，你可以在独立于其他状态的情况下轻松添加新状态或修改已有状态。
+
+**（2）某个类在为变量的值构建大量的条件分支**
+
+状态模式会将这些条件语句的分支抽取到相应状态类的方法中，这样不仅解决了大量的条件分支，并且还能让各个状态相对独立的变化。
+
+## 5.2 使用技巧
+
+**（1） 谁实现状态转换**
+
+通常有两种方式定义状态转换，一种是在 Context 中定义，而另一种是在各个状态类中定义。
+> - 对于一个涉及到状态转换的操作来说，如果后继状态是固定的（比如处于已发布状态的下架操作，后继状态固定为已下架），那么可以在 Context 中定义实现。但是大多数情况下，对于一个操作的后继状态往往需要依据当前操作的执行结果（比如处于审核中状态的审核操作来说，会根据审核的结果转换到不同的状态中，审核成功将变成已发布状态，审核失败将回到草稿状态），此时我们不得不在 Context 中处理状态对象返回的不同结果，这无疑增加了复杂度；
+> - 另一种实现方式是在状态类中进行定义，这就要求状态类需要持有 Context 的引用，并且 Context 还需要提供一个设置状态的接口。当状态类确定好后继状态后，可以通过 Context 提供的接口设置后继状态。这种方式非常灵活，并且往往更加容易实现。但缺点也很明显，一个 ConcreteState 至少拥有一个其他子类的信息（比如，UnderReviewState 就需要依赖 DraftState 和 PublishedState 两个状态子类），这就让各个子类之间产生了依赖。
+
+我们在本章的案例中，就采用了在各个状态类中实现状态转换的方式。
+
+**（2）State 可被共享**
+
+如果 State 对象没有实例变量，或者 State 对象的实例变量不可变，此时可以采用共享的 State。对于一个没有内部状态的对象来说，他是线程安全的，所以可以被多个 Context 所共享。此时可以从享元（Flyweight）模式中受益。
+
+**（3）客户端不应与 State 对象打交道**
+
+对于客户端来说，他只应和 Context 对象产生交集，客户端所有可能的行为都应实现在 Context 中。有一种情况除外，如果客户端需要使用一个状态来装配 Context，此时客户端不得不为 Context 提供一个初始的状态。一旦 Context 配置完成，它的客户端不必再和状态对象打交道。
+
+# 附录
+[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/behavioral/state)
