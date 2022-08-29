@@ -115,7 +115,7 @@
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：撤销、回滚
-> <br>**在线文档**：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先保存的状态...[**查看更多**][memento_doc]
+> <br>**在线文档**：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先保存的状态...[**查看更多**](/doc/behavioral/Memento.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/memento)跳转。
 > <br>
 
@@ -123,7 +123,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：你不必找我，我来找你
-> <br>**在线文档**：定义对象间的一种一对多的依赖关系 ,当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并被自动更新...[**查看更多**][observer_doc]
+> <br>**在线文档**：定义对象间的一种一对多的依赖关系 ,当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并被自动更新...[**查看更多**](/doc/behavioral/Observer.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/observer)跳转。
 > <br>
 
@@ -262,12 +262,10 @@
 [singleton_doc]:https://www.yuque.com/coderran/pd/dvedfa
 [adaptor_doc]:https://www.yuque.com/coderran/pd/zy4og8
 [decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
-[observer_doc]:https://www.yuque.com/coderran/pd/gpcb3a
 [template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
-[memento_doc]:https://www.yuque.com/coderran/pd/gm1ox9
 [composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
 [bridge_doc]:https://www.yuque.com/coderran/pd/fbospp
