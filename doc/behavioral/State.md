@@ -25,7 +25,7 @@ public class Document {
 ```java
 public void audit() {
     // 是否可以进行审核
-    if (state != '审核中') {
+    if (state != "审核中") {
         // 不允许其他状态进行审核操作
         return;
     }
@@ -34,10 +34,10 @@ public void audit() {
     ...
     if (passed) {
         // 审核通过
-        state = '已发布';
+        state = "已发布";
     } else {
         // 审核失败
-        state = '草稿';
+        state = "草稿";
     }
 }
 ```
