@@ -111,6 +111,7 @@ public class Client {
 
 # 三、案例实现
 接下来，我们就实现一下上面的解决方案。
+
 **（1）抽象产品**
 ```java
 public abstract class AbstractFormatSaver {
@@ -299,15 +300,16 @@ public class DTO {
 # 四、工厂方法模式
 ## 4.1 意图
 
-> ** 定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。  **
+> **定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。**
 
 对于该意图的解析如下：
 
 - **定义一个用于创建对象的接口**：工厂接口中的生产产品的方法；
 - **让子类决定实例化哪一个类**：把产品的生产过程交给具体的工厂实现，各个具体的工厂生产具体的产品。
-## 4.2 通用类图
+
+## 4.2 类图结构
 <div align="center">
-   <img src="/doc/resource/factory-method/经典工厂方法模式类图.jpg" width="60%"/>
+   <img src="/doc/resource/factory-method/经典工厂方法模式类图.jpg" width="50%"/>
 </div>
 
 工厂方法模式的类图结构如上图所示。在工厂方法模式中，有如下的角色列表：
@@ -319,7 +321,7 @@ public class DTO {
 
 # 五、从源码中看工厂方法模式
 
-**（1）在 jdk 源码中，java.util.Calendar 使用静态工厂来生产 Calendar 的实例**
+**（1）在 jdk 中，`java.util.Calendar`使用静态工厂来生产实例**
 
 ```java
     private static Calendar createCalendar(TimeZone zone,Locale aLocale){
@@ -372,7 +374,7 @@ public class DTO {
     }
 ```
 
-**（2）在 spring 源码中，FactoryBean 使用工厂方法 getObject() 来生产对象实例**
+**（2）在 spring 中，`org.springframework.beans.factory.FactoryBean`使用工厂方法`getObject()`来生产对象实例**
 
 ```java
 public interface FactoryBean<T> {
