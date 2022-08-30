@@ -20,10 +20,10 @@
 
 对于该类图的类说明如下：
 
-- `**AbstractDomicile**`：抽象的户籍地。定义了迁移户口（`migrate()`）的行为，该方法就是模板方法，在该方法中定义了整个流程的基本骨架，包括准备基本材料（`prepareBasicMaterials()`）、准备附加材料（`additionalMaterials()`）、办理户口迁移（`doBusiness()`）、发放新的户口簿（`grantCertificate()`）等行为。除此之外，`doCheck()`一个钩子方法，表示对部分材料进行审查（比如学历入户方式，需要提供的学历证明不低于大学本科，而其他类型的入户方式则没有这个流程）；
-- `**RelativesEntryDomicile**`：亲属关系入户；
-- `**HouseEntryDomicile**`：房产入户；
-- `**EducationEntryDomicile**`：学历入户；
+- `AbstractDomicile`：抽象的户籍地。定义了迁移户口（`migrate()`）的行为，该方法就是模板方法，在该方法中定义了整个流程的基本骨架，包括准备基本材料（`prepareBasicMaterials()`）、准备附加材料（`additionalMaterials()`）、办理户口迁移（`doBusiness()`）、发放新的户口簿（`grantCertificate()`）等行为。除此之外，`doCheck()`一个钩子方法，表示对部分材料进行审查（比如学历入户方式，需要提供的学历证明不低于大学本科，而其他类型的入户方式则没有这个流程）；
+- `RelativesEntryDomicile`：亲属关系入户；
+- `HouseEntryDomicile`：房产入户；
+- `EducationEntryDomicile`：学历入户；
 
 # 三、案例代码
 **（1）模板类**
@@ -180,7 +180,7 @@ public class Client {
 ## 4.2 通用类图
 模板方法模式的通用类图结构如下所示：
 <div align="center">
-   <img src="/doc/resource/template-method/经典模板方法模式类图.jpg" width="30%"/>
+   <img src="/doc/resource/template-method/经典模板方法模式类图.jpg" width="15%"/>
 </div>
 
 模板方法模式是代码复用的一种极有效的手段，通过复用一些公共的代码，使得公用的部分变得更容易管理。一般，我们将定义算法的基本骨架的这个方法叫做**模板方法**（`AbstractClass#templateMethod()`），将抽象的方法称为**原语操作**（`AbstractClass#abstractMethod1()`、`AbstractClass#abstractMethod2()`）。
@@ -193,7 +193,7 @@ public class Client {
 
 **（2）利用好钩子方法**
 
-事实上，在模板方法中还有一类更为出名的方法：`钩子方法`。钩子方法描述了这样的一种思想：超类中提供一个空的（或者默认的缺省行为）方法，当子类认为有必要替换这一行为的时候，可以重写这个钩子方法。钩子方法和原语操作有一定的相似性，例如他们都提供了给子类扩展的手段，但他们并不能划等号。对于原语操作每个子类都应该提供各自的实现，而钩子方法则是根据需要决定是否应该重写。上面例子中的 doCheck() 方法就是一个典型的钩子方法，当需要时，可重写钩子方法，以便在特定的步骤中插入特定的实现。
+事实上，在模板方法中还有一类更为出名的方法：钩子方法。钩子方法描述了这样的一种思想：超类中提供一个空的（或者默认的缺省行为）方法，当子类认为有必要替换这一行为的时候，可以重写这个钩子方法。钩子方法和原语操作有一定的相似性，例如他们都提供了给子类扩展的手段，但他们并不能划等号。对于原语操作每个子类都应该提供各自的实现，而钩子方法则是根据需要决定是否应该重写。上面例子中的 `AbstractDomicile#doCheck()` 方法就是一个典型的钩子方法，当需要时，可重写钩子方法，以便在特定的步骤中插入特定的实现。
 
 # 五、从源码中看模板方法模式
 在源码经常都能见到模板方法的影子，这里举两个例子。
@@ -213,7 +213,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
     }
 }
 ```
-在 add(E e) 中定义了添加元素调用的算法，而 add(int index, E element) 是一个应由子类实现的方法。
+在`add(E e)`中定义了添加元素调用的算法，而`add(int index, E element)`是一个应由子类实现的方法。
 
 **（2）在 Mybatis 中的应用**
 
