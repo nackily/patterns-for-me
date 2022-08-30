@@ -75,7 +75,7 @@
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：过滤器
-> <br>**在线文档**：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止...[**查看更多**](/doc/behavioral/Chain-Of-Responsibility.md)
+> <br>**在线文档**：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止...[**查看更多**](/doc/b/Chain-Of-Responsibility.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)跳转。
 > <br>
 
@@ -83,7 +83,7 @@
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：封装请求
-> <br>**在线文档**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消的操作...[**查看更多**](/doc/behavioral/Command.md)
+> <br>**在线文档**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消的操作...[**查看更多**](/doc/b/Command.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/command)跳转。
 > <br>
 
@@ -91,7 +91,7 @@
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★★★
 > <br>**助记关键字**：谷歌翻译
-> <br>**在线文档**：给定一种语言，定义它的文法的一种表示，以及一个解释器，这个解释器使用这个表示来解释该语言中的句子...[**查看更多**](/doc/behavioral/Interpreter.md)
+> <br>**在线文档**：给定一种语言，定义它的文法的一种表示，以及一个解释器，这个解释器使用这个表示来解释该语言中的句子...[**查看更多**](/doc/b/Interpreter.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/interpreter)跳转。
 > <br>
 
@@ -99,7 +99,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键字**：遍历
-> <br>**在线文档**：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示...[**查看更多**](/doc/behavioral/Iterator.md)
+> <br>**在线文档**：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示...[**查看更多**](/doc/b/Iterator.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/iterator)跳转。
 > <br>
 
@@ -107,7 +107,7 @@
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：中介、消息队列
-> <br>**在线文档**：用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互...[**查看更多**](/doc/behavioral/Mediator.md)
+> <br>**在线文档**：用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互...[**查看更多**](/doc/b/Mediator.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/mediator)跳转。
 > <br>
 
@@ -115,7 +115,7 @@
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：撤销、回滚
-> <br>**在线文档**：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先保存的状态...[**查看更多**](/doc/behavioral/Memento.md)
+> <br>**在线文档**：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先保存的状态...[**查看更多**](/doc/b/Memento.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/memento)跳转。
 > <br>
 
@@ -123,7 +123,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：你不必找我，我来找你
-> <br>**在线文档**：定义对象间的一种一对多的依赖关系 ,当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并被自动更新...[**查看更多**](/doc/behavioral/Observer.md)
+> <br>**在线文档**：定义对象间的一种一对多的依赖关系 ,当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并被自动更新...[**查看更多**](/doc/b/Observer.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/observer)跳转。
 > <br>
 
@@ -131,7 +131,7 @@
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：上坡加速，下坡减速
-> <br>**在线文档**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类...[**查看更多**](/doc/behavioral/State.md)
+> <br>**在线文档**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类...[**查看更多**](/doc/b/State.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/state)跳转。
 > <br>
 
@@ -139,7 +139,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：公交/地铁/共享单车都能回家
-> <br>**在线文档**：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。本模式使得算法可独立于使用它的客户而变化...[**查看更多**][strategy_doc]
+> <br>**在线文档**：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。本模式使得算法可独立于使用它的客户而变化...[**查看更多**](/doc/b/Strategy.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/strategy)跳转。
 > <br>
 
@@ -147,14 +147,14 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键字**：封装公用部分，扩展变化部分
-> <br>**在线文档**：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤...[**查看更多**][template_method_doc]
+> <br>**在线文档**：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤...[**查看更多**](/doc/b/Template-Method.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/template_method)跳转。
 > <br>
 
 ### 【B-11】访问者-Visitor
 > **流行指数**：★☆☆☆☆
 > <br>**难度等级**：★★★★★
-> <br>**在线文档**：表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作...[**查看更多**](/doc/behavioral/Visitor.md)
+> <br>**在线文档**：表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作...[**查看更多**](/doc/b/Visitor.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/behavioral/visitor)跳转。
 > <br>
 
@@ -164,7 +164,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键字**：全局唯一、工具类
-> <br>**在线文档**：单例模式应该是所有设计模式中结构最简单的一个了，同时它也是面试中被考的最多的设计模式...[**查看更多**][singleton_doc]
+> <br>**在线文档**：单例模式应该是所有设计模式中结构最简单的一个了，同时它也是面试中被考的最多的设计模式...[**查看更多**](/doc/c/Singleton.md)
 > <br>**代码目录**：[**点击**](/src/main/java/com/aoligei/creational/singleton)跳转。
 > <br>
 
@@ -259,10 +259,8 @@
 [factory_method_doc]:https://www.yuque.com/coderran/pd/dq7au9
 [abstract_factory_doc]:https://www.yuque.com/coderran/pd/ikqm88
 [prototype_doc]:https://www.yuque.com/coderran/pd/eqz0qg
-[singleton_doc]:https://www.yuque.com/coderran/pd/dvedfa
 [adaptor_doc]:https://www.yuque.com/coderran/pd/zy4og8
 [decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
-[template_method_doc]:https://www.yuque.com/coderran/pd/gxykap
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
