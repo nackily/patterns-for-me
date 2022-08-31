@@ -196,7 +196,7 @@
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键词**：对象共享
-> <br>**摘要**：运用共享技术有效地支持大量细粒度的对象...[**查看更多**][flyweight_doc]
+> <br>**摘要**：运用共享技术有效地支持大量细粒度的对象...[**查看更多**](/doc/s/Flyweight.md)
 > <br>
 
 **【S-7】代理-Proxy**
@@ -263,4 +263,3 @@
 [decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
-[flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
