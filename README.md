@@ -203,7 +203,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键词**：全局唯一、工具类
-> <br>**摘要**：代理模式为其他对象提供一种代理以控制对这个对象的访问...[**查看更多**][proxy_doc]
+> <br>**摘要**：代理模式为其他对象提供一种代理以控制对这个对象的访问...[**查看更多**](/doc/s/Proxy.md)
 > <br>
 
 ## 模式对比
@@ -263,5 +263,4 @@
 [decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
-[proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
