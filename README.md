@@ -152,7 +152,7 @@
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键词**：主题切换
-> <br>**摘要**：很多时候，我们不应该被一个看起来很复杂的名词或概念所绊倒，因为往往看起来越复杂的东西其本质越简单。就像是抽象工厂模式...[**查看更多**][abstract_factory_doc]
+> <br>**摘要**：很多时候，我们不应该被一个看起来很复杂的名词或概念所绊倒，因为往往看起来越复杂的东西其本质越简单。就像是抽象工厂模式...[**查看更多**](/doc/c/Abstract-Method.md)
 > <br>
 
 ### 【S】结构型模式
@@ -161,7 +161,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键词**：转接头、不同国家的标准电压不一样
-> <br>**摘要**：将一个类的接口转换成客户希望的另外一个接口，适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作...[**查看更多**][adaptor_doc]
+> <br>**摘要**：将一个类的接口转换成客户希望的另外一个接口，适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作...[**查看更多**](/doc/s/Adapter.md)
 > <br>
 
 **【S-2】桥-Bridge**
@@ -259,9 +259,7 @@
 
 [builder_doc]:https://www.yuque.com/coderran/pd/dkzsxv
 [factory_method_doc]:https://www.yuque.com/coderran/pd/dq7au9
-[abstract_factory_doc]:https://www.yuque.com/coderran/pd/ikqm88
 [prototype_doc]:https://www.yuque.com/coderran/pd/eqz0qg
-[adaptor_doc]:https://www.yuque.com/coderran/pd/zy4og8
 [decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
