@@ -168,14 +168,14 @@
 > **流行指数**：★★☆☆☆
 > <br>**难度等级**：★★★☆☆
 > <br>**助记关键词**：拱桥形状、解耦多个维度
-> <br>**摘要**：当需要从多个维度对一个对象进行扩展时，我们可以使用桥模式来让各个维度分离，进而实现各自独立的变化...[**查看更多**][bridge_doc]
+> <br>**摘要**：当需要从多个维度对一个对象进行扩展时，我们可以使用桥模式来让各个维度分离，进而实现各自独立的变化...[**查看更多**](/doc/s/Bridge.md)
 > <br>
 
 **【S-3】组合-Composite**
 > **流行指数**：★★★★☆
 > <br>**难度等级**：★★☆☆☆
 > <br>**助记关键词**：树形结构
-> <br>**摘要**：如果一个应用的核心模型是树形结构，那么我们就能用组合模式来表示它，组合模式就是为树形结构量身定制的...[**查看更多**][composite_doc]
+> <br>**摘要**：如果一个应用的核心模型是树形结构，那么我们就能用组合模式来表示它，组合模式就是为树形结构量身定制的...[**查看更多**](/doc/s/Composite.md)
 > <br>
 
 **【S-4】装饰器-Decorator**
@@ -264,6 +264,4 @@
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
 [facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
 [proxy_doc]:https://www.yuque.com/coderran/pd/ulzd3k
-[composite_doc]:https://www.yuque.com/coderran/pd/crhmfb
 [flyweight_doc]:https://www.yuque.com/coderran/pd/ytwx7z
-[bridge_doc]:https://www.yuque.com/coderran/pd/fbospp

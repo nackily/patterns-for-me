@@ -158,7 +158,7 @@ public class Plug {
 ## 4.2 类图结构
 适配器模式的类图则如下所示：
 <div align="center">
-   <img src="/doc/resource/adapter/案例类图.jpg" width="60%"/>
+   <img src="/doc/resource/adapter/经典适配器模式类图.jpg" width="60%"/>
 </div>
 
 在适配器模式中，包含有以下主要角色，我们可以将各个角色与上面的例子进行类比分析：
@@ -181,7 +181,7 @@ public class Plug {
 
 # 六、从源码中看适配器模式
 
-**（1）**`**java.util.concurrent.Executors**`**类中的静态内部类**`**RunnableAdapter**`
+**（1）`java.util.concurrent.Executors`类中的静态内部类`RunnableAdapter`**
 
 ```java
 public class Executors {
