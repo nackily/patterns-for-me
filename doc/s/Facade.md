@@ -1,0 +1,384 @@
+## <center> 行为型 - 门面（Facade）设计模式
+---
+
+在所有的设计模式中，门面模式属于少数几个见名知意的模式之一。在面向对象设计时，我们总是喜欢将对象内部的复杂细节封装起来，提供尽可能简单的方法来与外界进行交互。门面模式也是如此，对象封装是隐藏了内部数据结构的复杂性，门面模式就是隐藏了内部系统之间复杂的交互和依赖关系。可以说，门面模式是更广义的封装。
+
+# 一、问题引入
+
+在一个项目初期的时候，我们拥有很少的几个类，他们往往表现的比较良好。后来，随着新需求的不断迭代，项目中的类开始多了起来，每次新引入功能都有可能改动现有的类。为了让项目变得更加便于维护和扩展，我们决定对其重构。
+
+我们竭尽全力让对象职责更加单一，并且解除掉不必要的耦合关系，甚至引入了一些设计模式让各个小模块的扩展性更加灵活。但这样做的同时，也让系统的结构变得更为庞杂，对象与对象之间的依赖关系可能错综复杂。所有的对象组合在一起，共同构成了一个系统。
+
+然后，此时有一个外部系统，需要与现有的系统进行交互（为了区分，我们将现有的系统称呼为子系统）。外部系统和子系统之间的依赖关系很可能就如下图这样：
+<div align="center">
+   <img src="/doc/resource/facade/子系统与外部系统依赖关系.jpg" width="90%"/>
+</div>
+
+> 上面图没有实际的意义，只是为了演示两个复杂系统之间对接的情况，图本身没有表达任何现实意义。
+
+我们在惊叹于不知不觉间系统已然具有如此规模的同时，也为两个系统的交互犯了愁。如此多的依赖关系，将来子系统扩展或者接口发生变动时，外部系统的调整将变得艰难，影响巨大。
+
+> 事实上，子系统随着时间的推移演变得越来越复杂，类定义越来越多，是正常、合理且必然的。在一个健壮的项目中，各个小模块职责分明，各个类的行为单一，那么类的数量必然不会少。因为原本可能出现在一个类中表达多个行为的代码在解耦后，就被拆分到不同的类中了，类的数量必然增加。但这并不是指子系统设计得不好，相反，这正说明子系统设计得足够好，因为从某种程度上来说，类的数量在一定程度上体现了程序的健壮性。
+
+回到这个问题，既然外部系统在使用子系统时这么复杂，要和这么多子系统的类打交道，例如：在`A_Class6`中为了创建一个`B_Class9`类的对象，我不得不先创建`B_Class10`、`B_Class3`的对象，而创建`B_Class3`对象又必须先创建`B_Class5`对象。最终，在`A_Class6`中使用`B_Class9`时，会包含这样的代码：`B_Class9 class9 = new B_Class9(new B_Class10(), new B_Class3(new B_Class5()));`，如果使用者`A_Class6`根本不关心除`B_Class9`之外的对象，那么这个依赖关系对它来说难以忍受。
+
+那么，是否能简化使用方在使用子系统时的复杂度，让使用方将精力放在自己关心的事情上？
+
+# 二、解决方案
+既然使用方抱怨交互太复杂，那么我就简化子系统的交互逻辑，把这个简化后的逻辑提取到单独的类中去实现，这就是门面模式所要解决的问题。门面模式建议我们隐藏内部交互的复杂性，为外部提供一个统一的交互入口，这个交互入口应尽可能的简单，以此降低客户端使用时的难度。
+<div align="center">
+   <img src="/doc/resource/facade/引入门面模式后依赖关系.jpg" width="90%"/>
+</div>
+
+对比前后两张图，在使用门面模式后：
+
+- **系统之间的耦合度更低了**：外部系统不用再依赖子系统的具体内部实现，仅仅通过门面来处理交互逻辑及传递请求，这使得整个依赖关系变得更加简单；
+- **外部系统与子系统之间的交互变得更加清晰，更方便维护**：如果我的子系统内部有修改，我们只需要调整门面内部的逻辑处理，而不必修改外部系统的代码；
+- **简化外部系统的使用**：我们可以使用缺省值的方式，简化外部系统的使用，例如，可以在`Facade`中各自维护一个`B_Class9`、`B_Class10`、`B_Class3`、`B_Class5`引用，并且在外部系统请求之前，给他们提供缺省的对象，这能为外部系统省去一大部分麻烦。
+
+OK，到此为止，我们已经了解了门面模式所有核心的内容，是不是非常简单？
+
+# 三、案例实现
+## 3.1 案例引入
+
+九零后的聚会，吃完饭不是麻将就是唱 K。上次朋友聚合就去了一次 KTV，还记得一进房间，就看到一个中控面板，上面有几个按钮，分别是居家模式、Live模式、专业模式等。在切换模式的时候，房间的灯光和音箱效果会跟着变化。我们就以这个例子来说明门面模式，假定各个模式所对应的效果如下：
+
+- **居家模式**：黄、绿灯光，常亮效果灯光，混响效果音箱；
+- **Live模式**：黄、绿、红灯光，跑马灯效果灯光，回声效果音箱；
+- **专业模式**：绿灯光，频闪效果灯光，原声效果音箱。
+
+在这个案例中，作为用户，我们可以根据喜好选择当前房间的灯光颜色、灯效以及音响效果。我们并未直接控制灯的颜色和效果，也没有控制音箱效果，我们只是在中控面板上选择喜欢的模式，就能切换他们。如果将房间的各种效果比作复杂的子系统，那顾客就相当于上面提到的外部系统，中控面板自然就是子系统上层的门面。
+
+## 3.2 结构分析
+该例子对应的类图结构如下图所示：
+<div align="center">
+   <img src="/doc/resource/facade/案例类图.png" width="95%"/>
+</div>
+
+上面的类图结构看起来比较复杂，但大部分都不是本文的重点，我们的重点是图中的 ModelFacade 那部分。ModelFacade 表示了案例中的中控面板，也就是一个门面。图中处于深色背景部分的对象都隐藏在该门面后，由他们负责完成了一系列的工作。对于用户（Client）来说，只需要从中控面板中已提供的几种模式中进行选择，就可以切换到与之对应的房间效果。
+
+## 3.2 代码附录
+**（1）设备接口**
+```java
+public interface Equipment {
+    /**
+     * 打开设备
+     */
+    void on();
+
+    /**
+     * 关闭设备
+     */
+    void off();
+
+    /**
+     * 展示设备效果
+     */
+    void showEffects();
+}
+```
+**（2）音箱**
+```java
+public abstract class Speaker implements Equipment {
+    @Override
+    public void on() {
+        System.out.println("        音箱已打开");
+    }
+    @Override
+    public void off() {
+        System.out.println("        音箱已关闭");
+    }
+}
+```
+**（3）音响效果**
+
+**（3-1）混响音效**
+```java
+public class ReverbSoundEffectSpeaker extends Speaker {
+    @Override
+    public void showEffects() {
+        System.out.println("        音箱使用混响音效");
+    }
+}
+```
+**（3-2）原声音效**
+```java
+public class OriginalSoundEffectSpeaker extends Speaker {
+    @Override
+    public void showEffects() {
+        System.out.println("        音箱使用原声音效");
+    }
+}
+```
+**（3-3）回声音效**
+```java
+public class EchoSoundEffectSpeaker extends Speaker {
+    @Override
+    public void showEffects() {
+        System.out.println("        音箱使用回声音效");
+    }
+}
+```
+**（4）灯光**
+
+**（4-1）电灯泡**
+```java
+public abstract class Bulb implements Equipment {
+    @Override
+    public void on() {
+        System.out.println("        " + this.attachEffects() + "已打开");
+    }
+    @Override
+    public void off() {
+        System.out.println("        " + this.attachEffects() + "已关闭");
+    }
+    @Override
+    public void showEffects() {
+        System.out.println("        " + this.attachEffects());
+    }
+    /**
+     * 灯光效果
+     * @return 效果
+     */
+    protected abstract String attachEffects();
+}
+```
+**（4-2）绿灯电灯泡**
+```java
+public class GreenBulb extends Bulb {
+    @Override
+    public String attachEffects() {
+        return "绿灯灯光";
+    }
+}
+```
+**（4-3）红灯电灯泡**
+```java
+public class RedBulb extends Bulb {
+    @Override
+    public String attachEffects() {
+        return "红色灯光";
+    }
+}
+```
+**（4-4）黄灯电灯泡**
+```java
+public class YellowBulb extends Bulb {
+    @Override
+    public String attachEffects() {
+        return "黄色灯光";
+    }
+}
+```
+**（5）灯光效果**
+
+**（5-1）灯效装饰器**
+```java
+public abstract class LightEffectDecorator extends Bulb {
+
+    protected final Bulb bulb;
+
+    public LightEffectDecorator(Bulb bulb) {
+        this.bulb = bulb;
+    }
+}
+```
+**（5-2）常亮灯光效果**
+```java
+public class BrightEffectDecorator extends LightEffectDecorator {
+
+    public BrightEffectDecorator(Bulb bulb) {
+        super(bulb);
+    }
+
+    @Override
+    public String attachEffects() {
+        return "常亮效果的" + super.bulb.attachEffects();
+    }
+}
+
+```
+**（5-3）跑马灯灯光效果**
+```java
+public class MarqueeEffectDecorator extends LightEffectDecorator {
+
+    public MarqueeEffectDecorator(Bulb bulb) {
+        super(bulb);
+    }
+
+    @Override
+    public String attachEffects() {
+        return "跑马灯效果的" + super.bulb.attachEffects();
+    }
+}
+```
+**（5-4）频闪灯光效果**
+```java
+public class StrobeEffectDecorator extends LightEffectDecorator {
+
+    public StrobeEffectDecorator(Bulb bulb) {
+        super(bulb);
+    }
+
+    @Override
+    public String attachEffects() {
+        return "频闪效果的" + super.bulb.attachEffects();
+    }
+}
+```
+**（6）中控面板**
+```java
+public enum ModelFacade {
+    /**
+     * 唯一实例
+     */
+    INSTANCE;
+
+    private Equipment redBulb = new MarqueeEffectDecorator(new RedBulb());
+    private Equipment greenBulb = new MarqueeEffectDecorator(new GreenBulb());
+    private Equipment yellowBulb = new MarqueeEffectDecorator(new YellowBulb());
+    private Equipment speaker = new EchoSoundEffectSpeaker();
+
+    public void open() {
+        System.out.println("|==> 打开设备-------------------------------------------------------------|");
+        this.redBulb.on();
+        this.greenBulb.on();
+        this.yellowBulb.on();
+        this.speaker.on();
+        this.liveMode();
+    }
+
+    public void close() {
+        System.out.println("|==> 关闭设备-------------------------------------------------------------|");
+        this.redBulb.off();
+        this.greenBulb.off();
+        this.yellowBulb.off();
+        this.speaker.off();
+    }
+
+    public void familyMode() {
+        System.out.println("|==> 居家模式-------------------------------------------------------------|");
+        this.greenBulb = new BrightEffectDecorator(new GreenBulb());
+        this.yellowBulb = new BrightEffectDecorator(new YellowBulb());
+        this.speaker = new ReverbSoundEffectSpeaker();
+        System.out.println("    灯光效果：");
+        this.greenBulb.showEffects();
+        this.yellowBulb.showEffects();
+        System.out.println("    音响效果：");
+        this.speaker.showEffects();
+    }
+
+    public void liveMode() {
+        System.out.println("|==> 现场模式-------------------------------------------------------------|");
+        this.redBulb = new MarqueeEffectDecorator(new RedBulb());
+        this.greenBulb = new MarqueeEffectDecorator(new GreenBulb());
+        this.yellowBulb = new MarqueeEffectDecorator(new YellowBulb());
+        this.speaker = new EchoSoundEffectSpeaker();
+        System.out.println("    灯光效果：");
+        this.redBulb.showEffects();
+        this.greenBulb.showEffects();
+        this.yellowBulb.showEffects();
+        System.out.println("    音响效果：");
+        this.speaker.showEffects();
+    }
+
+    public void professionalMode() {
+        System.out.println("|==> 专业模式-------------------------------------------------------------|");
+        this.greenBulb = new StrobeEffectDecorator(new GreenBulb());
+        this.speaker = new OriginalSoundEffectSpeaker();
+        System.out.println("    灯光效果：");
+        this.greenBulb.showEffects();
+        System.out.println("    音响效果：");
+        this.speaker.showEffects();
+    }
+}
+```
+**（7）客户端使用**
+
+**（7-1）Client**
+```java
+public class Client {
+    public static void main(String[] args) {
+        // 打开所有设备
+        ModelFacade.INSTANCE.open();
+        // 切换到居家模式
+        ModelFacade.INSTANCE.familyMode();
+        // 切换到专业模式
+        ModelFacade.INSTANCE.professionalMode();
+        // 切换到现场模式
+        ModelFacade.INSTANCE.liveMode();
+        // 关闭所有设备
+        ModelFacade.INSTANCE.close();
+    }
+}
+```
+**（7-2）运行结果**
+```java
+|==> 打开设备-------------------------------------------------------------|
+        跑马灯效果的红色灯光已打开
+        跑马灯效果的绿灯灯光已打开
+        跑马灯效果的黄色灯光已打开
+        音箱已打开
+|==> 现场模式-------------------------------------------------------------|
+    灯光效果：
+        跑马灯效果的红色灯光
+        跑马灯效果的绿灯灯光
+        跑马灯效果的黄色灯光
+    音响效果：
+        音箱使用回声音效
+|==> 居家模式-------------------------------------------------------------|
+    灯光效果：
+        常亮效果的绿灯灯光
+        常亮效果的黄色灯光
+    音响效果：
+        音箱使用混响音效
+|==> 专业模式-------------------------------------------------------------|
+    灯光效果：
+        频闪效果的绿灯灯光
+    音响效果：
+        音箱使用原声音效
+|==> 现场模式-------------------------------------------------------------|
+    灯光效果：
+        跑马灯效果的红色灯光
+        跑马灯效果的绿灯灯光
+        跑马灯效果的黄色灯光
+    音响效果：
+        音箱使用回声音效
+|==> 关闭设备-------------------------------------------------------------|
+        跑马灯效果的红色灯光已关闭
+        跑马灯效果的绿灯灯光已关闭
+        跑马灯效果的黄色灯光已关闭
+        音箱已关闭
+```
+
+# 四、门面模式
+## 4.1 意图
+> **为子系统中的一组接口提供一个一致的界面，门面模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。**
+
+门面模式要实现的目的是为了让子系统变得更加容易使用，实现方式是定义一个高层的接口（使用者通过这个高层接口和子系统进行交互），最终的效果就是给子系统的一组接口提供了一个一致的界面。
+
+## 4.2 使用技巧
+
+**（1）在恰当的地方使用门面模式**
+
+在门面模式的定义中，已经指明了使用它的效果——给子系统增加一个门面，对于客户端来说，将变得更加容易使用，这一点尤其重要。如果给子系统加上门面后，仍然不能降低负责度，则不应该使用门面模式（或者打开的方式不对）。
+
+**（2）屏蔽那些用户不关心的细节**
+
+如在上面的例子中，作为用户的我，不需要知道灯光是如何产生的，灯效是如何切换的，我需要的是打开所有的设备，然后选择一个我喜欢的场景而已。屏蔽掉那些对客户端来说用处不大的细节之后，客户端的使用才能变得简单。
+
+**（3）灵活使用门面模式**
+
+使用门面模式时应该注意注重其意，而不在于形。拨开现象看本质，门面模式说到底还是为了客户端使用子系统更简单，只要抓住这一点便不会弄巧成拙。至于如何实现，并不会限制于某一种特定的方式。比如为了让门面类具有子系统类的特性，我们可以让门面类继承或持有某些具体的类。再比如，当多个客户端使用子系统，且这些客户端在某些细节上的期望不一致时，我们可以定义抽象的门面，为多个客户端提供差异化的具体门面，以此来满足不同客户端的需求。
+
+**（4）不要限制客户越过门面**
+
+我们发现，为了让子系统更加方便使用，我们屏蔽了很多细节（使用了缺省值）。但我们无法预知用户每一次的需求，也不可能为所有的用户都提供一个通用并且简单的接口。比如，在上面的例子中，某个用户希望在居家模式下使用的灯光是黄红而不是黄绿，此时子系统应该如何做呢？
+
+> 子系统什么也不应该做。既然这种需求属于个例，那么就特殊对待，子系统不限制客户端对底层类的直接使用，那么客户就可以根据底层类实现自己需要的功能。
+
+所以，门面模式从某种意义上来说是属于对子系统使用的一种优化。门面模式希望的是在大多数的情况下，都能为客户端提供良好的服务，但如果有需求超出了门面的能力范围，客户端就应该越过门面，在更底层去寻找答案。
+
+
+# 附录
+[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/structural/facade)

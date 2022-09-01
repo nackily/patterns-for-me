@@ -189,7 +189,7 @@
 > **流行指数**：★★★☆☆
 > <br>**难度等级**：★☆☆☆☆
 > <br>**助记关键词**：景区检票口、银行业务接待员
-> <br>**摘要**：为子系统中的一组接口提供一个一致的界面，门面模式定义了一个高层接口，这个接口使得这一子系统更加容易使用...[**查看更多**][facade_doc]
+> <br>**摘要**：为子系统中的一组接口提供一个一致的界面，门面模式定义了一个高层接口，这个接口使得这一子系统更加容易使用...[**查看更多**](/doc/s/Facade.md)
 > <br>
 
 **【S-6】享元-Flyweight**
@@ -258,8 +258,5 @@
 
 
 [builder_doc]:https://www.yuque.com/coderran/pd/dkzsxv
-[factory_method_doc]:https://www.yuque.com/coderran/pd/dq7au9
-[prototype_doc]:https://www.yuque.com/coderran/pd/eqz0qg
 [decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
-[facade_doc]:https://www.yuque.com/coderran/pd/odmvwb
