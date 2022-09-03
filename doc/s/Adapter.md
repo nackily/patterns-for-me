@@ -1,4 +1,4 @@
-## <center> 行为型 - 适配器（Adapter）设计模式
+## <center> 结构型 - 适配器（Adapter）设计模式
 ---
 
 # 一、问题引入

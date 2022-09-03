@@ -1,4 +1,4 @@
-## <center> 行为型 - 原型（Prototype）设计模式
+## <center> 创建型 - 原型（Prototype）设计模式
 ---
 
 # 一、原型模式

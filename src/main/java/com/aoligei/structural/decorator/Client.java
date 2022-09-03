@@ -1,24 +1,37 @@
 package com.aoligei.structural.decorator;
 
+import java.math.BigDecimal;
+import java.text.MessageFormat;
+
 /**
  * Client
  *
  * @author coder
- * @date 2022-05-24 16:01:55
+ * @date 2022-09-03 13:19:12
  * @since 1.0.0
  */
 public class Client {
-
     public static void main(String[] args) {
-        System.out.println("|==> Start ---------------------------------------------|");
-        System.out.println("    Tom 点了一份牛肉面");
-        Breakfast breakfast4Tom = new BeefDecorator(new Noodles());
-        System.out.println("        花费：" + breakfast4Tom.cost());
-        System.out.println("        食材包含有：" + breakfast4Tom.getDescription());
+        System.out.println("|==> Start --------------------------------------------------------------|");
+        ShoppingCart cart = new ShoppingCart();
+        // 添加商品
+        cart.addGoods(new ShoppingCart.GoodsDetail("夏季T恤", BigDecimal.valueOf(59.9), 2));
+        cart.addGoods(new ShoppingCart.GoodsDetail("网球拍", BigDecimal.valueOf(100), 1));
+        cart.addGoods(new ShoppingCart.GoodsDetail("网红款家用驱蚊液", BigDecimal.valueOf(28.5), 2));
+        System.out.println(MessageFormat.format("   购物车商品明细：\n{0}", cart.getDetails()));
+        System.out.println(MessageFormat.format("   商品原价：【{0}元】", cart.finalCost()));
 
-        System.out.println("    Jack 点了一份酸菜羊肉米粉，酸菜要了双份");
-        Breakfast breakfast4Jack = new SauerkrautDecorator(new SauerkrautDecorator(new MuttonDecorator(new Vermicelli())));
-        System.out.println("        花费：" + breakfast4Jack.cost());
-        System.out.println("        食材包含有：" + breakfast4Jack.getDescription());
+        // 添加优惠：一张折扣券（8.5折）、一张满减券（满100减20）、两张抵用券（20元、5元）
+        VoucherDecorator decorator =
+                new VoucherDecorator(
+                        new VoucherDecorator(
+                                new FullDiscountDecorator(
+                                        new DiscountDecorator(cart, BigDecimal.valueOf(0.85)), BigDecimal.valueOf(20), BigDecimal.valueOf(100)
+                                ), BigDecimal.valueOf(20)
+                        ), BigDecimal.valueOf(5)
+                );
+        System.out.println(MessageFormat.format("   优惠后价格：【{0}元】，优惠说明：【{1}】",
+                decorator.finalCost(),
+                decorator.description()));
     }
 }

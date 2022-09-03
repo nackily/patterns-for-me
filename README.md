@@ -182,7 +182,7 @@
 > **流行指数**：★★★★★
 > <br>**难度等级**：★★★★☆
 > <br>**助记关键词**：俄罗斯套娃
-> <br>**摘要**：在不改变原有对象结构的基础情况下，动态地给该对象增加一些额外功能的职责...[**查看更多**][decorator_doc]
+> <br>**摘要**：在不改变原有对象结构的基础情况下，动态地给该对象增加一些额外功能的职责...[**查看更多**](/doc/s/Decorator.md)
 > <br>
 
 **【S-5】门面-Facade**
@@ -258,5 +258,4 @@
 
 
 [builder_doc]:https://www.yuque.com/coderran/pd/dkzsxv
-[decorator_doc]:https://www.yuque.com/coderran/pd/xgff2o
 [strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd

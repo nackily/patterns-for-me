@@ -1,4 +1,4 @@
-## <center> 行为型 - 组合（Composite）设计模式
+## <center> 结构型 - 组合（Composite）设计模式
 ---
 
 <div align="center">

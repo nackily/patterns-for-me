@@ -1,4 +1,4 @@
-## <center> 行为型 - 单例（Singleton）设计模式
+## <center> 创建型 - 单例（Singleton）设计模式
 ---
 
 # 一、单例模式
