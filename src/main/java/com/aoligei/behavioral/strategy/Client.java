@@ -1,25 +1,31 @@
 package com.aoligei.behavioral.strategy;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+
 /**
  * Client
  *
  * @author coder
- * @date 2022-06-14 14:34:11
+ * @date 2022-09-05 17:59:29
  * @since 1.0.0
  */
 public class Client {
 
-    public static void main(String[] args) {
-        // 假设：当前上海有中风险区，采用宽松出行政策，Jack 从上海到成都
-        System.out.println("|==> Jack 从【上海 -> 成都】----------------------------------------------------------|");
-        Travel travelForJack = new Travel(new EasyLeaveStrategy(), new FromMediumRiskStrategy());
-        travelForJack.leaveDeparture();
-        travelForJack.enterDestination();
+    public static void main(String[] args) throws IOException {
+        System.out.println("|==> Start -------------------------------------------------------|");
+        // 压缩磁盘文件为zip格式压缩包
+        CompressContext context = new CompressContext(new ZipCompressor());
+        context.compressFile(Paths.get("opt", "test", "funny"), Paths.get("opt", "test", "output.zip"));
 
-        // 假设：当前天津为低风险区，采用严格限制出行政策，Tom 从天津到成都
-        System.out.println("|==> Tom 从【天津 -> 成都】-----------------------------------------------------------|");
-        Travel travelForTom = new Travel(new StrictLeaveStrategy(), new FromLowRiskStrategy());
-        travelForTom.leaveDeparture();
-        travelForTom.enterDestination();
+        // 压缩磁盘文件为tar格式压缩包
+        context = new CompressContext(new TarCompressor());
+        context.compressFile(Paths.get("opt", "test", "funny"), Paths.get("opt", "test", "output.tar"));
+
+        // 压缩class为jar包
+        context = new CompressContext(new JarCompressor());
+        Class<?>[] toPackageClasses = { JarCompressor.class, CompressStrategy.class, Client.class };
+        context.compressClasses(toPackageClasses, Paths.get("opt", "test", "output.jar"));
     }
+
 }

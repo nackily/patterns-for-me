@@ -258,4 +258,3 @@
 
 
 [builder_doc]:https://www.yuque.com/coderran/pd/dkzsxv
-[strategy_doc]:https://www.yuque.com/coderran/pd/mgbgzd
