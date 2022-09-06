@@ -44,7 +44,7 @@ public OutputStream compressFiles (String type, List<File> files) {
 
 事实上，这在面向对象中是很简单的，我们只需要给每一种压缩包格式都提供一个独立的压缩处理器对象。如此就可将多个行为分散到了不同的对象中，之后对于任何压缩处理器的修改都将在单独的对象中进行，不会影响到其他的压缩处理器。并且，我们让所有的压缩处理器都实现一个抽象的处理器`CompressStrategy`，在抽象处理器仅定义一个压缩的行为`compress()`，由各个压缩处理器负责提供响应压缩格式的实现。这样一来，他们就具有了统一的行为声明，就可以从外面实现一致的调用。如下图所示。
 <div align="center">
-   <img src="/doc/resource/strategy/压缩处理器结构.jpg" width="40%"/>
+   <img src="/doc/resource/strategy/压缩处理器结构.jpg" width="50%"/>
 </div>
 
 这正是策略模式的原型，策略模式建议我们定义一系列的算法，并将他们一个一个的封装起来。对于该例来说，不同的导出格式就对应了不同的导出算法，比如上图中的`ZipCompressor`，由它可以实现压缩成 ZIP 格式，所以它就是一个算法的封装。同时，所有算法的封装都实现自同一个抽象的行为定义`CompressStrategy#compress()`，因此他们具有同样的行为，所以他们之间是可以相互替换的。
@@ -381,7 +381,7 @@ public class Client {
 
 # 六、从源码中看策略模式
 
-**（1）在**`**java.util.Arrays**`**类中，通过**`**Comparator**`**类型的排序规则，对数组进行排序**
+**（1）在`java.util.Arrays`类中，通过`Comparator`类型的排序规则，对数组进行排序**
 
 这里的`Comparator`就是抽象的策略，定义了排序的算法，由子类自行实现排序逻辑。
 ```java
@@ -454,7 +454,7 @@ public class Arrays {
 }
 ```
 
-**（2）在Mybatis中，通过**`**Executor**`**定义的各种方法，对数据库进行操作**
+**（2）在Mybatis中，通过`Executor`定义的各种方法，对数据库进行操作**
 
 在 Mybatis 中，`Executor`就是抽象的策略接口，该类中定义了各种对数据库操作的方法，这里以`Executor#query()`方法为例：
 ```java
