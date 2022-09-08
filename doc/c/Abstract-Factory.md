@@ -1,4 +1,4 @@
-## <center> 创建型 - 抽象工厂（Abstract Method）设计模式
+## <center> 创建型 - 抽象工厂（Abstract Factory）设计模式
 ---
 
 很多时候，我们不应该被一个看起来很复杂的名词或概念所绊倒，因为往往看起来越复杂的东西其本质越简单。就像是抽象工厂模式，他的名字看起来有点令人头大，又是抽象，又是工厂，如果是第一次了解很容易就被劝退了。但事实是，当你真正尝试去了解它时，你会觉得它并没有想象中那么复杂。
@@ -33,7 +33,7 @@
 
 在上述需求中，并未对原来的需求进行变更，而是在原来的基础上进行了扩展了新的功能。除了支持将对象持久化到文件外，还要支持将文件中的数据还原成对象。这很简单，因为前半部分我们已经实现了，现在只需要依样画葫芦，照着前半部分的模型复刻后半部分就可以了。系统的完整类图如下所示。
 <div align="center">
-   <img src="/doc/resource/abstract-method/案例解决方案一类图.jpg" width="80%"/>
+   <img src="/doc/resource/abstract-factory/案例解决方案一类图.jpg" width="80%"/>
 </div>
 
 在这个类图结构中，分为两部分，一部分是 Java 对象写入磁盘，为上半部分深色背景的结构；另一个是磁盘文件还原为 Java 对象，为下半部分浅色背景的结构。同`AbstractFormatSaver`一样，`AbstractFormatLoader`也提供了三个完全与之相反的方法：
@@ -66,7 +66,7 @@ Object obj = loader.loadAndResolve("key", toSaveObject.getClass());
 
 基于这个思路，我们只需要对系统的结构进行一个小的调整：将同一系列的产品的生产合并到一个工厂中实现。这样客户端就能通过一个工厂生产出具有相关性的产品，这些产品为同一系列，可以搭配使用。
 <div align="center">
-   <img src="/doc/resource/abstract-method/案例类图.png" width="90%"/>
+   <img src="/doc/resource/abstract-factory/案例类图.png" width="90%"/>
 </div>
 
 如上图所示，为每一个系列的产品提供一个工厂，该工厂即可生产这一系列的产品，区别于工厂方法模式只能生产单个产品。例如，xml 系列的产品，可以由`XmlFactory`生产，包括有`XmlSaver`和`XmlLoader`。客户端在使用时，只需要获取到具体的工厂，即可调用`FormatFactory`提供的生产方法，获取对应的产品。像上面类图中的结构，提供了一个对外的工厂接口，这个接口中定义了创建一系列产品的方法；而每种系列的工厂实现这个接口，负责创建这个系列的产品，这就是抽象工厂模式。
@@ -397,7 +397,7 @@ public class DTO {
 ```
 运行生成的文件如下图所示：
 <div align="center">
-   <img src="/doc/resource/abstract-method/运行结果.png" width="20%"/>
+   <img src="/doc/resource/abstract-factory/运行结果.png" width="20%"/>
 </div>
 
 # 四、抽象工厂模式
@@ -411,7 +411,7 @@ public class DTO {
 
 ## 4.2 类图分析
 <div align="center">
-   <img src="/doc/resource/abstract-method/案例类图.png" width="80%"/>
+   <img src="/doc/resource/abstract-factory/案例类图.png" width="80%"/>
 </div>
 
 抽象工厂模式的类图结构如上所示，其有如下的参与者列表：
