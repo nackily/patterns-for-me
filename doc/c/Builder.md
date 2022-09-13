@@ -211,7 +211,7 @@ public class GenericConstructor {
 | &emsp;&emsp;**ShortMessageBuilder** | 短信建造器 |
 | &emsp;&emsp;**SiteLatterBuilder** | 站内信建造器 |
 | _product_ | / |
-| **Mail** | 邮件 |
+| &emsp;&emsp;**Mail** | 邮件 |
 | &emsp;&emsp;**ShortMessage** | 短信 |
 | &emsp;&emsp;**SiteLatter** | 站内信 |
 
@@ -547,4 +547,4 @@ public final class BeanDefinitionBuilder {
 
 
 # 附录
-[回到主页](/README.md)&emsp;&emsp;[消息通知案例代码](/src/main/java/com/aoligei/creational/builder/message)&emsp;&emsp;[连接配置案例代码](/src/main/java/com/aoligei/creational/builder/conn)
+[回到主页](/README.md)&emsp;[消息通知案例代码](/src/main/java/com/aoligei/creational/builder/message)&emsp;[连接配置案例代码](/src/main/java/com/aoligei/creational/builder/conn)
