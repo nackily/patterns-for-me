@@ -145,9 +145,9 @@ setter 确实解决了重叠构造器方式呈现出的一些问题，并且比�
    <img src="/doc/resource/builder/建造器的抽象.jpg" width="60%"/>
 </div>
 
-如上图所示，我们在所有构造器之上提供了抽象建造器`Builder`，并且定义了所有的构建步骤。例如所有通知都需要的发件者`_buildSender(String):void_`，所有通知都需要的接收者`_buildRecipient(String):void_`，所有通知都需要的载体`_buildBody(String):void_`。
+如上图所示，我们在所有构造器之上提供了抽象建造器`Builder`，并且定义了所有的构建步骤。例如所有通知都需要的发件者`buildSender(String):void`，所有通知都需要的接收者`buildRecipient(String):void`，所有通知都需要的载体`buildBody(String):void`。
 
-我们同样在抽象建造器中定义了添加抄送人`_addCc(String):void_`和设置主题`_buildTheme(String):void_`的行为，但并不是所有类型的通知都需要这些信息，例如短信无法支持消息主题这样的属性，同样也没有抄送人的说法。那我们应该如何处理这些例外情况呢？如果具体建造器不需要某一个建造步骤，我们可以在该建造步骤中什么也不做，表示当前建造器不进行这个步骤；我们也可以在该建造步骤中抛出异常，表示当前建造器并不支持这个步骤。关于这一点，在稍后的内容中我们会继续探讨，此处暂且搁置。
+我们同样在抽象建造器中定义了添加抄送人`addCc(String):void`和设置主题`buildTheme(String):void`的行为，但并不是所有类型的通知都需要这些信息，例如短信无法支持消息主题这样的属性，同样也没有抄送人的说法。那我们应该如何处理这些例外情况呢？如果具体建造器不需要某一个建造步骤，我们可以在该建造步骤中什么也不做，表示当前建造器不进行这个步骤；我们也可以在该建造步骤中抛出异常，表示当前建造器并不支持这个步骤。关于这一点，在稍后的内容中我们会继续探讨，此处暂且搁置。
 
 ## 2.3 复用建造过程
 你或许会感到疑惑，为什么我们在上面要对所有的建造器进行抽象呢？事实上，正是为了建造过程的复用。回想一开始我们提出的四种通知场景，以订单支付超时通知为例，在那里我们并未限定该通知必须是短信通知，亦或者是邮件通知，理论上这三种通知方式都可以被支持。如果我们不对建造过程进行抽象，那么我们就无法复用这个建造过程，换句话说我们必须为每一种通知方式提供独立的建造方法，尽管这些建造过程几乎是完全一致的。
@@ -203,19 +203,17 @@ public class GenericConstructor {
 代码的层次及类说明如下所示，源代码请参考[案例代码](/src/main/java/com/aoligei/creational/builder/message)。
 
 | **Builder** | 抽象建造器 |
-| --- | --- |
+| --- |----|
 | **GenericConstructor** | 通用的通知构造器 |
 | **NoticeStatus** | 通知状态枚举 |
-| _builder_ | 
- |
-|     **MailBuilder** | 邮件建造器 |
-|     **ShortMessageBuilder** | 短信建造器 |
-|     **SiteLatterBuilder** | 站内信建造器 |
-| _product_ | 
- |
-| **    Mail** | 邮件 |
-|     **ShortMessage** | 短信 |
-|     **SiteLatter** | 站内信 |
+| _builder_ | / |
+| &emsp;&emsp;**MailBuilder** | 邮件建造器 |
+| &emsp;&emsp;**ShortMessageBuilder** | 短信建造器 |
+| &emsp;&emsp;**SiteLatterBuilder** | 站内信建造器 |
+| _product_ | / |
+| **Mail** | 邮件 |
+| &emsp;&emsp;**ShortMessage** | 短信 |
+| &emsp;&emsp;**SiteLatter** | 站内信 |
 
 客户端示例代码如下
 ```java
@@ -549,4 +547,4 @@ public final class BeanDefinitionBuilder {
 
 
 # 附录
-[回到主页](/README.md)    [消息通知案例代码](/src/main/java/com/aoligei/creational/builder/message)    [连接配置案例代码](/src/main/java/com/aoligei/creational/builder/conn)
+[回到主页](/README.md)&emsp;&emsp;[消息通知案例代码](/src/main/java/com/aoligei/creational/builder/message)&emsp;&emsp;[连接配置案例代码](/src/main/java/com/aoligei/creational/builder/conn)
