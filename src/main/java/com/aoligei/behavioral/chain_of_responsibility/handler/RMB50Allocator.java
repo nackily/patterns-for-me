@@ -1,4 +1,7 @@
-package com.aoligei.behavioral.chain_of_responsibility;
+package com.aoligei.behavioral.chain_of_responsibility.handler;
+
+import com.aoligei.behavioral.chain_of_responsibility.AbstractPaperCurrencyAllocator;
+import com.aoligei.behavioral.chain_of_responsibility.CurrencyRequest;
 
 /**
  * 50元分配器
@@ -9,7 +12,7 @@ package com.aoligei.behavioral.chain_of_responsibility;
  */
 public class RMB50Allocator extends AbstractPaperCurrencyAllocator {
     @Override
-    protected void allocate(CurrencyRequest request) {
+    public void allocate(CurrencyRequest request) {
         if (request.getToAllocateAmount() >= 50) {
             int allocatedNum = request.getToAllocateAmount() / 50;
             int remainingAmount = request.getToAllocateAmount() % 50;

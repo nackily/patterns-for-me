@@ -98,7 +98,7 @@ public class DeepClone implements Cloneable, Serializable {
 
 ## 3.2 案例类图
 <div align="center">
-   <img src="/doc/resource/prototype/" width="65%"/>
+   <img src="/doc/resource/prototype/案例类图.png" width="65%"/>
 </div>
 
 该案例的类图结构如上所示，类图由以下部分组成。

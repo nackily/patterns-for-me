@@ -1,4 +1,8 @@
-package com.aoligei.behavioral.command.ide;
+package com.aoligei.behavioral.command.ide.command;
+
+import com.aoligei.behavioral.command.ide.Application;
+import com.aoligei.behavioral.command.ide.Command;
+import com.aoligei.behavioral.command.ide.Document;
 
 /**
  * 切换文档命令

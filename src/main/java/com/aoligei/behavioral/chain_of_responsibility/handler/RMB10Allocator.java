@@ -1,4 +1,7 @@
-package com.aoligei.behavioral.chain_of_responsibility;
+package com.aoligei.behavioral.chain_of_responsibility.handler;
+
+import com.aoligei.behavioral.chain_of_responsibility.AbstractPaperCurrencyAllocator;
+import com.aoligei.behavioral.chain_of_responsibility.CurrencyRequest;
 
 /**
  * 10元分配器
@@ -9,7 +12,7 @@ package com.aoligei.behavioral.chain_of_responsibility;
  */
 public class RMB10Allocator extends AbstractPaperCurrencyAllocator {
     @Override
-    protected void allocate(CurrencyRequest request) {
+    public void allocate(CurrencyRequest request) {
         if (request.getToAllocateAmount() >= 10) {
             int allocatedNum = request.getToAllocateAmount() / 10;
             int remainingAmount = request.getToAllocateAmount() % 10;

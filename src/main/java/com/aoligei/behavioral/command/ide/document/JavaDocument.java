@@ -1,4 +1,6 @@
-package com.aoligei.behavioral.command.ide;
+package com.aoligei.behavioral.command.ide.document;
+
+import com.aoligei.behavioral.command.ide.Document;
 
 /**
  * Java文档

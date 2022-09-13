@@ -1,4 +1,7 @@
-package com.aoligei.behavioral.command.ide;
+package com.aoligei.behavioral.command.ide.button;
+
+import com.aoligei.behavioral.command.ide.Application;
+import com.aoligei.behavioral.command.ide.command.OpenDocumentCommand;
 
 /**
  * 打开文档按钮

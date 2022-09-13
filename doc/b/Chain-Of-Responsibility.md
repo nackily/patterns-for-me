@@ -59,11 +59,10 @@ public class ATMApplication {
 我们迫切的需要一种方式来对其重构，以便使开发人员可以从日益剧增的维护投入中解放出来。
 
 # 二、解决方案
-## 2.1 方案思路
 
 **（1）封装请求对象**
 
-上面提到，系统有可能在某一时刻从逻辑链路中移除一个逻辑（比如不再提供 10 元的纸币），此时对于用户输入的金额，则会出现无法提供服务的情况（比如用户输入 1460 元，此时缺少 1 张 10元）。为了应对这种情况，我们必须先对金额进行分配【addAllocated】，如果能将所有金额完全分配，再为用户出钞【cashOut】，否则，不提供出钞的服务。为了更好的描述系统处理的过程，可以将金额，各个节点的分配情况封装成单独的请求对象。
+上面提到，系统有可能在某一时刻从逻辑链路中移除一个逻辑（比如不再提供 10 元的纸币），此时对于用户输入的金额，则会出现无法提供服务的情况（比如用户输入 1460 元，此时缺少 1 张 10元）。为了应对这种情况，我们必须先对金额进行分配【`addAllocated()`】，如果能将所有金额完全分配，再为用户出钞【`cashOut()`】，否则，不提供出钞的服务。为了更好的描述系统处理的过程，可以将金额，各个节点的分配情况封装成单独的请求对象。
 
 **（2）链路逻辑组件化**
 
@@ -74,141 +73,22 @@ public class ATMApplication {
 
 从上图中，我们看出所有的组件（处理器）都有着两个共同的特点：分配对于面额的纸币、连接着后继处理器（尾处理器除外）。为了使所有的组件去差异化，我们应该对组件进行抽象，这样我们就可以使任意一个组件成为某个组件的后继，甚至可以随意调换他们之间的顺序。
 
-## 2.2 方案结构
+# 三、案例实现
 
-按照上面的思路，我们对系统进行重构，新的类图结构如下图。
+## 3.1 案例类图
+按照上面的思路，我们对系统进行重构，新的类图结构如下图所示。
 <div align="center">
    <img src="/doc/resource/chain-of-responsibility/案例类图.jpg" width="100%"/>
 </div>
 
 > 在应用启动时，通过`AbstractPaperPasCurrencyAllocator.nextAllocator()`提前构造好链路【`RMB100Allocator -> RMB50Allocator -> RMB10Allocator` 】。当用户发起兑换现金的请求后，请求首先到达 100 元的分配处理器。在该处理器分配完毕后，会根据请求中剩余的金额（`CurrencyRequest.toAllocateAmount`）决定是否继续向后继处理器传递请求，如此往复。直到请求从链路中脱离时，应用开始出钞（`CurrencyRequest.cashOut()`），如果全部金额正常分配，则为用户提供现金，否则告知用户系统无法提供本次服务。
 
-# 三、案例实现
+## 3.2 代码附录
+<div align="center">
+   <img src="/doc/resource/chain-of-responsibility/代码附录.png" width="95%"/>
+</div>
 
-对上述类图的实现代码如下。
-
-**（1）兑现纸币的请求**
-```java
-public class CurrencyRequest {
-
-    /**
-     * 待分配币值
-     */
-    private int toAllocateAmount;
-
-    /**
-     * 已分配币值及数量
-     */
-    private final Map<String, Integer> allocated = new HashMap<>();
-
-    public CurrencyRequest(int amount) {
-        this.toAllocateAmount = amount;
-    }
-
-    /**
-     * 分配面额
-     * @param denomination 本次分配面额
-     * @param allocatedNum 本次分配数量
-     * @param toAllocateAmount 剩余待分配币值
-     */
-    public void addAllocated(String denomination, int allocatedNum, int toAllocateAmount) {
-        this.toAllocateAmount = toAllocateAmount;
-        allocated.put(denomination, allocatedNum);
-    }
-
-    /**
-     * 出钞
-     */
-    public void cashOut() {
-        if (toAllocateAmount > 0) {
-            System.out.println(MessageFormat.format("    系统无法提供本次服务，有【{0}】元无法分配纸币",
-                    toAllocateAmount));
-        } else {
-            // 出钞
-            allocated.forEach((key, value) ->
-                    System.out.println(MessageFormat.format("    面额【{0}】：【{1}】张", key, value))
-            );
-        }
-    }
-
-
-    public int getToAllocateAmount() {
-        return toAllocateAmount;
-    }
-
-}
-```
-**（2）抽象纸币分配器**
-```java
-public abstract class AbstractPaperCurrencyAllocator {
-
-    /**
-     * 下一个纸币分配器
-     */
-    protected AbstractPaperCurrencyAllocator nextAllocator;
-
-    protected void setNextAllocator(AbstractPaperCurrencyAllocator next){
-        this.nextAllocator = next;
-    }
-
-    /**
-     * 分配纸币
-     * @param request cur
-     */
-    protected abstract void allocate(CurrencyRequest request);
-}
-```
-**（3）纸币分配器**
-
-**（3-1）100元面额纸币分配器**
-```java
-public class RMB100Allocator extends AbstractPaperCurrencyAllocator {
-    @Override
-    protected void allocate(CurrencyRequest request) {
-        if (request.getToAllocateAmount() >= 100) {
-            int allocatedNum = request.getToAllocateAmount() / 100;
-            int remainingAmount = request.getToAllocateAmount() % 100;
-            request.addAllocated("100", allocatedNum, remainingAmount);
-        }
-        if (request.getToAllocateAmount() > 0 && nextAllocator != null) {
-            nextAllocator.allocate(request);
-        }
-    }
-}
-```
-**（3-2）50元面额纸币分配器**
-```java
-public class RMB50Allocator extends AbstractPaperCurrencyAllocator {
-    @Override
-    protected void allocate(CurrencyRequest request) {
-        if (request.getToAllocateAmount() >= 50) {
-            int allocatedNum = request.getToAllocateAmount() / 50;
-            int remainingAmount = request.getToAllocateAmount() % 50;
-            request.addAllocated("50", allocatedNum, remainingAmount);
-        }
-        if (request.getToAllocateAmount() > 0 && nextAllocator != null) {
-            nextAllocator.allocate(request);
-        }
-    }
-}
-```
-**（3-3）10元面额纸币分配器**
-```java
-public class RMB10Allocator extends AbstractPaperCurrencyAllocator {
-    @Override
-    protected void allocate(CurrencyRequest request) {
-        if (request.getToAllocateAmount() >= 10) {
-            int allocatedNum = request.getToAllocateAmount() / 10;
-            int remainingAmount = request.getToAllocateAmount() % 10;
-            request.addAllocated("10", allocatedNum, remainingAmount);
-        }
-        if (request.getToAllocateAmount() > 0 && nextAllocator != null) {
-            nextAllocator.allocate(request);
-        }
-    }
-}
-```
-**（4）ATM 应用**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)。ATM 应用示例代码如下
 ```java
 public class ATMApplication {
 
@@ -570,4 +450,4 @@ abstract class AbstractChannelHandlerContext implements
 
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)

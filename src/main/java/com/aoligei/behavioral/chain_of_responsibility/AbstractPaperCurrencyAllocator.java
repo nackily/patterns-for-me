@@ -22,5 +22,5 @@ public abstract class AbstractPaperCurrencyAllocator {
      * 分配纸币
      * @param request cur
      */
-    protected abstract void allocate(CurrencyRequest request);
+    public abstract void allocate(CurrencyRequest request);
 }

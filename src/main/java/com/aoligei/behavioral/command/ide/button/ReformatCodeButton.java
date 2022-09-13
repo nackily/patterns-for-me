@@ -1,4 +1,10 @@
-package com.aoligei.behavioral.command.ide;
+package com.aoligei.behavioral.command.ide.button;
+
+import com.aoligei.behavioral.command.ide.*;
+import com.aoligei.behavioral.command.ide.command.JavaFormatCommand;
+import com.aoligei.behavioral.command.ide.command.XmlFormatCommand;
+import com.aoligei.behavioral.command.ide.document.JavaDocument;
+import com.aoligei.behavioral.command.ide.document.XmlDocument;
 
 /**
  * 格式化按钮

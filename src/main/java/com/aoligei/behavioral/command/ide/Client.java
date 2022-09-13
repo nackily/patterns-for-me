@@ -1,5 +1,9 @@
 package com.aoligei.behavioral.command.ide;
 
+import com.aoligei.behavioral.command.ide.button.OpenDocumentButton;
+import com.aoligei.behavioral.command.ide.button.ReformatCodeButton;
+import com.aoligei.behavioral.command.ide.button.ToggleDocumentButton;
+
 /**
  * Client
  *

@@ -1,4 +1,6 @@
-package com.aoligei.behavioral.command.ide;
+package com.aoligei.behavioral.command.ide.document;
+
+import com.aoligei.behavioral.command.ide.Document;
 
 /**
  * Xml文档
@@ -7,7 +9,7 @@ package com.aoligei.behavioral.command.ide;
  * @date 2022-06-27 12:54:14
  * @since 1.0.0
  */
-public class XmlDocument extends Document{
+public class XmlDocument extends Document {
 
     public XmlDocument(String name) {
         super(name);

@@ -76,283 +76,27 @@ public void button_click() {
 我们通过对请求过程进行解耦，对请求本身进行封装，得到了一个可以向未知的对象（文档对象由应用程序指定，按钮对象并不知道由谁来响应请求）发起一个可变的请求（按钮对象调用的是 Request 的 response() 方法，但按钮对象并不知道是哪一个具体的实现）的结构，而这就是命令模式的核心。
 
 # 三、案例实现
-这里已经为上面的分析结果编写了一个简单的示例，提供了示例中提到的类对象，除此之外，还提供了一个客户端，用以模拟用户对菜单的点击。
 
-**（1） 请求对象**
+### 3.1 案例类图
+这里已经为上述分析编写了一个简单的示例，提供了示例中提到的类对象，除此之外，还提供了一个客户端，用以模拟用户对菜单的点击。
+<div align="center">
+   <img src="/doc/resource/command/案例类图.jpg" width="90%"/>
+</div>
 
-**（1-1） 请求接口**
-```java
-public interface Command {
-    /**
-     * 响应命令
-     */
-    void response();
-}
-```
-**（1-2） 打开文档请求**
-```java
-public class OpenDocumentCommand implements Command {
-    private final Application application;
-    private final String name;
-    public OpenDocumentCommand(Application application, String name) {
-        this.application = application;
-        this.name = name;
-    }
+该案例的类图结构如上所示，由以下部分组成。
+- **OpenDocumentButton、ToggleDocumentButton、ReformatCodeButton**：分别代表打开文档、切换文档和格式化代码按钮，均提供了响应点击事件`click(String):void`；
+- **Command**：抽象的命令，定义了对发起命令的响应行为`response():void`；
+- **OpenDocumentCommand、ToggleDocumentCommand**：分别代表打开文档命令、切换文档命令，他们与当前环境关系密切，需要依赖当前应用程序`Application`，并负责在命令发起时将请求传达给应用程序；
+- **JavaFormatCommand、XmlFormatCommand**：分别代表Java文件格式化命令和Xml文件格式化命令。他们负责在命令发起时将请求传达给具体格式的文档对象，让文档对象负责自身的格式化工作；
+- **Document**：抽象的文档；
+- **JavaDocument、XMLDocument**：分别代表Java格式的文档和Xml格式的文档。他们都负责对自身的文档内容进行格式化行为；
 
-    @Override
-    public void response() {
-        if (null == name || "".equals(name)) {
-            return;
-        }
-        Document document = null;
-        if (name.endsWith(".xml")) {
-            document = new XmlDocument(name);
-        } else if (name.endsWith(".java")) {
-            document = new JavaDocument(name);
-        }
+### 3.2 代码附录
+<div align="center">
+   <img src="/doc/resource/command/代码附录.png" width="95%"/>
+</div>
 
-        application.open(document);
-    }
-}
-```
-**（1-3） 切换文档为活跃窗口请求**
-```java
-public class ToggleDocumentButton {
-    private static final ToggleDocumentButton INSTANCE = new ToggleDocumentButton();
-
-    public static ToggleDocumentButton getInstance() {
-        return INSTANCE;
-    }
-
-    public void click(String name) {
-        Document doc = Application.getInstance().getDocument(name);
-        if (doc == null) {
-            // 没有该文档
-            return;
-        }
-        Application.getInstance().toggle(doc);
-    }
-}
-```
-**（1-4） 格式化 XML 文档请求**
-```java
-public class XmlFormatCommand implements Command{
-    private final XmlDocument xmlDocument;
-    public XmlFormatCommand(XmlDocument xmlDocument) {
-        this.xmlDocument = xmlDocument;
-    }
-
-    @Override
-    public void response() {
-        xmlDocument.formatXml();
-    }
-}
-```
-**（1-5） 格式化 JAVA文档请求**
-```java
-public class JavaFormatCommand implements Command{
-    private final JavaDocument javaDocument;
-    public JavaFormatCommand(JavaDocument javaDocument) {
-        this.javaDocument = javaDocument;
-    }
-
-    @Override
-    public void response() {
-        javaDocument.formatJava();
-    }
-}
-```
-
-**（2）文档对象**
-
-**（2-1）抽象的文档**
-```java
-public abstract class Document {
-    /**
-     * 文档名
-     */
-    private final String name;
-
-    public Document(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-}
-```
-**（2-2）JAVA文档**
-```java
-public class JavaDocument extends Document {
-
-    public JavaDocument(String name) {
-        super(name);
-    }
-
-    public void formatJava() {
-        System.out.println("    已格式化JAVA文档：" + this.getName());
-    }
-}
-```
-**（2-3）XML文档**
-```java
-public class XmlDocument extends Document{
-
-    public XmlDocument(String name) {
-        super(name);
-    }
-
-    public void formatXml() {
-        System.out.println("    已格式化XML文档：" + this.getName());
-    }
-}
-```
-
-**（3）按钮对象**
-
-**（3-1）打开文档按钮**
-```java
-public class OpenDocumentButton {
-
-    private static final OpenDocumentButton INSTANCE = new OpenDocumentButton();
-
-    public static OpenDocumentButton getInstance() {
-        return INSTANCE;
-    }
-
-    public void click(String name) {
-        new OpenDocumentCommand(Application.getInstance(), name).response();
-    }
-}
-```
-**（3-2）切换文档按钮**
-```java
-public class ToggleDocumentButton {
-
-    private static final ToggleDocumentButton INSTANCE = new ToggleDocumentButton();
-
-    public static ToggleDocumentButton getInstance() {
-        return INSTANCE;
-    }
-
-    public void click(String name) {
-        Document doc = Application.getInstance().getDocument(name);
-        if (doc == null) {
-            // 没有该文档
-            return;
-        }
-        Application.getInstance().toggle(doc);
-    }
-}
-```
-**（3-3）格式化文档按钮**
-```java
-public class ReformatCodeButton {
-
-    private static final ReformatCodeButton INSTANCE = new ReformatCodeButton();
-
-    public static ReformatCodeButton getInstance() {
-        return INSTANCE;
-    }
-
-    public void click() {
-        Document doc = Application.getInstance().getActiveDoc();
-        if (null == doc) {
-            return;
-        }
-        Command command = null;
-        if (doc.getName().endsWith(".xml")) {
-            command = new XmlFormatCommand((XmlDocument) doc);
-        } else if (doc.getName().endsWith(".java")) {
-            command = new JavaFormatCommand((JavaDocument) doc);
-        } else {
-            // 其他格式
-        }
-        command.response();
-    }
-}
-```
-
-**（4）应用程序**
-```java
-public class Application {
-
-    private static final Application INSTANCE = new Application();
-
-    public static Application getInstance(){
-        return INSTANCE;
-    }
-
-    /**
-     * 已打开的文档列表
-     */
-    private final List<Document> openedDocs = new ArrayList<>();
-
-    /**
-     * 当前活跃文档名
-     */
-    private Document activeDoc = null;
-
-    /**
-     * 添加文档对象
-     * @param doc 文档对象
-     */
-    public void open (Document doc) {
-        // 当前文档已经打开
-        if (openedDocs.stream().anyMatch(item -> item.getName().equals(doc.getName()))) {
-            return;
-        }
-        openedDocs.add(doc);
-        activeDoc = doc;
-        System.out.println("    已打开文档：" + doc.getName());
-    }
-
-    /**
-     * 关闭文档
-     * @param doc 文档对象
-     */
-    public void close (Document doc) {
-        openedDocs.remove(doc);
-        activeDoc = openedDocs.size() > 0
-                ? openedDocs.get(0)
-                : null;
-    }
-
-    /**
-     * 切换文档为活跃文档
-     * @param doc 文档对象
-     */
-    public void toggle(Document doc) {
-        if (openedDocs.contains(doc)) {
-            activeDoc = doc;
-            System.out.println("    已切换至文档：" + doc.getName());
-        }
-    }
-
-    /**
-     * 获取当前活跃文档的名称
-     * @return 文档名
-     */
-    public Document getActiveDoc() {
-        return activeDoc;
-    }
-
-    /**
-     * 获取文档对象
-     * @param name 文档名
-     * @return 文档对象
-     */
-    public Document getDocument(String name) {
-        return openedDocs.stream()
-                .filter(item -> name.equals(item.getName()))
-                .findFirst().orElse(null);
-    }
-}
-```
-**（5）客户端**
-
-**（5-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/command/ide)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -370,7 +114,7 @@ public class Client {
     }
 }
 ```
-**（5-2）运行结果**
+运行结果如下
 ```text
 |==> Start--------------------------------------------------------|
     已打开文档：someday.java
@@ -472,6 +216,6 @@ public class Client {
 </div>
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/behavioral/command/ide)    [小猫摘星星代码](/src/main/java/com/aoligei/behavioral/command/game)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/command/ide)&emsp;[小猫摘星星代码](/src/main/java/com/aoligei/behavioral/command/game)
 
 推荐阅读文章：[Command Design Pattern in Java](https://www.journaldev.com/1624/command-design-pattern)

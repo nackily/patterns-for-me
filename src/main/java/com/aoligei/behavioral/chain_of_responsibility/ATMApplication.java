@@ -1,5 +1,9 @@
 package com.aoligei.behavioral.chain_of_responsibility;
 
+import com.aoligei.behavioral.chain_of_responsibility.handler.RMB100Allocator;
+import com.aoligei.behavioral.chain_of_responsibility.handler.RMB10Allocator;
+import com.aoligei.behavioral.chain_of_responsibility.handler.RMB50Allocator;
+
 import java.util.Scanner;
 
 /**
