@@ -200,22 +200,11 @@ public class GenericConstructor {
 - **ShortMessage、Mail、SiteLatter**：分别代表短信、邮件和站内信。他们由各自的建造器负责实例化对象，并且在对象的初始化完成之后，再将引用暴露给客户端。
 
 ## 3.2 代码附录
-代码的层次及类说明如下所示，源代码请参考[案例代码](/src/main/java/com/aoligei/creational/builder/message)。
+<div align="center">
+   <img src="/doc/resource/builder/代码附录.png" width="95%"/>
+</div>
 
-| **Builder** | 抽象建造器 |
-| --- |----|
-| **GenericConstructor** | 通用的通知构造器 |
-| **NoticeStatus** | 通知状态枚举 |
-| _builder_ | / |
-| &emsp;&emsp;**MailBuilder** | 邮件建造器 |
-| &emsp;&emsp;**ShortMessageBuilder** | 短信建造器 |
-| &emsp;&emsp;**SiteLatterBuilder** | 站内信建造器 |
-| _product_ | / |
-| &emsp;&emsp;**Mail** | 邮件 |
-| &emsp;&emsp;**ShortMessage** | 短信 |
-| &emsp;&emsp;**SiteLatter** | 站内信 |
-
-客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/builder/message)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
