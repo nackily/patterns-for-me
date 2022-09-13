@@ -1,4 +1,6 @@
-package com.aoligei.creational.prototype;
+package com.aoligei.creational.prototype.contract;
+
+import com.aoligei.creational.prototype.AbstractContract;
 
 /**
  * 租售合同
@@ -7,7 +9,7 @@ package com.aoligei.creational.prototype;
  * @date 2022-06-06 15:35:24
  * @since 1.0.0
  */
-public class LeaseContract extends Contract {
+public class LeaseContract extends AbstractContract {
 
     public LeaseContract() {
         super("租售合同");

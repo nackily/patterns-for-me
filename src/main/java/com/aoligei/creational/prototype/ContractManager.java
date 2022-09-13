@@ -1,5 +1,8 @@
 package com.aoligei.creational.prototype;
 
+import com.aoligei.creational.prototype.contract.LeaseContract;
+import com.aoligei.creational.prototype.contract.SalesContract;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,17 +15,17 @@ import java.util.Map;
  */
 public class ContractManager {
 
-    private static final Map<String, Contract> CACHE = new HashMap<>();
+    private static final Map<String, AbstractContract> CACHE = new HashMap<>();
 
     public static void loadCache() {
-        Contract sales = new SalesContract();
+        AbstractContract sales = new SalesContract();
         CACHE.put("sales", sales);
-        Contract lease = new LeaseContract();
+        AbstractContract lease = new LeaseContract();
         CACHE.put("lease", lease);
     }
 
-    public static Contract newInstance(String key){
-        Contract contract = CACHE.get(key);
+    public static AbstractContract newInstance(String key){
+        AbstractContract contract = CACHE.get(key);
         if (contract == null) {
             throw new RuntimeException("不支持的合同类型");
         }

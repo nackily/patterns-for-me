@@ -1,4 +1,6 @@
-package com.aoligei.creational.abstract_factory;
+package com.aoligei.creational.abstract_factory.loader;
+
+import com.aoligei.creational.abstract_factory.AbstractFormatLoader;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;

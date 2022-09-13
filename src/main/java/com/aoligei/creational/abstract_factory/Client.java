@@ -1,5 +1,7 @@
 package com.aoligei.creational.abstract_factory;
 
+import com.aoligei.creational.abstract_factory.factory.JsonFactory;
+import com.aoligei.creational.abstract_factory.factory.XmlFactory;
 import com.aoligei.creational.factory_method.AbstractFormatSaver;
 import com.aoligei.creational.factory_method.DTO;
 

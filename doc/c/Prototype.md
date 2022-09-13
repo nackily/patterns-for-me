@@ -96,106 +96,39 @@ public class DeepClone implements Cloneable, Serializable {
 
 > 现有一家中间商，该中间商经营的业务范围包括有房屋买卖，房屋租售等。当中间商促成买方和卖方进行交易时，会从现有的模板库中调出来标准的房屋买卖合同进行复印，然后由双方进行签字，合同生效；房屋租售业务流程类似。
 
-## 3.2 代码附录
-根据这样的业务约定，我们可以套用原型模式进行设计，示例代码如下。
+## 3.2 案例类图
+<div align="center">
+   <img src="/doc/resource/prototype/" width="65%"/>
+</div>
 
-**（1）抽象的合同**
-```java
-public abstract class Contract implements Cloneable {
+该案例的类图结构如上所示，类图由以下部分组成。
 
-    private String type;                        // 合同类型
-    private String buyer;                       // 买方
-    private String mediator = "不靠谱中间商";    // 中间商
-    private String seller;                      // 卖方
+- **AbstractContract**：抽象的合同，定义了公用的复制合同`clone():AbstractContract`行为。并且定义了签署合同`sign(String,String):void`的行为，两个参数分别是卖方姓名和买方姓名；
+- **SalesContract、LeaseContract**：分别代表买卖合同和租售合同。
 
-    public Contract(String type) {
-        this.type = type;
-    }
+## 3.3 代码附录
+<div align="center">
+   <img src="/doc/resource/prototype/代码附录.png" width="95%"/>
+</div>
 
-    public void setBuyer(String buyer) {
-        this.buyer = buyer;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
-    /**
-     * 签署合同
-     * @param productOwner 商品归属方
-     * @param other 另一方
-     */
-    public abstract void signed (String productOwner, String other);
-
-    @Override
-    public Contract clone() {
-        try {
-            Contract clone = (Contract) super.clone();
-            System.out.println("    复印了一份房屋" + this.type);
-            // TODO: copy mutable state here, so the clone can't change the internals of the original
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
-}
-```
-**（2）具体的合同**
-
-**（2-1）买卖合同**
-```java
-public class SalesContract extends Contract {
-
-    public SalesContract() {
-        super("买卖合同");
-    }
-
-    @Override
-    public void signed(String productOwner, String other) {
-        this.setBuyer(other);
-        this.setSeller(productOwner);
-        System.out.println("    房屋买方为：" + other);
-        System.out.println("    房屋出售方为：" + productOwner);
-    }
-}
-```
-**（2-1）租售合同**
-```java
-public class LeaseContract extends Contract {
-
-    public LeaseContract() {
-        super("租售合同");
-    }
-
-    @Override
-    public void signed(String productOwner, String other) {
-        this.setBuyer(other);
-        this.setSeller(productOwner);
-        System.out.println("    房屋租方为：" + other);
-        System.out.println("    房屋出租方为：" + productOwner);
-    }
-}
-```
-**（3）客户端**
-
-**（3-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/prototype)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws CloneNotSupportedException {
         // 实例化原型购房合同
-        Contract sales = new SalesContract();
+        AbstractContract sales = new SalesContract();
         // 实例化原型租售合同
-        Contract lease = new LeaseContract();
+        AbstractContract lease = new LeaseContract();
         System.out.println("|==> 现有[张三]欲购置[李四]的房子-------------------------------------|");
-        Contract clone4Sales = sales.clone();
+        AbstractContract clone4Sales = sales.clone();
         clone4Sales.signed("李四", "张三");
         System.out.println("|==> 现有[杰克]欲租赁[汤姆]的房子-------------------------------------|");
-        Contract clone4Lease = lease.clone();
+        AbstractContract clone4Lease = lease.clone();
         clone4Lease.signed("汤姆", "杰克");
     }
 }
 ```
-**（3-2）运行结果**
+运行结果如下
 ```text
 |==> 现有[张三]欲购置[李四]的房子-------------------------------------|
     复印了一份房屋买卖合同
@@ -261,5 +194,5 @@ public class ArrayList<E> extends AbstractList<E>
 ```
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/creational/prototype)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/creational/prototype)
 

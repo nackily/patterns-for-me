@@ -1,5 +1,6 @@
-package com.aoligei.creational.abstract_factory;
+package com.aoligei.creational.abstract_factory.loader;
 
+import com.aoligei.creational.abstract_factory.AbstractFormatLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**

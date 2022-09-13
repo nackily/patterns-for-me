@@ -1,6 +1,9 @@
 package com.aoligei.creational.prototype;
 
 
+import com.aoligei.creational.prototype.contract.LeaseContract;
+import com.aoligei.creational.prototype.contract.SalesContract;
+
 /**
  * Client
  *
@@ -17,24 +20,24 @@ public class Client {
 
     private static void classic() {
         // 实例化原型购房合同
-        Contract sales = new SalesContract();
+        AbstractContract sales = new SalesContract();
         // 实例化原型租售合同
-        Contract lease = new LeaseContract();
+        AbstractContract lease = new LeaseContract();
         System.out.println("|==> 现有[张三]欲购置[李四]的房子-------------------------------------|");
-        Contract clone4Sales = sales.clone();
+        AbstractContract clone4Sales = sales.clone();
         clone4Sales.signed("李四", "张三");
         System.out.println("|==> 现有[杰克]欲租赁[汤姆]的房子-------------------------------------|");
-        Contract clone4Lease = lease.clone();
+        AbstractContract clone4Lease = lease.clone();
         clone4Lease.signed("汤姆", "杰克");
     }
 
     private static void useManager() {
         ContractManager.loadCache();
         System.out.println("|==> 现有[张三]欲购置[李四]的房子-------------------------------------|");
-        Contract clone4Sales = ContractManager.newInstance("sales");
+        AbstractContract clone4Sales = ContractManager.newInstance("sales");
         clone4Sales.signed("李四", "张三");
         System.out.println("|==> 现有[杰克]欲租赁[汤姆]的房子-------------------------------------|");
-        Contract clone4Lease = ContractManager.newInstance("lease");
+        AbstractContract clone4Lease = ContractManager.newInstance("lease");
         clone4Lease.signed("汤姆", "杰克");
     }
 

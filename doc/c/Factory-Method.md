@@ -110,135 +110,11 @@ public class Client {
 - **第二阶段 -> 第三阶段**：通过改变产品的生产模式进行解耦，将原来集中生产模式改变为一个产品配备一个工厂，一个工厂只能生产一种产品，客户端根据实际需要选择工厂就能得到产品，这个演变过程主要是为了得到更好的扩展性，保证在新增产品种类时，不影响到现有产品的生产过程。
 
 # 三、案例实现
-接下来，我们就实现一下上面的解决方案。
+<div align="center">
+   <img src="/doc/resource/factory-method/代码附录.png" width="95%"/>
+</div>
 
-**（1）抽象产品**
-```java
-public abstract class AbstractFormatSaver {
-
-    /**
-     * 文件存储格式
-     */
-    protected final String fileExtension;
-    public AbstractFormatSaver(String fileExtension) {
-        this.fileExtension = fileExtension;
-    }
-
-    /**
-     * 转换格式并存储对象
-     * @param key 键
-     * @param obj 原始对象
-     */
-    public void convertAndStore(String key, Object obj) throws Exception {
-        String formatContent = this.convert(obj);
-        this.store(key, formatContent);
-    }
-
-    /**
-     * 格式转换
-     * @param obj 原始对象
-     * @return 格式化后的字符串
-     * @throws Exception Exception
-     */
-    protected abstract String convert(Object obj) throws Exception;
-
-    /**
-     * 内容写入文件
-     * @param key 键 - 作为文件名
-     * @param content 内容
-     * @throws IOException IOException
-     */
-    protected void store(String key, String content) throws IOException {
-        System.out.println("    即将开始写入文件");
-        String directory = Objects.requireNonNull(this.getClass().getResource("/")).getPath();
-        String filename = directory + key + this.fileExtension;
-        // 写入文件
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(content);
-        }
-    }
-}
-```
-**（2）具体产品**
-
-**（2-1）JSON格式存储器**
-```java
-public class JsonSaver extends AbstractFormatSaver {
-
-    private final ObjectMapper objectMapper;
-    public JsonSaver(ObjectMapper objectMapper) {
-        super(".json");
-        this.objectMapper = objectMapper;
-    }
-
-    @Override
-    protected String convert(Object obj) throws Exception {
-        System.out.println("    即将开始转换对象为JSON格式");
-        String tar = objectMapper.writeValueAsString(obj);
-        System.out.println("        转换后内容：" + tar);
-        return tar;
-    }
-}
-```
-**（2-2）XML格式存储器**
-```java
-public class XmlSaver extends AbstractFormatSaver {
-
-    public XmlSaver() {
-        super(".xml");
-    }
-
-    @Override
-    protected String convert(Object obj) throws Exception {
-        System.out.println("    即将开始转换对象为XML格式");
-        StringWriter writer = new StringWriter();
-        JAXBContext context = JAXBContext.newInstance(obj.getClass());
-        Marshaller marshaller = context.createMarshaller();
-        // 编码
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        marshaller.marshal(obj, writer);
-        String tar = writer.toString();
-        System.out.println("        转换后内容：" + tar);
-        return tar;
-    }
-}
-```
-**（3）抽象工厂**
-```java
-public interface FormatSaveFactory {
-
-    /**
-     * 生产存储器
-     * @return AbstractFormatSaver
-     */
-    AbstractFormatSaver createSaver();
-}
-```
-**（4）具体工厂**
-
-**（4-1）JSON格式存储器工厂**
-```java
-public class JsonSaveFactory implements FormatSaveFactory {
-
-    @Override
-    public AbstractFormatSaver createSaver() {
-        return new JsonSaver(new ObjectMapper());
-    }
-}
-```
-**（4-2）XML格式存储器工厂**
-```java
-public class XmlSaveFactory implements FormatSaveFactory {
-
-    @Override
-    public AbstractFormatSaver createSaver() {
-        return new XmlSaver();
-    }
-}
-```
-**（5）客户端**
-
-**（5-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/factory_method)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws Exception {
@@ -282,7 +158,7 @@ public class DTO {
     }
 }
 ```
-**（5-2）运行结果**
+运行结果如下
 ```text
 |==> Start ---------------------------------------------------------------|
     即将开始转换对象为JSON格式
@@ -397,4 +273,4 @@ public interface FactoryBean<T> {
 ```
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/creational/factory_method)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/creational/factory_method)

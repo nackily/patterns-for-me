@@ -72,258 +72,13 @@ Object obj = loader.loadAndResolve("key", toSaveObject.getClass());
 如上图所示，为每一个系列的产品提供一个工厂，该工厂即可生产这一系列的产品，区别于工厂方法模式只能生产单个产品。例如，xml 系列的产品，可以由`XmlFactory`生产，包括有`XmlSaver`和`XmlLoader`。客户端在使用时，只需要获取到具体的工厂，即可调用`FormatFactory`提供的生产方法，获取对应的产品。像上面类图中的结构，提供了一个对外的工厂接口，这个接口中定义了创建一系列产品的方法；而每种系列的工厂实现这个接口，负责创建这个系列的产品，这就是抽象工厂模式。
 
 # 三、案例实现
-在深入讨论抽象工厂模式之前，我们先对上面的案例进行实现。因为该案例引申自工厂方法模式中使用的案例，所以，部分代码（包括有`AbstractFormatSaver`、`JsonSaver`和`XmlSaver`）直接引用自工厂方法模式的代码。
+在深入讨论抽象工厂模式之前，我们先对上面的案例进行实现。因为该案例延伸自工厂方法模式中使用的案例，所以，部分代码（包括有`AbstractFormatSaver`、`JsonSaver`和`XmlSaver`）直接引用自工厂方法模式的代码。
 
-**（1）格式存储器**
+<div align="center">
+   <img src="/doc/resource/abstract-factory/代码附录.png" width="95%"/>
+</div>
 
-引用自工厂方法模式的案例代码，相关代码的链接已附录在文末。
-
-**（1-1）抽象的数据格式存储器**
-```java
-public abstract class AbstractFormatSaver {
-
-    /**
-     * 文件存储格式
-     */
-    protected final String fileExtension;
-    public AbstractFormatSaver(String fileExtension) {
-        this.fileExtension = fileExtension;
-    }
-
-    /**
-     * 转换格式并存储对象
-     * @param key 键
-     * @param obj 原始对象
-     */
-    public void convertAndStore(String key, Object obj) throws Exception {
-        String formatContent = this.convert(obj);
-        this.store(key, formatContent);
-    }
-
-    /**
-     * 格式转换
-     * @param obj 原始对象
-     * @return 格式化后的字符串
-     * @throws Exception Exception
-     */
-    protected abstract String convert(Object obj) throws Exception;
-
-    /**
-     * 内容写入文件
-     * @param key 键 - 作为文件名
-     * @param content 内容
-     * @throws IOException IOException
-     */
-    protected void store(String key, String content) throws IOException {
-        System.out.println("    即将开始写入文件");
-        String directory = Objects.requireNonNull(this.getClass().getResource("/")).getPath();
-        String filename = directory + key + this.fileExtension;
-        // 写入文件
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(content);
-        }
-    }
-}
-```
-**（1-2）JSON格式存储器**
-```java
-public class JsonSaver extends AbstractFormatSaver {
-
-    private final ObjectMapper objectMapper;
-    public JsonSaver(ObjectMapper objectMapper) {
-        super(".json");
-        this.objectMapper = objectMapper;
-    }
-
-    @Override
-    protected String convert(Object obj) throws Exception {
-        System.out.println("    即将开始转换对象为JSON格式");
-        String tar = objectMapper.writeValueAsString(obj);
-        System.out.println("        转换后内容：" + tar);
-        return tar;
-    }
-}
-```
-**（1-3）XML格式存储器**
-```java
-public class XmlSaver extends AbstractFormatSaver {
-
-    public XmlSaver() {
-        super(".xml");
-    }
-
-    @Override
-    protected String convert(Object obj) throws Exception {
-        System.out.println("    即将开始转换对象为XML格式");
-        StringWriter writer = new StringWriter();
-        JAXBContext context = JAXBContext.newInstance(obj.getClass());
-        Marshaller marshaller = context.createMarshaller();
-        // 编码
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        marshaller.marshal(obj, writer);
-        String tar = writer.toString();
-        System.out.println("        转换后内容：" + tar);
-        return tar;
-    }
-}
-```
-
-**（2）对象加载器**
-
-**（2-1）抽象的对象加载器**
-```java
-public abstract class AbstractFormatLoader {
-
-    /**
-     * 文件后缀
-     */
-    protected final String fileExtension;
-    public AbstractFormatLoader(String fileExtension) {
-        this.fileExtension = fileExtension;
-    }
-
-    /**
-     * 加载并解析为对象
-     * @param key 键 - 文件名
-     * @param type 期待的对象类型
-     * @param <T> 返回的类型
-     * @return 还原的对象
-     * @throws Exception Exception
-     */
-    public <T> T loadAndResolve(String key, Class<T> type) throws Exception {
-        String context = this.load(key);
-        return this.resolve(context, type);
-    }
-
-    /**
-     * 加载文件为字符串
-     * @param key 键 - 文件名
-     * @return 字符串
-     * @throws IOException IOException
-     */
-    protected String load(String key) throws IOException {
-        System.out.println("    即将开始加载文件");
-        String directory = Objects.requireNonNull(this.getClass().getResource("/")).getPath();
-        String filename = directory + key + fileExtension;
-
-        File file = new File(filename);
-        try (Reader r = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);) {
-            int ch;
-            StringBuilder sb = new StringBuilder();
-            while ((ch = r.read()) != -1) {
-                sb.append((char) ch);
-            }
-            return sb.toString();
-        }
-    }
-
-    /**
-     * 解析为对象
-     * @param content 字符串
-     * @param type 期待的对象类型
-     * @param <T> 返回的类型
-     * @return 还原的对象
-     * @throws Exception Exception
-     */
-    protected abstract <T> T resolve(String content, Class<T> type) throws Exception;
-}
-```
-**（2-2）JSON对象存储器**
-```java
-public class JsonLoader extends AbstractFormatLoader {
-
-    private final ObjectMapper objectMapper;
-
-    public JsonLoader(ObjectMapper objectMapper) {
-        super(".json");
-        this.objectMapper = objectMapper;
-    }
-
-    @Override
-    protected <T> T resolve(String content, Class<T> type) throws Exception {
-        System.out.println("    即将开始解析JSON");
-        T tar = objectMapper.readValue(content, type);
-        System.out.println("        解析后内容：" + tar);
-        return tar;
-    }
-}
-```
-**（2-3）XML格式存储器**
-```java
-public class XmlLoader extends AbstractFormatLoader {
-
-    public XmlLoader() {
-        super(".xml");
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    protected <T> T resolve(String content, Class<T> type) throws Exception {
-        System.out.println("    即将开始解析XML");
-        JAXBContext context = JAXBContext.newInstance(type);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        InputStream stream = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
-        T tar = (T) unmarshaller.unmarshal(stream);
-        System.out.println("        解析后内容：" + tar);
-        return tar;
-    }
-}
-
-```
-
-**（3）产品工厂**
-
-**（3-1）系列产品工厂接口**
-```java
-public interface FormatFactory {
-
-    /**
-     * 生产存储器
-     * @return AbstractFormatSaver
-     */
-    AbstractFormatSaver createSaver();
-
-    /**
-     * 生产加载器
-     * @return AbstractFormatLoader
-     */
-    AbstractFormatLoader createLoader();
-
-}
-
-```
-**（3-2）JSON系列产品工厂**
-```java
-public class JsonFactory implements FormatFactory{
-    @Override
-    public AbstractFormatSaver createSaver() {
-        return new JsonSaver(new ObjectMapper());
-    }
-
-    @Override
-    public AbstractFormatLoader createLoader() {
-        return new JsonLoader(new ObjectMapper());
-    }
-}
-```
-**（3-3）XML系列产品工厂**
-```java
-public class XmlFactory implements FormatFactory{
-    @Override
-    public AbstractFormatSaver createSaver() {
-        return new XmlSaver();
-    }
-
-    @Override
-    public AbstractFormatLoader createLoader() {
-        return new XmlLoader();
-    }
-}
-```
-
-**（4）客户端**
-
-**（4-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/abstract_factory)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws Exception {
@@ -379,7 +134,7 @@ public class DTO {
     }
 }
 ```
-**（4-2）运行结果**
+运行结果如下
 ```text
 |==> Start ---------------------------------------------------------------|
     即将开始转换对象为JSON格式
@@ -441,5 +196,5 @@ public class DTO {
 有时候客户端只需要使用一个具体的工厂，此时，我们可以在应用程序初始化阶段加载具体的工厂。比如在上面构建 UI 界面的例子中，应用程序在启动时，操作系统就已经确定，此时，对于所有的实现工厂来说，只有与当前操作系统一致的那个工厂才具有实际意义。所以，我们可以在应用程序初始化时就根据当前的操作系统环境加载与之对应的工厂。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/creational/abstract_factory)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/creational/abstract_factory)
 

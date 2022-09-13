@@ -1,4 +1,6 @@
-package com.aoligei.creational.factory_method;
+package com.aoligei.creational.factory_method.product;
+
+import com.aoligei.creational.factory_method.AbstractFormatSaver;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
