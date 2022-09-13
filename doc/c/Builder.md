@@ -201,7 +201,7 @@ public class GenericConstructor {
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/builder/代码附录.png" width="80%"/>
+   <img src="/doc/resource/builder/代码附录.png" width="95%"/>
 </div>
 
 代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/builder/message)。客户端示例代码如下
