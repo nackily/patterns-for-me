@@ -55,247 +55,14 @@ OK，到此为止，我们已经了解了门面模式所有核心的内容，是
    <img src="/doc/resource/facade/案例类图.png" width="95%"/>
 </div>
 
-上面的类图结构看起来比较复杂，但大部分都不是本文的重点，我们的重点是图中的 ModelFacade 那部分。ModelFacade 表示了案例中的中控面板，也就是一个门面。图中处于深色背景部分的对象都隐藏在该门面后，由他们负责完成了一系列的工作。对于用户（Client）来说，只需要从中控面板中已提供的几种模式中进行选择，就可以切换到与之对应的房间效果。
+上面的类图结构看起来比较复杂，但大部分都不是本文的重点，我们的重点是图中的`ModelFacade`那部分。`ModelFacade`表示了案例中的中控面板，也就是一个门面。图中处于深色背景部分的对象都隐藏在该门面后，由他们负责完成了一系列的工作。对于用户（客户端）来说，只需要从中控面板中已提供的几种模式中进行选择，就可以切换到与之对应的房间效果。
 
 ## 3.2 代码附录
-**（1）设备接口**
-```java
-public interface Equipment {
-    /**
-     * 打开设备
-     */
-    void on();
+<div align="center">
+   <img src="/doc/resource/facade/代码附录.png" width="95%"/>
+</div>
 
-    /**
-     * 关闭设备
-     */
-    void off();
-
-    /**
-     * 展示设备效果
-     */
-    void showEffects();
-}
-```
-**（2）音箱**
-```java
-public abstract class Speaker implements Equipment {
-    @Override
-    public void on() {
-        System.out.println("        音箱已打开");
-    }
-    @Override
-    public void off() {
-        System.out.println("        音箱已关闭");
-    }
-}
-```
-**（3）音响效果**
-
-**（3-1）混响音效**
-```java
-public class ReverbSoundEffectSpeaker extends Speaker {
-    @Override
-    public void showEffects() {
-        System.out.println("        音箱使用混响音效");
-    }
-}
-```
-**（3-2）原声音效**
-```java
-public class OriginalSoundEffectSpeaker extends Speaker {
-    @Override
-    public void showEffects() {
-        System.out.println("        音箱使用原声音效");
-    }
-}
-```
-**（3-3）回声音效**
-```java
-public class EchoSoundEffectSpeaker extends Speaker {
-    @Override
-    public void showEffects() {
-        System.out.println("        音箱使用回声音效");
-    }
-}
-```
-**（4）灯光**
-
-**（4-1）电灯泡**
-```java
-public abstract class Bulb implements Equipment {
-    @Override
-    public void on() {
-        System.out.println("        " + this.attachEffects() + "已打开");
-    }
-    @Override
-    public void off() {
-        System.out.println("        " + this.attachEffects() + "已关闭");
-    }
-    @Override
-    public void showEffects() {
-        System.out.println("        " + this.attachEffects());
-    }
-    /**
-     * 灯光效果
-     * @return 效果
-     */
-    protected abstract String attachEffects();
-}
-```
-**（4-2）绿灯电灯泡**
-```java
-public class GreenBulb extends Bulb {
-    @Override
-    public String attachEffects() {
-        return "绿灯灯光";
-    }
-}
-```
-**（4-3）红灯电灯泡**
-```java
-public class RedBulb extends Bulb {
-    @Override
-    public String attachEffects() {
-        return "红色灯光";
-    }
-}
-```
-**（4-4）黄灯电灯泡**
-```java
-public class YellowBulb extends Bulb {
-    @Override
-    public String attachEffects() {
-        return "黄色灯光";
-    }
-}
-```
-**（5）灯光效果**
-
-**（5-1）灯效装饰器**
-```java
-public abstract class LightEffectDecorator extends Bulb {
-
-    protected final Bulb bulb;
-
-    public LightEffectDecorator(Bulb bulb) {
-        this.bulb = bulb;
-    }
-}
-```
-**（5-2）常亮灯光效果**
-```java
-public class BrightEffectDecorator extends LightEffectDecorator {
-
-    public BrightEffectDecorator(Bulb bulb) {
-        super(bulb);
-    }
-
-    @Override
-    public String attachEffects() {
-        return "常亮效果的" + super.bulb.attachEffects();
-    }
-}
-
-```
-**（5-3）跑马灯灯光效果**
-```java
-public class MarqueeEffectDecorator extends LightEffectDecorator {
-
-    public MarqueeEffectDecorator(Bulb bulb) {
-        super(bulb);
-    }
-
-    @Override
-    public String attachEffects() {
-        return "跑马灯效果的" + super.bulb.attachEffects();
-    }
-}
-```
-**（5-4）频闪灯光效果**
-```java
-public class StrobeEffectDecorator extends LightEffectDecorator {
-
-    public StrobeEffectDecorator(Bulb bulb) {
-        super(bulb);
-    }
-
-    @Override
-    public String attachEffects() {
-        return "频闪效果的" + super.bulb.attachEffects();
-    }
-}
-```
-**（6）中控面板**
-```java
-public enum ModelFacade {
-    /**
-     * 唯一实例
-     */
-    INSTANCE;
-
-    private Equipment redBulb = new MarqueeEffectDecorator(new RedBulb());
-    private Equipment greenBulb = new MarqueeEffectDecorator(new GreenBulb());
-    private Equipment yellowBulb = new MarqueeEffectDecorator(new YellowBulb());
-    private Equipment speaker = new EchoSoundEffectSpeaker();
-
-    public void open() {
-        System.out.println("|==> 打开设备-------------------------------------------------------------|");
-        this.redBulb.on();
-        this.greenBulb.on();
-        this.yellowBulb.on();
-        this.speaker.on();
-        this.liveMode();
-    }
-
-    public void close() {
-        System.out.println("|==> 关闭设备-------------------------------------------------------------|");
-        this.redBulb.off();
-        this.greenBulb.off();
-        this.yellowBulb.off();
-        this.speaker.off();
-    }
-
-    public void familyMode() {
-        System.out.println("|==> 居家模式-------------------------------------------------------------|");
-        this.greenBulb = new BrightEffectDecorator(new GreenBulb());
-        this.yellowBulb = new BrightEffectDecorator(new YellowBulb());
-        this.speaker = new ReverbSoundEffectSpeaker();
-        System.out.println("    灯光效果：");
-        this.greenBulb.showEffects();
-        this.yellowBulb.showEffects();
-        System.out.println("    音响效果：");
-        this.speaker.showEffects();
-    }
-
-    public void liveMode() {
-        System.out.println("|==> 现场模式-------------------------------------------------------------|");
-        this.redBulb = new MarqueeEffectDecorator(new RedBulb());
-        this.greenBulb = new MarqueeEffectDecorator(new GreenBulb());
-        this.yellowBulb = new MarqueeEffectDecorator(new YellowBulb());
-        this.speaker = new EchoSoundEffectSpeaker();
-        System.out.println("    灯光效果：");
-        this.redBulb.showEffects();
-        this.greenBulb.showEffects();
-        this.yellowBulb.showEffects();
-        System.out.println("    音响效果：");
-        this.speaker.showEffects();
-    }
-
-    public void professionalMode() {
-        System.out.println("|==> 专业模式-------------------------------------------------------------|");
-        this.greenBulb = new StrobeEffectDecorator(new GreenBulb());
-        this.speaker = new OriginalSoundEffectSpeaker();
-        System.out.println("    灯光效果：");
-        this.greenBulb.showEffects();
-        System.out.println("    音响效果：");
-        this.speaker.showEffects();
-    }
-}
-```
-**（7）客户端使用**
-
-**（7-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/facade)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -312,7 +79,7 @@ public class Client {
     }
 }
 ```
-**（7-2）运行结果**
+运行结果如下
 ```text
 |==> 打开设备-------------------------------------------------------------|
         跑马灯效果的红色灯光已打开
@@ -381,4 +148,4 @@ public class Client {
 
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/structural/facade)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/facade)

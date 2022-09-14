@@ -80,200 +80,11 @@
 在该类图中，`CostCalculator`表示抽象的费用计算器，定义了两个行为，分别是优惠的描述`description()`和计算费用`finalCost()`。`ShoppingCart`代表购物车，除了实现`CostCalculator`中定义的行为外，还有添加商品`addGoods()`和获取商品列表的详细信息`getDetails()`，`GoodDetail`为商品类。`AbstractCostDecorator`为抽象的优惠计算器，统一定义了所有优惠计算器所需的依赖`calculator`，三个实现类分别是折扣计算器`DiscountDecorator`、满减计算器`FullDiscountDecorator`和抵用计算器`VoucherDecorator`。在满减计算器中，提供了获取当前总金额是否跨过满减门槛的方法`aboveThreshold()`。
 
 ## 3.2 代码附录
+<div align="center">
+   <img src="/doc/resource/decorator/代码附录.png" width="95%"/>
+</div>
 
-**（1）费用计算器**
-```java
-public interface CostCalculator {
-
-    /**
-     * 计算描述
-     * @return 描述
-     */
-    String description();
-
-    /**
-     * 商品的最终费用
-     * @return 最终费用
-     */
-    BigDecimal finalCost();
-
-}
-```
-**（2）购物车**
-```java
-public class ShoppingCart implements CostCalculator {
-
-    private final List<GoodsDetail> goods = new ArrayList<>();       // 商品清单
-
-    public void addGoods(GoodsDetail detail) {
-        this.goods.add(detail);
-    }
-
-    @Override
-    public String description() {
-        return "商品总费用";
-    }
-
-    @Override
-    public BigDecimal finalCost() {
-        BigDecimal totalCost = BigDecimal.ZERO;
-        for (GoodsDetail item : goods) {
-            BigDecimal cost = item.price.multiply(BigDecimal.valueOf(item.number));
-            totalCost = totalCost.add(cost);
-        }
-        return totalCost;
-    }
-
-    /**
-     * 获取商品明细
-     * @return 商品明细
-     */
-    public String getDetails() {
-        List<String> details = goods.stream()
-                .map(o -> MessageFormat.format("      商品名：【{0}】，商品单价：【{1}元】，商品数量：【{2}】",
-                        o.name, o.price, o.number))
-                .collect(Collectors.toList());
-        return String.join("\n", details);
-    }
-
-
-    /**
-     * 商品明细
-     */
-    public static class GoodsDetail {
-        private final String name;            // 名称
-        private final BigDecimal price;       // 单价
-        private final int number;             // 数量
-        public GoodsDetail(String name, BigDecimal price, int number) {
-            this.name = name;
-            this.price = price;
-            this.number = number;
-        }
-    }
-}
-```
-**（3）优惠计算器**
-
-**（3-1）抽象的优惠计算器**
-```java
-public abstract class AbstractCostDecorator implements CostCalculator {
-
-    /**
-     * 包装的费用计算器
-     */
-    protected final CostCalculator calculator;
-
-    public AbstractCostDecorator(CostCalculator calculator) {
-        this.calculator = calculator;
-    }
-}
-
-```
-**（3-2）折扣券费用计算器**
-```java
-public class DiscountDecorator extends AbstractCostDecorator {
-
-    /**
-     * 折扣
-     */
-    private final BigDecimal discount;
-
-    public DiscountDecorator(CostCalculator calculator, BigDecimal discount) {
-        super(calculator);
-        this.discount = discount;
-    }
-
-    @Override
-    public String description() {
-        return calculator.description() +
-                MessageFormat.format(" -> {0}折扣", discount.multiply(BigDecimal.valueOf(10)));
-    }
-
-    @Override
-    public BigDecimal finalCost() {
-        // 费用 * 折扣
-        return calculator.finalCost().multiply(discount);
-    }
-}
-```
-**（3-3）满减券费用计算器**
-```java
-public class FullDiscountDecorator extends AbstractCostDecorator {
-
-    /**
-     * 满减券面额
-     */
-    private final BigDecimal amount;
-
-    /**
-     * 满减门槛
-     */
-    private final BigDecimal threshold;
-
-    public FullDiscountDecorator(CostCalculator calculator, BigDecimal amount, BigDecimal threshold) {
-        super(calculator);
-        this.amount = amount;
-        this.threshold = threshold;
-    }
-
-    @Override
-    public String description() {
-        if (aboveThreshold()) {
-            return calculator.description() +
-                    MessageFormat.format(" -> 满{0}减{1}", threshold, amount);
-        }
-        return null;
-    }
-
-    @Override
-    public BigDecimal finalCost() {
-        if (aboveThreshold()) {
-            // 费用 - 减去优惠面额
-            return calculator.finalCost().subtract(amount);
-        }
-        // 无法满减 -> 原价
-        return calculator.finalCost();
-    }
-
-    /**
-     * 原始金额是否高于满减门槛
-     * @return true:是
-     */
-    public boolean aboveThreshold () {
-        return calculator.finalCost().compareTo(threshold) > 0;
-    }
-}
-```
-**（3-4）抵用券费用计算器**
-```java
-public class VoucherDecorator extends AbstractCostDecorator {
-
-    /**
-     * 抵用券面额
-     */
-    private final BigDecimal amount;
-
-    public VoucherDecorator(CostCalculator calculator, BigDecimal amount) {
-        super(calculator);
-        this.amount = amount;
-    }
-
-    @Override
-    public String description() {
-        return calculator.description() +
-                MessageFormat.format(" -> {0}元抵用券", amount);
-    }
-
-    @Override
-    public BigDecimal finalCost() {
-        // 费用 - 减去抵用券面额
-        return calculator.finalCost().subtract(amount);
-    }
-}
-```
-**（4）客户端**
-
-**（4-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/decorator)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -301,7 +112,7 @@ public class Client {
     }
 }
 ```
-**（4-2）运行结果**
+运行结果如下
 ```text
 |==> Start --------------------------------------------------------------|
    购物车商品明细：
@@ -363,4 +174,4 @@ ServletRequestWrapper是ServletRequest接口的装饰器实现，开发者可以
 
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/structural/decorator)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/decorator)

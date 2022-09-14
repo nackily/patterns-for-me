@@ -25,8 +25,16 @@ public abstract class AbstractNotifer {
         this.content = content;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     /**
      * 通知用户
      */
-    protected abstract void doNotify();
+    public abstract void doNotify();
 }

@@ -1,5 +1,9 @@
 package com.aoligei.structural.flyweight;
 
+import com.aoligei.structural.flyweight.shape.Line;
+import com.aoligei.structural.flyweight.shape.Oval;
+import com.aoligei.structural.flyweight.shape.Rectangle;
+
 import java.util.HashMap;
 
 /**

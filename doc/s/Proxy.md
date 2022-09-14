@@ -64,137 +64,11 @@
 > 比如，对于一个图像编辑器系统来说，提供了加载图片、绘制图像、修改图像以及保存图片的功能。加载图片可以将图片从磁盘或者网络上加载到内存中，绘制图像则是将内存中的图像对象绘制到屏幕上。图片加载这个操作的开销可能很大，这个开销包括内存的开销以及时间的开销，比如从网络上加载一副空间占用很大的图片。我们有一个实现了各种操作的图像类，但这个图像类会在图像初始化时就加载图像，这会导致我们只要初始化图像的对象，就可能发生卡顿。但对于一个友好的图像编辑器来说，打开文档的速度必须快速，此时，我们就可以用代理解决该问题。
 > 具体做法是，为图像对象提供一个代理对象，在真正需要展示图像的时候才去加载图像（代理类的绘制方法中才去初始化真实的图片对象），这样就可以避免在初始化图像对象时就不得不加载图像的尴尬境地。
 
-该案例的实现代码如下所示：
+<div align="center">
+   <img src="/doc/resource/proxy/虚拟代理代码附录.png" width="95%"/>
+</div>
 
-**图像接口**
-```java
-public interface Graphic {
-
-    /**
-     * 绘制图像到屏幕
-     */
-    void draw();
-
-    /**
-     * 图像宽度
-     * @return 宽度
-     */
-    double getWidth();
-
-    /**
-     * 图像高度
-     * @return 高度
-     */
-    double getHeight();
-
-    /**
-     * 存储图片
-     */
-    void store();
-
-}
-```
-**图片类**
-```java
-public class Image implements Graphic {
-
-    private final String fileName;
-
-    /**
-     * 图片宽度
-     */
-    private double width;
-
-    /**
-     * 图片高度
-     */
-    private double height;
-
-    public Image(String fileName) {
-        this.fileName = fileName;
-        this.loadImage(fileName);
-    }
-
-    private void loadImage(String fileName) {
-        System.out.println("    开始加载图片");
-        // 模拟加载图片
-        width = Math.random() * (50) + 51;
-        height = Math.random() * (50) + 51;
-    }
-
-    @Override
-    public void draw() {
-        System.out.println(MessageFormat.format("    已绘制图片[{0}]", this.fileName));
-    }
-
-    @Override
-    public double getWidth() {
-        System.out.println(MessageFormat.format("        图片宽度为 {0}", this.width));
-        return this.width;
-    }
-
-    @Override
-    public double getHeight() {
-        System.out.println(MessageFormat.format("        图片高度为 {0}", this.height));
-        return this.height;
-    }
-
-    @Override
-    public void store() {
-        System.out.println(MessageFormat.format("    已存储图片[{0}]", this.fileName));
-    }
-}
-
-```
-**图片代理类**
-```java
-public class ImageProxy implements Graphic {
-    
-    private Image image;
-    
-    private final String fileName;
-    
-    public ImageProxy(String fileName) {
-        this.fileName = fileName;
-    }
-    
-    @Override
-    public void draw() {
-        if (image == null) {
-            this.image = new Image(this.fileName);
-        }
-        this.image.draw();
-    }
-    
-    @Override
-    public double getWidth() {
-        if (image == null) {
-            System.out.println("        图片宽度为50，当前未加载图片，使用默认图像");
-            return 50;
-        } else {
-            return image.getWidth();
-        }
-    }
-    
-    @Override
-    public double getHeight() {
-        if (image == null) {
-            System.out.println("        图片高度为50，当前未加载图片，使用默认图像");
-            return 50;
-        } else {
-            return image.getHeight();
-        }
-    }
-    
-    @Override
-    public void store() {
-        if (image != null) {
-            this.image.store();
-        }
-    }
-}
-```
-**使用客户端**
+该案例的代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/proxy/virtual_proxy)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -209,9 +83,8 @@ public class Client {
         image.getHeight();
     }
 }
-
 ```
-**运行结果**
+运行结果如下
 ```text
 |==> 打开文档【/res/a.png】---------------------------------------------|
     获取图片宽度：
@@ -279,77 +152,11 @@ public class Client {
 
 ## 4.3 动态代理示例
 这里，我们以 jdk 动态代理为例，演示如何使用 jdk 的动态代理，cglib 的动态代理有兴趣的同学可自行查阅资料。更多关于动态代理的实现原理我已整理并放在代码注释中。
+<div align="center">
+   <img src="/doc/resource/proxy/JDK代理代码附录.png" width="95%"/>
+</div>
 
-**接口**
-```java
-public interface AnyService {
-    /**
-     * 目标方法_0
-     */
-    void targetFunc0();
-
-    /**
-     * 目标方法_1
-     * @param num any number
-     * @return anything
-     */
-    String targetFunc1(int num);
-}
-```
-**被代理类**
-```java
-public class AnyServiceImpl implements AnyService {
-    @Override
-    public void targetFunc0() {
-        System.out.println("    =>> 执行目标方法");
-    }
-
-    @Override
-    public String targetFunc1(int num) {
-        return "Anything";
-    }
-}
-```
-**调用处理程序**
-```java
-public class ProxyInvocationHandler implements InvocationHandler {
-
-    /**
-     * 被代理对象
-     */
-    private Object target;
-
-    /**
-     * 设置目标对象
-     * @param target 目标对象
-     */
-    protected void setTarget(Object target){
-        this.target = target;
-    }
-
-    /**
-     * 获取代理对象
-     * @return 代理对象
-     */
-    protected Object getProxy(){
-        return Proxy.newProxyInstance(this.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
-    }
-
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("=>> 代理对象的Java类型：" + proxy.getClass().getSimpleName());
-        System.out.println("=>> 调用的方法名：" + method.getName());
-        System.out.println("=>> 调用方法的参数：" + Arrays.toString(args));
-
-        System.out.println("    =>> 执行目标方法之前");
-        Object res = method.invoke(target, args);
-        System.out.println("    =>> 返回：" + res);
-        System.out.println("    =>> 执行目标方法之后");
-        return res;
-    }
-}
-```
-**客户端**
+客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -387,4 +194,4 @@ public class Client {
 
 
 # 附录
-[回到主页](/README.md)    [延迟对象初始化案例](/src/main/java/com/aoligei/structural/proxy/virtual_proxy)    [JDK动态代理示例](/src/main/java/com/aoligei/structural/proxy/jdk_proxy)
+[回到主页](/README.md)&emsp;[延迟对象初始化案例](/src/main/java/com/aoligei/structural/proxy/virtual_proxy)&emsp;[JDK动态代理示例](/src/main/java/com/aoligei/structural/proxy/jdk_proxy)

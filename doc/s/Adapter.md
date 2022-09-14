@@ -37,106 +37,39 @@
 ## 3.1 案例类图
 按照上面的分析，此处已经实现了这个案例，下图为案例的类图结构。
 <div align="center">
-   <img src="/doc/resource/adapter/案例类图.jpg" width="100%"/>
+   <img src="/doc/resource/adapter/案例类图.png" width="95%"/>
 </div>
 
 对于该类图的说明如下：
 
 - **Plug**：充电头，提供充电服务；
-- **AccessUsbCable**：转接头的抽象，提供接入数据线的行为（`access()`）；
+- **AccessAdapter**：转接头的抽象，提供接入数据线的行为（`access()`）；
 - **PhoneUsbCableAdapter、GameConsoleUsbCableAdapter**：分别为手机数据线转接头、游戏机数据线转接头；
 - **PhoneUsbCable**：手机数据线，提供接入 usb-c 类型的电源插座；
 - **GameConsoleUsbCable**：游戏机数据线，提供接入 usb-b 类型的电源插座；
 
 ## 3.2 代码附录
+<div align="center">
+   <img src="/doc/resource/adapter/代码附录.png" width="95%"/>
+</div>
 
-**（1）数据线**
-
-**（1-1）手机数据线**
-```java
-public class PhoneUsbCable {
-
-    public void accessTypeC (){
-        System.out.println("    手机数据线接入 type-c 类型接口");
-    }
-
-}
-```
-**（1-2）游戏机数据线**
-```java
-public class GameConsoleUsbCable {
-
-    public void accessTypeB (){
-        System.out.println("    游戏机数据线接入 type-b 类型接口");
-    }
-
-}
-```
-**（2）转接头抽象**
-```java
-public interface AccessUsbCable {
-    /**
-     * 接入数据线
-     */
-    void access();
-}
-```
-**（3）转接头**
-
-**（3-1）手机数据线转接头**
-```java
-public class PhoneUsbCableAdapter implements AccessUsbCable {
-
-    private final PhoneUsbCable phoneUsbCable;
-
-    public PhoneUsbCableAdapter(PhoneUsbCable phoneUsbCable) {
-        this.phoneUsbCable = phoneUsbCable;
-    }
-
-    @Override
-    public void access() {
-        System.out.println("    手机数据线适配器接入 type-a 类型的接口，接出 usb-c 类型的接口");
-        this.phoneUsbCable.accessTypeC();
-    }
-}
-```
-**（3-2）游戏机数据线转接头**
-```java
-public class GameConsoleUsbCableAdapter implements AccessUsbCable {
-
-    private final GameConsoleUsbCable gameConsoleUsbCable;
-
-    public GameConsoleUsbCableAdapter(GameConsoleUsbCable gameConsoleUsbCable) {
-        this.gameConsoleUsbCable = gameConsoleUsbCable;
-    }
-
-    @Override
-    public void access() {
-        System.out.println("    游戏机数据线适配器接入 type-a 类型的接口，接出 usb-b 类型的接口");
-        this.gameConsoleUsbCable.accessTypeB();
-    }
-}
-
-```
-**（4）充电头**
-
-**（4-1）充电头**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/adapter)。客户端示例代码如下
 ```java
 public class Plug {
 
     public static void main(String[] args) {
         System.out.println("手机充电时接线，该插座接出 usb-a 类型的接口：");
-        AccessUsbCable phone = new PhoneUsbCableAdapter(new PhoneUsbCable());
+        AccessAdapter phone = new PhoneAdapterAdapter(new PhoneUsbCable());
         phone.access();
 
         System.out.println("游戏机充电时接线，该插座接出 usb-a 类型的接口：");
-        AccessUsbCable gameConsole = new GameConsoleUsbCableAdapter(new GameConsoleUsbCable());
+        AccessAdapter gameConsole = new GameConsoleAdapterAdapter(new GameConsoleUsbCable());
         gameConsole.access();
     }
 
 }
 ```
-**（4-2）运行结果**
+运行结果如下
 ```text
 手机充电时接线，该插座接出 usb-a 类型的接口：
     手机数据线适配器接入 type-a 类型的接口，接出 usb-c 类型的接口
@@ -273,5 +206,5 @@ public class FutureTask<V> implements RunnableFuture<V> {
 综上所述，`RunnableAdapter`类采用适配器模式主要是为了使上层应用只需要统一处理`Callable`类型的接口，以便上层应用只需处理一套逻辑。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/structural/adapter)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/adapter)
 

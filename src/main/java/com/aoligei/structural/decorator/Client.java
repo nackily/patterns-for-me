@@ -1,5 +1,9 @@
 package com.aoligei.structural.decorator;
 
+import com.aoligei.structural.decorator.calculator.DiscountDecorator;
+import com.aoligei.structural.decorator.calculator.FullDiscountDecorator;
+import com.aoligei.structural.decorator.calculator.VoucherDecorator;
+
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 

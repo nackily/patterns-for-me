@@ -56,90 +56,11 @@ public void destroyVirus(Folder f) {
 OK，到这里我们已经实现了组合模式，这个类图这个就是组合模式所要表达的内容。我们将在下面对组合模式进行深入的探讨，在此之前，我们先看一下这个案例实现的代码。
 
 # 三、案例实现
-对于上面分析的例子，实现代码如下：
+<div align="center">
+   <img src="/doc/resource/composite/代码附录.png" width="95%"/>
+</div>
 
-**（1）抽象的文件系统**
-```java
-public abstract class AbstractFile {
-
-    /**
-     * 文件名
-     */
-    protected String name;
-    public AbstractFile(String name) {
-        this.name = name;
-    }
-
-    /**
-     * 杀毒
-     */
-    protected abstract void destroyVirus();
-}
-```
-**（2）文件夹**
-```java
-public class Folder extends AbstractFile {
-
-    /**
-     * 子节点
-     */
-    private final List<AbstractFile> children = new ArrayList<>();
-
-    public Folder(String name) {
-        super(name);
-    }
-
-    /**
-     * 添加子节点
-     * @param item 子节点
-     */
-    public void add(AbstractFile item) {
-        this.children.add(item);
-    }
-
-    @Override
-    protected void destroyVirus() {
-        System.out.println(MessageFormat.format("   ==>开始处理文件夹[{0}]...", super.name));
-        children.forEach(AbstractFile::destroyVirus);
-    }
-}
-
-```
-**（3）各种类型的文件**
-
-**（3-1）图片文件**
-```java
-public class ImageFile extends AbstractFile {
-
-    public ImageFile(String name) {
-        super(name);
-    }
-
-    @Override
-    protected void destroyVirus() {
-        System.out.println(MessageFormat.format("   图片文件[{0}]开始杀毒", super.name));
-    }
-}
-
-```
-**（3-2）文本文件**
-```java
-public class TextFile extends AbstractFile {
-
-    public TextFile(String name) {
-        super(name);
-    }
-
-    @Override
-    protected void destroyVirus() {
-        System.out.println(MessageFormat.format("   文本文件[{0}]开始杀毒", super.name));
-    }
-}
-
-```
-**（4）客户端**
-
-**（4-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/composite)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -176,7 +97,7 @@ public class Client {
     }
 }
 ```
-**（4-2）运行结果**
+运行结果如下
 ```text
 |==> 文件夹内容如下： --------------------------------------------------------|
     =文档资料
@@ -323,5 +244,5 @@ public class CompositeCacheManager implements CacheManager, InitializingBean {
 可以看出，`CompositeCacheManager`使用了组合模式，并且采用的是更安全的组合模式。使用`CompositeCacheManager`我们可以让我们的项目同时支持多个缓存管理器，既可以用本地缓存，也可以用分布式缓存，还可以实现其他的缓存支持。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/structural/composite)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/composite)
 

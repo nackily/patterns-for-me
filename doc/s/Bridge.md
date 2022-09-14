@@ -60,191 +60,12 @@
 在这个类图结构中，客户端直接向`AbstractTriggerExecutor`（触发机制执行器）提交请求，触发执行器依赖一个`AbstractNotifer`（通知发送器）。如何触发发送消息的逻辑在`AbstractTriggerExecutor#execute()`中实现，实现类决定在合适的时机触发推送任务；`AbstractTriggerExecutor`将推送任务委托给`AbstractNotifer`执行，具体的`AbstractNotifer`在各自的`doNotify()`中实现。而这个结构就是典型的桥模式。
 
 # 三、案例实现
-本篇仅仅是一个例子，并不打算真正实现短信、邮件发送等功能。有兴趣的朋友可自行实现更多细节。案例代码已附在文章结尾处，有需自取。
+本篇仅仅是一个例子，并不打算真正实现短信、邮件发送等功能。有兴趣的朋友可自行实现更多细节。
+<div align="center">
+   <img src="/doc/resource/bridge/代码附录.png" width="95%"/>
+</div>
 
-**（1）通知器抽象**
-```java
-public abstract class AbstractNotifer {
-
-    /**
-     * 身份标识：1.站内消息 -> 用户编号；2.邮件 -> 邮箱；3.短信/机器人语音通话 -> 电话号码
-     */
-    protected final String identity;
-
-    /**
-     * 通知内容
-     */
-    protected String content;
-
-
-    public AbstractNotifer(String identity, String content) {
-        this.identity = identity;
-        this.content = content;
-    }
-
-    /**
-     * 通知用户
-     */
-    protected abstract void doNotify();
-}
-
-```
-**（2）实现多个通知方式**
-
-**（2-1）邮件**
-```java
-public class MailNotifer extends AbstractNotifer {
-
-    public MailNotifer(String identity, String content) {
-        super(identity, content);
-    }
-
-    @Override
-    protected void doNotify() {
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(MessageFormat.format("       [{0}]发送邮件，【邮箱地址：{1}】，【内容：{2}】", time, super.identity, super.content));
-    }
-}
-```
-**（2-2）机器人语音通话**
-```java
-public class RobotCallNotifer extends AbstractNotifer {
-
-    public RobotCallNotifer(String identity, String content) {
-        super(identity, content);
-    }
-
-    @Override
-    protected void doNotify() {
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(MessageFormat.format("       [{0}]发起机器人语音通话，【手机号码：{1}】，【内容：{2}】", time, super.identity, super.content));
-    }
-}
-```
-**（2-3）短信**
-```java
-public class ShortMessageNotifer extends AbstractNotifer {
-
-    public ShortMessageNotifer(String identity, String content) {
-        super(identity, content);
-    }
-
-    @Override
-    protected void doNotify() {
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(MessageFormat.format("       [{0}]发送短信，【手机号码：{1}】，【内容：{2}】", time, super.identity, super.content));
-    }
-}
-```
-**（2-4）站内消息**
-```java
-public class SiteMessageNotifer extends AbstractNotifer {
-
-    public SiteMessageNotifer(String identity, String content) {
-        super(identity, content);
-    }
-
-    @Override
-    protected void doNotify() {
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(MessageFormat.format("       [{0}]发送站内消息，【用户编号：{1}】，【内容：{2}】", time, super.identity, super.content));
-    }
-}
-```
-**（3）触发机制执行器抽象**
-```java
-public abstract class AbstractTriggerExecutor {
-
-    /**
-     * 通知器
-     */
-    protected final AbstractNotifer notifer;
-
-
-    public AbstractTriggerExecutor(AbstractNotifer handler) {
-        this.notifer = handler;
-    }
-
-    /**
-     * 执行
-     * @throws InterruptedException 中断异常
-     */
-    protected abstract void execute() throws InterruptedException;
-
-}
-```
-**（4）实现多个触发机制**
-
-**（4-1）立即执行的执行器**
-```java
-public class ImmediatelyExecutor extends AbstractTriggerExecutor {
-
-    public ImmediatelyExecutor(AbstractNotifer handler) {
-        super(handler);
-    }
-
-    @Override
-    protected void execute() {
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(MessageFormat.format("    [{0}]已提交通知到立即执行处理器...", time));
-        super.notifer.doNotify();
-    }
-}
-```
-**（4-2）延时一段时间执行的执行器**
-```java
-public class DelayExecutor extends AbstractTriggerExecutor {
-
-    /**
-     * 延迟秒数
-     */
-    private final int delaySeconds;
-
-    public DelayExecutor(AbstractNotifer handler, int delaySeconds) {
-        super(handler);
-        this.delaySeconds = delaySeconds;
-    }
-
-    @Override
-    protected void execute() throws InterruptedException {
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(MessageFormat.format("    [{0}]已提交通知到延迟执行处理器...", time));
-        Thread.sleep(delaySeconds * 1000L);
-        super.notifer.doNotify();
-    }
-}
-```
-**（4-3）定时执行的执行器**
-```java
-public class TimerExecutor extends AbstractTriggerExecutor {
-
-    /**
-     * 定时表达式
-     */
-    private final String express;
-
-    public TimerExecutor(AbstractNotifer handler, String express) {
-        super(handler);
-        this.express = express;
-    }
-
-    @Override
-    protected void execute() throws InterruptedException {
-        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        System.out.println(MessageFormat.format("    [{0}]已提交通知到定时执行处理器，定时表达式为【{1}】...", time, express));
-        // todo: 在此处实现定时触发的机制
-        Thread.sleep(2000);
-        // 模拟系统统计报表
-        int num = 2;
-        double total = 38900.0;
-        super.notifer.content = MessageFormat.format(super.notifer.content, num, total);
-        super.notifer.doNotify();
-    }
-}
-```
-**（5）客户端**
-
-**（5-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/bridge)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws InterruptedException {
@@ -264,7 +85,7 @@ public class Client {
     }
 }
 ```
-**（5-2）运行结果**
+运行结果如下
 ```text
 |==> Start ---------------------------------------------------------------------------------------|
     [15:10:08]已提交通知到立即执行处理器...
@@ -349,4 +170,4 @@ public class Client {
 1. 通过参数的方式决定，就像静态工厂一样。例如，给每一个 Implementor 提供一个与之对应的 key，通过传入的 key 决定具体创建哪一个 Implementor，当然，这种方式有一个前提：Abstraction 必须知道所有的 Implementor。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/structural/bridge)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/bridge)

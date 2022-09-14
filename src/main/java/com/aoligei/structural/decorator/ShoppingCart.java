@@ -1,7 +1,5 @@
 package com.aoligei.structural.decorator;
 
-import sun.plugin2.message.Message;
-
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.ArrayList;

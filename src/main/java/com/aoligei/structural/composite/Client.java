@@ -1,6 +1,9 @@
 package com.aoligei.structural.composite;
 
 
+import com.aoligei.structural.composite.file.ImageFile;
+import com.aoligei.structural.composite.file.TextFile;
+
 /**
  * Client
  *

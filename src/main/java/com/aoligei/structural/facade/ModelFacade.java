@@ -1,5 +1,15 @@
 package com.aoligei.structural.facade;
 
+import com.aoligei.structural.facade.equip.bulb.GreenBulb;
+import com.aoligei.structural.facade.equip.bulb.RedBulb;
+import com.aoligei.structural.facade.equip.bulb.YellowBulb;
+import com.aoligei.structural.facade.equip.bulb.decorator.BrightEffectDecorator;
+import com.aoligei.structural.facade.equip.bulb.decorator.MarqueeEffectDecorator;
+import com.aoligei.structural.facade.equip.bulb.decorator.StrobeEffectDecorator;
+import com.aoligei.structural.facade.equip.speaker.EchoSoundEffectSpeaker;
+import com.aoligei.structural.facade.equip.speaker.OriginalSoundEffectSpeaker;
+import com.aoligei.structural.facade.equip.speaker.ReverbSoundEffectSpeaker;
+
 /**
  * 模式门面
  *

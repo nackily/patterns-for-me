@@ -96,7 +96,7 @@ OK，到此为止，我们已经对包装类缓存池的机制进行了完整的
 - **FlyweightFactory**：管理所有的共享对象，通常的处理是：当用户请求一个 flyweight 时，FlyweightFactory 对象提供一个已创建的实例或者创建一个（如果不存在的话）；
 - **Client**：维护共享对象的外在状态。
 
-**（1）同`Integer**`类比分析**
+**（1）同`Integer`类比分析**
 
 - **ConcreteFlyweight**：如`Integer`对象，维护了内部状态（`private final int value`）；
 - **FlyweightFactory**：如`Integer#valueOf()`静态方法，内部维护了`IntegerCache#cache[]`，当缓存中包含有所需的共享对象时，可从缓存中获取；
@@ -132,138 +132,24 @@ OK，到此为止，我们已经对包装类缓存池的机制进行了完整的
 > - 每一个图像被绘制在屏幕上时，都可能有着完全不同的位置（包括图像左上角的坐标、宽度和高度）。如果将这部分作为内部状态，对象共享的可能性就将大大降低。这就相当于，区间[1~5]之间的自然数取值只有 5 种可能，而区间[1~500]之间的自然数取值就有 500 种可能，前者的共享可能性明显高于后者；
 > - 和位置属性一样，将颜色作为外部状态的依据也是如此。颜色也有着太丰富的变化空间；
 
-## 3.2 代码附录
-**（1）图像接口**
-```java
-public interface Shape {
+## 3.2 案例类图
+<div align="center">
+   <img src="/doc/resource/flyweight/案例类图.png" width="75%"/>
+</div>
 
-    /**
-     * 绘制当前图像到屏幕上
-     * @param g g
-     * @param x 图像的左上角X坐标
-     * @param y 图像的左上角Y坐标
-     * @param width 图像的宽度
-     * @param height 图像的高度
-     * @param c 颜色
-     */
-    void draw(Graphics g, int x, int y, int width, int height, Color c);
-}
-```
-**（2）形状**
+该案例的类图结构如上图所示，由以下部分组成。
 
-**（2-1）线条**
-```java
-public class Line implements Shape {
+- **Shape**：抽象的形状。定义了绘制当前形状到屏幕`draw(Graphics,int,int,int,int,Color):void`的行为，参数分别为画笔、图像相对于屏幕左上角的x坐标、图像相当于屏幕左上角的y坐标、宽度、高度和图像颜色；
+- **Line、Oval、Rectangle**：分别代表线条，椭圆和矩形。实现了抽象的形状`Shape`；
+- **ShapeFactory**：共享的形状工厂。内部维护了形状对象的共享缓存`CACHES`，客户端可通过静态方法`ShapeFactory.getShape(SupportedShape):Shape`获取缓存的形状对象，参数为形状枚举；
+- **Application**：应用程序。通过缓存的共享形状对象在屏幕绘制 100 个图形，这些图形的形状、大小、位置、颜色和是否填充属性均随机获取；
 
-    public Line() {
-        System.out.println("    创建一个新的线条对象");
-    }
+## 3.3 代码附录
+<div align="center">
+   <img src="/doc/resource/flyweight/代码附录.png" width="95%"/>
+</div>
 
-    @Override
-    public void draw(Graphics g, int x, int y, int width, int height, Color c) {
-        g.setColor(c);
-        // 线条的终点坐标为：[x + width, y + height]
-        g.drawLine(x, y, x + width, x + height);
-    }
-}
-```
-**（2-2）矩形**
-```java
-public class Rectangle implements Shape{
-
-    private final boolean fill;
-    public Rectangle(boolean fill) {
-        this.fill = fill;
-        System.out.println("    创建一个新的矩形对象");
-    }
-
-    @Override
-    public void draw(Graphics g, int x, int y, int width, int height, Color c) {
-        g.setColor(c);
-        if (this.fill) {
-            g.fillRect(x, y, width, height);
-        } else {
-            g.drawRect(x, y, width, height);
-        }
-    }
-}
-```
-**（2-3）椭圆形**
-```java
-public class Oval implements Shape{
-
-    private final boolean fill;
-    public Oval(boolean fill) {
-        this.fill = fill;
-        System.out.println("    创建一个新的椭圆形对象");
-    }
-
-    @Override
-    public void draw(Graphics g, int x, int y, int width, int height, Color c) {
-        g.setColor(c);
-        if (this.fill) {
-            g.fillOval(x, y, width, height);
-        } else {
-            g.drawOval(x, y, width, height);
-        }
-    }
-}
-```
-**（3）共享对象工厂**
-```java
-public class ShapeFactory {
-
-    /**
-     * 缓存
-     */
-    private static final HashMap<SupportedShape, Shape> CACHES = new HashMap<>();
-
-    /**
-     * 获取图像对象
-     * @param s 图像类型
-     * @return 图像对象
-     */
-    public static Shape getShape(SupportedShape s) {
-        if (CACHES.containsKey(s)) {
-            return CACHES.get(s);
-        }
-        Shape shape = null;
-        switch (s) {
-            case LINE:
-                shape = new Line();
-                break;
-            case RECT:
-                shape = new Rectangle(false);
-                break;
-            case RECT_FILL:
-                shape = new Rectangle(true);
-                break;
-            case OVAL:
-                shape = new Oval(false);
-                break;
-            case OVAL_FILL:
-                shape = new Oval(true);
-                break;
-            default:
-                throw new RuntimeException("不支持的图像类型");
-        }
-        CACHES.put(s, shape);
-        return shape;
-    }
-
-
-    public static enum SupportedShape {
-        LINE,                       // 线条
-        RECT,                       // 矩形
-        RECT_FILL,                  // 填充矩形
-        OVAL,                       // 椭圆形
-        OVAL_FILL;                  // 填充椭圆形
-    }
-}
-```
-**（4）客户端**
-
-**（4-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/flyweight)。客户端示例代码如下
 ```java
 public class Application extends JFrame implements ActionListener {
 
@@ -351,7 +237,7 @@ public class Application extends JFrame implements ActionListener {
     }
 }
 ```
-**（4-2）运行结果**
+运行结果如下
 ```text
 |==> Start -------------------------------------------------|
     创建一个新的椭圆形对象
@@ -392,4 +278,4 @@ public class Application extends JFrame implements ActionListener {
 在前面，我们已经通过案例来说明内部状态和外部状态应该如何科学地划分，这一点相当重要。总结来说，我们使用享元模式的目的是为了减少资源的消耗，也是为了只用少量的几个对象来表达这些可被共享的状态，这个过程必须要做的就是剔除掉那些容易变化的状态。如果我们想要在对象中穷尽这些易变的状态，就必须创建更多的对象来表示，这就与我们的初衷相悖，自然也就无法实现对象复用。所以我们在对状态进行分类时，有一个常用的原则：不变的是内部状态，易变的通常是外部状态。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/structural/flyweight)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/flyweight)
