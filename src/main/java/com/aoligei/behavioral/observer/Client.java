@@ -1,5 +1,8 @@
 package com.aoligei.behavioral.observer;
 
+import com.aoligei.behavioral.observer.customer.Organization;
+import com.aoligei.behavioral.observer.customer.Person;
+
 /**
  * Client
  *

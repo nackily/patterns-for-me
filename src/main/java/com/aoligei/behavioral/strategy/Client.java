@@ -1,5 +1,9 @@
 package com.aoligei.behavioral.strategy;
 
+import com.aoligei.behavioral.strategy.compressor.JarCompressor;
+import com.aoligei.behavioral.strategy.compressor.TarCompressor;
+import com.aoligei.behavioral.strategy.compressor.ZipCompressor;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 

@@ -1,5 +1,7 @@
 package com.aoligei.behavioral.state;
 
+import com.aoligei.behavioral.state.status.DraftState;
+
 import java.text.MessageFormat;
 
 /**

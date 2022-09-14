@@ -50,132 +50,11 @@
 到此为止，我们已经提供了三种对于备忘录模式的不同实现。他们有着各自的特点，我们可以根据实际需求灵活选择，或者基于他们扩展更适合需求的方案。
 
 # 三、代码附录
-我们选择对方案三进行实现，代码如下。
+<div align="center">
+   <img src="/doc/resource/memento/代码附录.png" width="95%"/>
+</div>
 
-**（1）游戏及存档状态**
-```java
-public class Game implements ActionListener {
-
-    private int money;                                                      // 金币
-    private String bgm;                                                     // 背景音乐
-    private int bgmProgress;                                                // 背景音乐播放进度
-    private int bloodBar;                                                   // 血条
-    private final Timer timer = new Timer(1000, this);         // 计时器
-    private final Random random = new Random();                             // 随机数生成器
-
-    public Game(String bgm) {
-        this.actionPerformed(null);
-    }
-
-    /**
-     * 切换BGM
-     * @param bgm bgm
-     */
-    public void switchBgm(String bgm) {
-        // 从头开始播放音乐
-        this.bgmProgress = 1;
-        this.bgm = bgm;
-    }
-
-
-    public void showStatus() {
-        String status = MessageFormat.format("      游戏状态为【金币：{0}，血条：{1}，BGM：{2}，BGM播放进度：{3}秒】",
-                money, bloodBar, bgm, bgmProgress);
-        System.out.println(status);
-    }
-
-    /**
-     * 创建存档点
-     * @return 存档点
-     */
-    public Savepoint createSavepoint() {
-        System.out.println("    开始存档...");
-        this.showStatus();
-        return new Savepoint(this.money, this.bgm, this.bloodBar);
-    }
-
-    /**
-     * 读档
-     * @param point 存档点
-     */
-    public void restore(Savepoint point) {
-        System.out.println("    恢复存档...");
-        this.money = point.money;
-        this.switchBgm(point.bgm);
-        this.bloodBar = point.bloodBar;
-        this.showStatus();
-    }
-
-    /**
-     * 定时器计时结束时执行
-     * @param e e
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // 每过一秒，金币+100，血条重置为1-100之间的随机数
-        this.money += 100;
-        this.bloodBar = random.nextInt(100);
-        this.bgmProgress += 1;
-        // 游戏开始，计时器每过 1s 打印一次游戏状态
-        this.showStatus();
-        // 计时开始
-        timer.start();
-    }
-
-    /**
-     * 存档状态
-     */
-    protected static class Savepoint {
-        private final int money;
-        private final String bgm;
-        private final int bloodBar;
-        public Savepoint(int money, String bgm, int bloodBar) {
-            this.money = money;
-            this.bgm = bgm;
-            this.bloodBar = bloodBar;
-        }
-    }
-}
-```
-**（2）历史存档点**
-```java
-public class SavepointHistory {
-
-    /**
-     * 当前游戏
-     */
-    private final Game currentGame;
-
-    /**
-     * 存档点容器
-     */
-    private final Stack<Game.Savepoint> savepointStack = new Stack<>();
-    public SavepointHistory(Game currentGame) {
-        this.currentGame = currentGame;
-    }
-
-    /**
-     * 存档
-     */
-    public void store() {
-        Game.Savepoint point = currentGame.createSavepoint();
-        savepointStack.push(point);
-    }
-
-    /**
-     * 读档
-     */
-    public void restore() {
-        if (!savepointStack.isEmpty()) {
-            Game.Savepoint point = savepointStack.pop();
-            currentGame.restore(point);
-        }
-    }
-}
-```
-**（3）客户端**
-
-**（3-1）Client**
+我们选择对方案三进行实现，代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/memento)。客户端示例代码如下
 ```java
 public class Client {
 
@@ -208,7 +87,7 @@ public class Client {
 }
 
 ```
-**（3-2）运行结果**
+运行结果如下
 ```text
 |==> Game Start -------------------------------------------------------|
       游戏状态为【金币：100，血条：40，BGM：null，BGM播放进度：1秒】
@@ -279,4 +158,4 @@ public class Client {
 </div>
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/behavioral/memento)    [小猫摘星星代码](/src/main/java/com/aoligei/behavioral/command/game)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/memento)&emsp;[小猫摘星星代码](/src/main/java/com/aoligei/behavioral/command/game)

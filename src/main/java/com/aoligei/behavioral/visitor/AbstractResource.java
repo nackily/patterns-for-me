@@ -27,7 +27,7 @@ public abstract class AbstractResource {
      * @param v 访问者
      * @return String
      */
-    protected abstract String accept(Visitor v);
+    public abstract String accept(Visitor v);
 
     public AbstractResource(String name) {
         this.name = name;

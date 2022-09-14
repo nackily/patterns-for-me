@@ -1,5 +1,7 @@
 package com.aoligei.behavioral.iterator;
 
+import com.aoligei.behavioral.iterator.aggregate.ArrayList0;
+
 import java.util.HashMap;
 import java.util.Map;
 

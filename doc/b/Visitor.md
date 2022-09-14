@@ -41,213 +41,11 @@
 - **Visitor**：抽象的访问者，定义了针对于各种资源类型的访问行为【`visitMenu(Menu):String`、`visitCatalog(Catalog):String`、`visitButton(Button):String`】，以此实现同一个访问者针对于不同的资源类型有不一样的访问方式；
 - **XmlExportVisitor**：xml 格式导出访问器，实现了针对于这种资源的访问。除此之外，还提供了对子节点的访问【`visitChildren(AbstractResource):String`】、以及统一的导出文档行为【`export(AbstractResource):String`】。
 ## 3.2 代码附录
-**（1）抽象的资源**
-```java
-public abstract class AbstractResource {
+<div align="center">
+   <img src="/doc/resource/visitor/代码附录.png" width="95%"/>
+</div>
 
-    /**
-     * 资源名字
-     */
-    protected final String name;
-
-    /**
-     * 子节点
-     */
-    private final List<AbstractResource> children = new ArrayList<>();
-
-    /**
-     * 接收访问者
-     * @param v 访问者
-     * @return String
-     */
-    protected abstract String accept(Visitor v);
-
-    public AbstractResource(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public AbstractResource addChild(AbstractResource resource) {
-        children.add(resource);
-        return this;
-    }
-
-    public List<AbstractResource> getChildren() {
-        return children;
-    }
-
-}
-```
-**（2）具体资源**
-**（2-1）目录**
-```java
-public class Catalog extends AbstractResource{
-
-    /**
-     * 展示顺序
-     */
-    private final Integer order;
-    public Catalog(String name, Integer order) {
-        super(name);
-        this.order = order;
-    }
-
-    @Override
-    protected String accept(Visitor v) {
-        return v.visitCatalog(this);
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-}
-```
-**（2-2）菜单**
-```java
-public class Menu extends AbstractResource {
-
-    /**
-     * 展示顺序
-     */
-    private final Integer order;
-
-    /**
-     * 访问路由
-     */
-    private final String path;
-
-    public Menu(String name, Integer order, String path) {
-        super(name);
-        this.order = order;
-        this.path = path;
-    }
-
-    @Override
-    public String accept(Visitor v) {
-        return v.visitMenu(this);
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-}
-```
-**（2-3）按钮**
-```java
-public class Button extends AbstractResource{
-
-    /**
-     * 图标名
-     */
-    private final String icon;
-    public Button(String name, String icon) {
-        super(name);
-        this.icon = icon;
-    }
-
-    @Override
-    protected String accept(Visitor v) {
-        return v.visitButton(this);
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-}
-```
-**（3）抽象的访问者**
-```java
-public interface Visitor {
-
-    /**
-     * 访问目录
-     * @param c 目录
-     * @return String
-     */
-    String visitCatalog(Catalog c);
-
-    /**
-     * 访问菜单
-     * @param m 菜单
-     * @return String
-     */
-    String visitMenu(Menu m);
-
-    /**
-     * 访问按钮
-     * @param b 按钮
-     * @return String
-     */
-    String visitButton(Button b);
-
-}
-```
-**（4）具体访问者**
-```java
-public class XmlExportVisitor implements Visitor {
-
-    public String export(AbstractResource resource) {
-        String header = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        return header + resource.accept(this);
-    }
-
-    @Override
-    public String visitCatalog(Catalog c) {
-        return "<catalog>\n" +
-                "    <name>" + c.getName() + "</name>\n" +
-                "    <order>" + c.getOrder() + "</order>\n" +
-                visitChildren(c) +
-                "</catalog>";
-    }
-
-    @Override
-    public String visitMenu(Menu m) {
-        return "<menu>\n" +
-                "    <name>" + m.getName() + "</name>\n" +
-                "    <order>" + m.getOrder() + "</order>\n" +
-                "    <path>" + m.getPath() + "</path>\n" +
-                visitChildren(m) +
-                "</menu>";
-    }
-
-    @Override
-    public String visitButton(Button b) {
-        return "<button>\n" +
-                "    <name>" + b.getName() + "</name>\n" +
-                "    <icon>" + b.getIcon() + "</icon>\n" +
-                visitChildren(b) +
-                "</button>";
-    }
-
-    /**
-     * 访问子节点
-     * @param resource 资源
-     * @return String
-     */
-    private String visitChildren(AbstractResource resource) {
-        StringBuilder sb = new StringBuilder();
-        List<AbstractResource> children = resource.getChildren();
-        for (AbstractResource o : children) {
-            String childXml = o.accept(this);
-            childXml = "    " + childXml.replace("\n", "\n    ") + "\n";
-            sb.append(childXml);
-        }
-        return sb.toString();
-    }
-    
-}
-```
-**（5）客户端**
-**（5-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/visitor)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -264,7 +62,7 @@ public class Client {
     }
 }
 ```
-**（5-2）运行结果**
+运行结果如下
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <catalog>
@@ -298,6 +96,7 @@ public class Client {
     </menu>
 </catalog>
 ```
+
 # 四、访问者模式
 ## 4.1 意图
 > **表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。**
@@ -422,4 +221,4 @@ public class FindFileTest {
 
 
 # 附录
-[回到主页](/README.md)   [案例代码](/src/main/java/com/aoligei/behavioral/visitor)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/visitor)

@@ -66,237 +66,11 @@ public OutputStream compressFiles (String type, List<File> files) {
 - `CompressContext`：策略上下文，内部维护一个压缩处理器的引用，并在合适的时候向压缩处理器发起压缩文档集合的请求。`CompressContext#compressFile(Path,Path[],Path)`表示将磁盘文件压缩后写入到磁盘中，参数一代表需要压缩的文件或文件夹路径，参数二代表集合中不参与本次压缩的文件或文件夹路径，参数三表示输出文件路径。`CompressContext#compressFile(Path,Path)`同上，表示路径下的文件全部参与压缩。`CompressContext#compressClasses(Class<?>[],Path)`表示将多个JAVA类压缩后写入到磁盘中，参数一代表需要压缩的`Class`，参数二表示输出文件路径。
 
 ## 3.2 代码附录
-**（1）压缩策略接口**
+<div align="center">
+   <img src="/doc/resource/strategy/代码附录.png" width="95%"/>
+</div>
 
-**（1-1）压缩策略接口**
-```java
-public interface CompressStrategy {
-
-    /**
-     * 对象压缩
-     * @param entries 待压缩列表
-     * @param os 输出流
-     * @throws IOException 异常
-     */
-    void compress(Collection<CompressEntry> entries, OutputStream os) throws IOException;
-}
-```
-**（1-2）压缩对象元数据**
-```java
-public class CompressEntry {
-
-    private final byte[] content;             // 压缩对象字节数组
-    private final Path relativePath;          // 相对于跟目录的路径
-
-    public CompressEntry(byte[] content, Path relativePath) {
-        this.content = content;
-        this.relativePath = relativePath;
-    }
-
-    public byte[] getContent() {
-        return content;
-    }
-
-    public Path getRelativePath() {
-        return relativePath;
-    }
-}
-```
-**（2）压缩器**
-
-**（2-1）ZIP格式压缩器**
-```java
-public class ZipCompressor implements CompressStrategy {
-    @Override
-    public void compress(Collection<CompressEntry> entries, OutputStream os) throws IOException {
-        System.out.println("    ==>> 开始压缩[.zip]文件...");
-
-        // ZIP输出流
-        ZipOutputStream zipOs = new ZipOutputStream(os);
-        // 逐个压缩并写入输出流
-        for (CompressEntry element : entries) {
-            // 相对路径
-            Path entryPath = element.getRelativePath();
-            ZipEntry entry = new ZipEntry(entryPath.toString());
-            // 添加进压缩列表
-            zipOs.putNextEntry(entry);
-            // 写入输出流
-            zipOs.write(element.getContent());
-            zipOs.closeEntry();
-        }
-        zipOs.close();
-
-        System.out.println("    <<== 压缩[.zip]文件完成...");
-    }
-
-}
-```
-**（2-2）TAR格式压缩器**
-```java
-public class TarCompressor implements CompressStrategy {
-
-    @Override
-    public void compress(Collection<CompressEntry> entries, OutputStream os) throws IOException {
-        System.out.println("    ==>> 开始压缩[.tar]文件...");
-
-        // TAR输出流
-        TarArchiveOutputStream tos = new TarArchiveOutputStream(os);
-        for (CompressEntry element : entries) {
-            byte[] bytes = element.getContent();
-            // 相对路径替换为linux文件分隔符，否则无法创建目录
-            String entryName = element.getRelativePath().toString().replace("\\", "/");
-            TarArchiveEntry tarEntry = new TarArchiveEntry(entryName);
-            tarEntry.setSize(bytes.length);
-            // 添加进压缩列表
-            tos.putArchiveEntry(tarEntry);
-            // 写入输出流
-            tos.write(bytes);
-            tos.closeArchiveEntry();
-        }
-        tos.close();
-
-        System.out.println("    <<== 压缩[.tar]文件完成...");
-    }
-}
-```
-**（2-3）JAR格式压缩器**
-```java
-public class JarCompressor implements CompressStrategy {
-
-    @Override
-    public void compress(Collection<CompressEntry> entries, OutputStream os) throws IOException {
-        System.out.println("    ==>> 开始压缩[.jar]文件...");
-
-        // JAR输出流
-        JarArchiveOutputStream jos = new JarArchiveOutputStream(os);
-        for (CompressEntry element : entries) {
-            byte[] bytes = element.getContent();
-            // 相对路径替换为linux文件分隔符，否则无法创建目录
-            String entryName = element.getRelativePath().toString().replace("\\", "/");
-            JarArchiveEntry jarEntry = new JarArchiveEntry(entryName);
-            jarEntry.setSize(bytes.length);
-            // 添加进压缩列表
-            jos.putArchiveEntry(jarEntry);
-            // 写入输出流
-            jos.write(bytes);
-            jos.closeArchiveEntry();
-        }
-        jos.close();
-
-        System.out.println("    <<== 压缩[.jar]文件完成...");
-    }
-
-}
-```
-**（3）压缩管理器**
-```java
-public class CompressContext {
-
-    private final CompressStrategy strategy;
-
-    public CompressContext(CompressStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    /**
-     * 压缩磁盘文件
-     * @param rootPath 需要压缩的文件或文件夹
-     * @param dest 目标文件
-     * @throws IOException 异常
-     */
-    public void compressFile(Path rootPath, Path dest) throws IOException {
-        compressFile(rootPath, null, dest);
-    }
-
-    /**
-     * 压缩磁盘文件
-     * @param rootPath 需要压缩的文件或文件夹
-     * @param ignorePaths 忽略的文件名
-     * @param dest 目标文件
-     * @throws IOException 异常
-     */
-    public void compressFile(Path rootPath, Path[] ignorePaths, Path dest) throws IOException {
-        List<CompressEntry> entries = new ArrayList<>();
-        // 文件访问器，是文件夹则遍历该文件夹及子文件夹
-        Files.walkFileTree(rootPath,
-                new CompressVisitor(entries, rootPath, ignorePaths));
-        OutputStream fos = new FileOutputStream(dest.toString());
-        // 压缩
-        strategy.compress(entries, fos);
-        fos.close();
-    }
-
-    /**
-     * 压缩类
-     * @param classes 类
-     * @param dest 目标文件
-     * @throws IOException 异常
-     */
-    public void compressClasses(Class<?>[] classes, Path dest) throws IOException {
-        List<CompressEntry> entries = new ArrayList<>();
-        for (Class<?> c : classes) {
-            System.out.println(MessageFormat.format("    :::: 待压缩的类【{0}】", c.getName()));
-            // 类名
-            String entryName = c.getSimpleName();
-            // 包名
-            String packagePath = Objects.requireNonNull(c.getResource("")).getPath();
-            // 类完整路径
-            String classPath = packagePath + File.separator + entryName + ".class";
-            // 构造CompressEntry
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            FileInputStream fis = new FileInputStream(classPath);
-            IOUtils.copy(fis, bos, 1024);
-            entries.add(new CompressEntry(bos.toByteArray(), Paths.get(entryName)));
-            fis.close();
-            bos.close();
-        }
-        OutputStream fos = new FileOutputStream(dest.toString());
-        // 压缩
-        strategy.compress(entries, fos);
-        fos.close();
-    }
-
-    /**
-     * 文件访问器
-     */
-    public static class CompressVisitor extends SimpleFileVisitor<Path> {
-
-        private final List<CompressEntry> entries;      // 待压缩的对象列表
-        private final Path destRootPath;                // 根路径
-        private final Path[] ignorePaths;               // 需要忽略的文件路径
-
-        public CompressVisitor(List<CompressEntry> entries, Path destRootPath, Path[] ignorePaths) {
-            this.entries = entries;
-            this.destRootPath = destRootPath;
-            this.ignorePaths = ignorePaths;
-        }
-
-        @Override
-        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-            // 获取该文件的相对路径
-            Path entryRelativePath = destRootPath.relativize(file);
-            if (ignorePaths == null || !Arrays.asList(ignorePaths).contains(entryRelativePath)) {
-                // 如果不是忽略的文件，添加进压缩列表
-                System.out.println(MessageFormat.format("    :::: 待压缩的文件【{0}】", file));
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                FileInputStream fis = new FileInputStream(file.toFile());
-                IOUtils.copy(fis, bos, 1024);
-                entries.add(new CompressEntry(bos.toByteArray(), entryRelativePath));
-                fis.close();
-                bos.close();
-            } else {
-                System.out.println(MessageFormat.format("    :::: 被忽略的文件【{0}】", file));
-            }
-            // 继续向后遍历
-            return FileVisitResult.CONTINUE;
-        }
-    }
-
-}
-```
-**（4）客户端**
-
-**（4-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/strategy)。客户端示例代码如下
 ```java
 public class Client {
 
@@ -318,7 +92,7 @@ public class Client {
 
 }
 ```
-**（4-2）运行结果**
+运行结果如下
 ```text
 |==> Start -------------------------------------------------------|
     :::: 待压缩的文件【opt/test/funny/文档.docx】
@@ -329,7 +103,7 @@ public class Client {
     :::: 待压缩的文件【opt/test/one/文档.docx】
     ==>> 开始压缩[.tar]文件...
     <<== 压缩[.tar]文件完成...
-    :::: 待压缩的类【com.aoligei.behavioral.strategy.JarCompressor】
+    :::: 待压缩的类【com.aoligei.behavioral.strategy.compressor.JarCompressor】
     :::: 待压缩的类【com.aoligei.behavioral.strategy.CompressStrategy】
     :::: 待压缩的类【com.aoligei.behavioral.strategy.Client】
     ==>> 开始压缩[.jar]文件...
@@ -491,6 +265,6 @@ public class DefaultSqlSession implements SqlSession {
 ```
 
 # 附录
-[回到主页](/README.md)   [案例代码](/src/main/java/com/aoligei/behavioral/strategy)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/strategy)
 
 

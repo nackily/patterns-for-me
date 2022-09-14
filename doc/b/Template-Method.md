@@ -26,109 +26,11 @@
 - `EducationEntryDomicile`：学历入户；
 
 # 三、案例代码
-**（1）模板类**
-```java
-public abstract class AbstractDomicile {
-    private final String username;
-    public AbstractDomicile(String username) {
-        this.username = username;
-    }
+<div align="center">
+   <img src="/doc/resource/template-method/代码附录.png" width="95%"/>
+</div>
 
-    /**
-     * 迁移户口
-     */
-    public final void migrate () {
-        System.out.println(MessageFormat.format("||--> migrate domicile for {0} ------------------------------------|", this.username));
-        this.prepareBasicMaterials();
-        this.additionalMaterials();
-        this.doCheck();
-        this.doBusiness();
-        this.grantCertificate();
-    }
-
-    /**
-     * 准备基本材料
-     */
-    private void prepareBasicMaterials(){
-        System.out.println("    应准备好当前的身份证、原始户口簿、入户申请表");
-    }
-
-    /**
-     * 准备附加材料
-     */
-    protected abstract void additionalMaterials();
-
-    /**
-     * 钩子方法，有些落户方式需要检查
-     */
-    protected void doCheck(){}
-
-    /**
-     * 办理业务
-     */
-    private void doBusiness(){
-        System.out.println("    提交资料，由工作人员审核及办理");
-        System.out.println("        户口已迁出");
-        System.out.println("        已迁入新户口");
-    }
-
-    /**
-     * 拿证
-     */
-    private void grantCertificate(){
-        System.out.println("    发放新户口簿");
-    }
-}
-```
-**（2）具体实现类**
-
-**（2-1）学历入户类**
-```java
-public class EducationEntryDomicile extends AbstractDomicile {
-    public EducationEntryDomicile(String username) {
-        super(username);
-    }
-
-    @Override
-    protected void additionalMaterials() {
-        System.out.println("    还应准备好：学历证书、学位证书");
-    }
-
-    @Override
-    protected void doCheck() {
-        System.out.println("    查验证书是否有效，并且学历至少要求为大学本科学历");
-    }
-}
-```
-**（2-2）住房落户类**
-```java
-public class HouseEntryDomicile extends AbstractDomicile {
-    public HouseEntryDomicile(String username) {
-        super(username);
-    }
-
-    @Override
-    protected void additionalMaterials() {
-        System.out.println("    还应准备好：房产证书");
-    }
-}
-```
-**（2-3）投靠亲属入户类**
-```java
-public class RelativesEntryDomicile extends AbstractDomicile {
-    public RelativesEntryDomicile(String username) {
-        super(username);
-    }
-
-    @Override
-    protected void additionalMaterials() {
-        System.out.println("    还应准备好：亲属的身份证、户口簿");
-    }
-}
-```
-**（3）客户端**
-
-**（3-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/xxxx)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -141,7 +43,7 @@ public class Client {
     }
 }
 ```
-**（3-2）运行结果**
+运行结果如下
 ```text
 ||--> migrate domicile for Tom ------------------------------------|
     应准备好当前的身份证、原始户口簿、入户申请表
@@ -235,4 +137,4 @@ public abstract class BaseExecutor implements Executor {
 在 BaseExecutor 中，刷新语句的方法`flushStatements()`定义了算法，是模板方法；在该方法中，调用了抽象方法`doFlushStatements()`，让真正的刷新语句操作延迟到子类执行，是一个标准的模板方法模式的应用。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/behavioral/template_method)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/template_method)

@@ -1,5 +1,7 @@
 package com.aoligei.behavioral.mediator;
 
+import com.aoligei.behavioral.mediator.widget.*;
+
 import javax.swing.*;
 import java.awt.*;
 

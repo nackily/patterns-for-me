@@ -1,5 +1,9 @@
 package com.aoligei.behavioral.visitor;
 
+import com.aoligei.behavioral.visitor.resource.Button;
+import com.aoligei.behavioral.visitor.resource.Catalog;
+import com.aoligei.behavioral.visitor.resource.Menu;
+
 /**
  * 访问者接口
  *

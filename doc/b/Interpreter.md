@@ -55,202 +55,11 @@
 </div>
 
 # 三、案例实现
-在前面我们已经讨论过案例的解决方案，并且对其解决问题的思路进行了详细的说明。这个案例实现代码如下。
+<div align="center">
+   <img src="/doc/resource/interpreter/代码附录.png" width="95%"/>
+</div>
 
-**（1）表达式**
-
-**（1-1）表达式接口**
-```java
-public interface Expression {
-
-    /**
-     * 鉴权
-     * @param userKey 用户
-     * @return 是否拥有权限
-     */
-    boolean authenticate(String userKey);
-}
-```
-**（1-2）权限表达式**
-```java
-public class PermissionExpression implements Expression {
-
-    /**
-     * 权限值
-     */
-    private final String auth;
-
-    /**
-     * 类型
-     */
-    private final PermissionType type;
-
-    public PermissionExpression(String auth, PermissionType type) {
-        this.auth = auth;
-        this.type = type;
-    }
-
-    @Override
-    public boolean authenticate(String userKey) {
-        switch (type) {
-            case ROLE:
-                List<String> roles = Simulation.getUserConfig(userKey).getRoles();
-                return roles.contains(auth);
-            case ELEMENT:
-                List<String> elements = Simulation.getUserConfig(userKey).getElements();
-                return elements.contains(auth);
-            default:
-                throw new RuntimeException("未知类型");
-        }
-    }
-}
-```
-**（1-3）鉴权类型枚举**
-```java
-public enum PermissionType {
-
-    /**
-     * 角色鉴权
-     */
-    ROLE("R:"),
-
-    /**
-     * 页面元素鉴权
-     */
-    ELEMENT("E:");
-
-    final String key;
-
-    PermissionType(String key) {
-        this.key = key;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public PermissionType fromKey(String key) {
-        return Arrays.stream(PermissionType.values())
-                .filter(item -> item.getKey().equals(key))
-                .findFirst()
-                .orElse(null);
-    }
-}
-```
-
-**（2）符号表达式**
-
-**（2-1）抽象的符号表达式**
-```java
-public abstract class AbstractSymbolExpression implements Expression {
-
-    /**
-     * 符号前面的权限表达式
-     */
-    protected final Expression prev;
-
-    /**
-     * 符号后面的权限表达式
-     */
-    protected final Expression next;
-
-    public AbstractSymbolExpression(Expression prev, Expression next) {
-        this.prev = prev;
-        this.next = next;
-    }
-
-    /**
-     * 多个权限表达式鉴权
-     * @param userKey 用户
-     * @return 是否拥有权限
-     */
-    @Override
-    public abstract boolean authenticate(String userKey);
-}
-```
-**（2-2）'且'表达式**
-```java
-public class AndExpression extends AbstractSymbolExpression {
-
-    public AndExpression(Expression prev, Expression next) {
-        super(prev, next);
-    }
-
-    @Override
-    public boolean authenticate(String userKey) {
-        return super.prev.authenticate(userKey)
-                && super.next.authenticate(userKey);
-    }
-}
-```
-**（2-3）'或'表达式**
-```java
-public class OrExpression extends AbstractSymbolExpression {
-
-    public OrExpression(Expression prev, Expression next) {
-        super(prev, next);
-    }
-
-    @Override
-    public boolean authenticate(String userKey) {
-        return super.prev.authenticate(userKey)
-                || super.next.authenticate(userKey);
-    }
-}
-```
-
-**（3）模拟用户权限配置**
-```java
-public class Simulation {
-
-    private final static List<UserPermissionConfig> CONFIGS = new ArrayList<>();
-    static {
-        CONFIGS.add(new UserPermissionConfig("tom",
-                Arrays.asList("warehouse-manager", "salesperson"),
-                Arrays.asList("system.user.query", "system.user.export-to-xlsx", "system.user.export-to-docx")));
-        CONFIGS.add(new UserPermissionConfig("lisa",
-                Collections.singletonList("warehouse-manager"),
-                Arrays.asList("system.user.query", "sys.user.detail")));
-        CONFIGS.add(new UserPermissionConfig("jack",
-                Arrays.asList("salesperson", "admin"),
-                Collections.emptyList()));
-    }
-
-    public static UserPermissionConfig getUserConfig(String userKey) {
-        return CONFIGS.stream()
-                .filter(item -> item.getKey().equals(userKey))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("未知用户"));
-    }
-
-    /**
-     * 用户权限配置
-     */
-    public static class UserPermissionConfig {
-        private final String key;                                         // 用户key
-        private final List<String> roles;                                 // 用户拥有的角色
-        private final List<String> elements;                              // 用户拥有的资源
-        public UserPermissionConfig(String key, List<String> roles, List<String> elements) {
-            this.key = key;
-            this.roles = roles;
-            this.elements = elements;
-        }
-        public String getKey() {
-            return key;
-        }
-        public List<String> getRoles() {
-            return roles;
-        }
-        public List<String> getElements() {
-            return elements;
-        }
-    }
-}
-```
-
-**（4）客户端**
-
-**（4-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/interpreter)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -305,7 +114,7 @@ public class Client {
     }
 }
 ```
-**（4-1）运行结果**
+运行结果如下
 ```text
 |==> Start-------------------------------------------------------------------------------|
     访问接口[api1]所需权限：(E:system.user.export-to-xlsx | E:system.user.export-to-docx) | R:admin
@@ -354,5 +163,5 @@ public class Client {
 在解释器模式中，我们并未提及如何构建一个抽象的语法树，这意味着解释器模式并不负责语法分析。抽象语法树可以用数据库表驱动的方式来生成，也可以采用语法分析程序（比如递归下降法）构建，甚至，可以由客户端直接构建（例如，`Client.buildExpressionForApi1()` 方法）。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/behavioral/interpreter)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/interpreter)
 

@@ -1,5 +1,9 @@
 package com.aoligei.behavioral.template_method;
 
+import com.aoligei.behavioral.template_method.domicile.EducationEntryDomicile;
+import com.aoligei.behavioral.template_method.domicile.HouseEntryDomicile;
+import com.aoligei.behavioral.template_method.domicile.RelativesEntryDomicile;
+
 /**
  * Client
  *

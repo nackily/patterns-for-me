@@ -1,6 +1,9 @@
 package com.aoligei.behavioral.iterator;
 
 
+import com.aoligei.behavioral.iterator.aggregate.ArrayList0;
+import com.aoligei.behavioral.iterator.aggregate.LinkedList0;
+
 /**
  * Client
  *

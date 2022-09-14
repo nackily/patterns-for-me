@@ -1,5 +1,11 @@
 package com.aoligei.behavioral.interpreter;
 
+import com.aoligei.behavioral.interpreter.expression.AbstractSymbolExpression;
+import com.aoligei.behavioral.interpreter.expression.PermissionExpression;
+import com.aoligei.behavioral.interpreter.expression.PermissionType;
+import com.aoligei.behavioral.interpreter.expression.symbol.AndExpression;
+import com.aoligei.behavioral.interpreter.expression.symbol.OrExpression;
+
 import java.text.MessageFormat;
 
 /**

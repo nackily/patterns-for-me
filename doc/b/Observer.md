@@ -37,127 +37,11 @@
 在该类图结构中，对顾客进行了抽象，统一称呼为观察者（`Observer`），分为个人性质的顾客（`Person`）和组织性质的顾客（`Organization`）。他们都可被添加（`register()`）到水果店的通知列表中（`FruitShop#observers`），在有水果上新（`newest()`）时，将通知（`notifyObservers()`）所有关注着的顾客。在顾客接收通知（`accept()`）时，参数中包含水果店的上新内容。
 
 # 三、代码实现
-案例的实现代码如下所示。
+<div align="center">
+   <img src="/doc/resource/observer/代码附录.png" width="95%"/>
+</div>
 
-**（1） 顾客**
-
-**（1-1） 顾客接口**
-```java
-public interface Observer {
-
-    /**
-     * 获取顾客的身份信息
-     * @return 身份信息
-     */
-    String getIdentityInfo();
-
-    /**
-     * 接收通知
-     * @param info 通知内容
-     */
-    void accept(String info);
-}
-```
-**（1-2） 个人顾客**
-```java
-public class Person implements Observer {
-
-    private final String name;
-    public Person(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getIdentityInfo() {
-        return name;
-    }
-
-    @Override
-    public void accept(String info) {
-        System.out.println(MessageFormat.format("        [{0}]接收到通知：[{1}]，回复：[{2}]",
-                this.getIdentityInfo(),
-                info,
-                new Random().nextBoolean() ? "我不喜欢吃这些水果，下次再说" : "我马上来店里"));
-    }
-}
-```
-**（1-3） 组织性质的顾客**
-```java
-public class Organization implements Observer {
-
-    private final String name;
-    public Organization(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getIdentityInfo() {
-        return name;
-    }
-
-    @Override
-    public void accept(String info) {
-        System.out.println(MessageFormat.format("        [{0}]接收到通知：[{1}]，回复：[{2}]",
-                this.getIdentityInfo(),
-                info,
-                "我马上安排员工来店里购买"));
-    }
-}
-```
-**（2）水果店**
-```java
-public class FruitShop {
-
-    /**
-     * 最新到货的水果
-     */
-    private String latestArrivalFruit;
-
-    /**
-     * 通知列表
-     */
-    private final Set<Observer> observers = new HashSet<>();
-
-    /**
-     * 水果上新
-     * @param arrivalFruit 到货的水果
-     */
-    public void newest(String arrivalFruit) {
-        System.out.println("    当前新到水果：" + arrivalFruit);
-        this.latestArrivalFruit = arrivalFruit;
-        notifyObservers();
-    }
-
-    /**
-     * 顾客登记
-     * @param o 顾客
-     */
-    public void register(Observer o) {
-        System.out.println("    顾客登记：" + o.getIdentityInfo());
-        this.observers.add(o);
-    }
-
-    /**
-     * 顾客注销
-     * @param o 顾客
-     */
-    public void unregister(Observer o) {
-        System.out.println("    顾客注销：" + o.getIdentityInfo());
-        this.observers.remove(o);
-    }
-
-    /**
-     * 通知所有顾客
-     */
-    public void notifyObservers() {
-        System.out.println("    通知所有顾客...");
-        this.observers.forEach(item -> item.accept(this.latestArrivalFruit));
-    }
-}
-```
-**（3）客户端**
-
-**（3-1）Client**
+代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/observer)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -185,7 +69,7 @@ public class Client {
     }
 }
 ```
-**（3-1）运行结果**
+运行结果如下
 ```text
 |==> Start --------------------------------------------------------------------|
     顾客登记：张婶
@@ -284,6 +168,6 @@ public class Client {
 在 jdk 中，已经提供了观察者模式的实现，他们分别是`java.util.Observer`和`java.util.Observable`。其中，Observable 就是被观察对象的模板类，已经提供了注册/注销/通知等核心方法，并且该类已经保证了线程安全。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/behavioral/observer)
+[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/observer)
 
 
