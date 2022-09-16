@@ -166,7 +166,7 @@ public class DTO {
 
 ## 4.2 类图分析
 <div align="center">
-   <img src="/doc/resource/abstract-factory/案例类图.png" width="80%"/>
+   <img src="/doc/resource/abstract-factory/经典抽象工厂模式类图.jpg" width="80%"/>
 </div>
 
 抽象工厂模式的类图结构如上所示，其有如下的参与者列表：
