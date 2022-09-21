@@ -10,7 +10,8 @@
 ## 项目介绍
 
 ### 内容概述
-本项目主要探讨《Design Patterns - Elements of Reusable Object-Oriented Software》一书中提及的 23 种设计模式。这其中包括以我个人的理解和经验，对那些深奥的理论进行解析，并以实际的案例降低学习门槛。对一种模式的讲解可能包括如下几个方面的内容：
+本项目主要探讨《Design Patterns - Elements of Reusable Object-Oriented Software》一书中提及的所有设计模式，结合我个人的理解和经验，对那些深奥的理论进行解析，并以实际的案例降低学习门槛。本项目主要由三部分内容组成：模式部分、总结部分和对比部分。模式部分涵盖了 23 种设计模式；总结部分主要包括有关于创建型模式的讨论、关于结构型模式的讨论和关于行为型模式的讨论；对比部分则是针对容易混淆的模式进行对比区分。对于单个模式主要从如下几个方面进行论述：
+
 - **案例引入** => 引入实际案例，抛出在案例中遇到的问题；
 - **问题分析** => 反复分析案例中的问题，循序渐进，逐步推导出解决方案；
 - **解决方案** => 实现解决方案，包括解决方案的类图分析及代码附录等；
@@ -22,7 +23,7 @@
 - **源码示例** => 列举源码中的示例，包括我们熟悉的 JDK、Spring、Mybatis 等；
 - **扩展** => 其他相关的内容；
 
-> 所有案例的实现代码都使用的 Java 语言，如果你不熟悉 Java 语言，或许可以从类图结构中获益。
+> 模式部分中的所有案例实现代码均使用的 Java 语言，如果你不熟悉 Java 语言，或许可以从类图结构中获益。
 
 ### 特点
 
@@ -49,84 +50,84 @@
 ## 行为型模式篇
 
 **【B-1】责任链-Chain Of Responsibility**
-> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
+> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
 > <br>**摘要**：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止...[**查看更多**](/doc/b/Chain-Of-Responsibility.md)
 > <br>
 
 **【B-2】命令-Command**
-> **流行指数**：★★★☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
+> **流行指数**：★★★☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
 > <br>**摘要**：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤消的操作...[**查看更多**](/doc/b/Command.md)
 > <br>
 
 **【B-3】解释器-Interpreter**
-> **流行指数**：★☆☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
+> **流行指数**：★☆☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
 > <br>**摘要**：给定一种语言，定义它的文法的一种表示，以及一个解释器，这个解释器使用这个表示来解释该语言中的句子...[**查看更多**](/doc/b/Interpreter.md)
 > <br>
 
 **【B-4】迭代器-Iterator**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★☆☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★☆☆☆
 > <br>**摘要**：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示...[**查看更多**](/doc/b/Iterator.md)
 > <br>
 
 **【B-5】中介者-Mediator**
-> **流行指数**：★☆☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★☆☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互...[**查看更多**](/doc/b/Mediator.md)
 > <br>
 
 **【B-6】备忘录-Memento**
-> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先保存的状态...[**查看更多**](/doc/b/Memento.md)
 > <br>
 
 **【B-7】观察者-Observer**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：定义对象间的一种一对多的依赖关系 ,当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并被自动更新...[**查看更多**](/doc/b/Observer.md)
 > <br>
 
 **【B-8】状态-State**
-> **流行指数**：★★★☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
+> **流行指数**：★★★☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
 > <br>**摘要**：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它的类...[**查看更多**](/doc/b/State.md)
 > <br>
 
 **【B-9】策略-Strategy**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
 > <br>**摘要**：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。本模式使得算法可独立于使用它的客户而变化...[**查看更多**](/doc/b/Strategy.md)
 > <br>
 
 **【B-10】模板方法-Template Method**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
 > <br>**摘要**：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤...[**查看更多**](/doc/b/Template-Method.md)
 > <br>
 
 **【B-11】访问者-Visitor**
-> **流行指数**：★☆☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
+> **流行指数**：★☆☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★★
 > <br>**摘要**：表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作...[**查看更多**](/doc/b/Visitor.md)
 > <br>
 
 ## 创建型模式篇
 
 **【C-1】单例-Singleton**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
 > <br>**摘要**：单例模式应该是所有设计模式中结构最简单的一个了，同时它也是面试中被考的最多的设计模式...[**查看更多**](/doc/c/Singleton.md)
 > <br>
 
 **【C-2】原型-Prototype**
-> **流行指数**：★★★★☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★☆☆☆
+> **流行指数**：★★★★☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★☆☆☆
 > <br>**摘要**：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象...[**查看更多**](/doc/c/Prototype.md)
 > <br>
 
 **【C-3】建造者-Builder**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★☆
 > <br>**摘要**：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示...[**查看更多**](/doc/c/Builder.md)
 > <br>
 
 **【C-4】工厂方法-Factory Method**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：我们都知道设计模式实际上是一些指导思想，这些指导思想是由前人总结和提炼出来的，主要目的是为了解决在代码设计和维护时暴露出来的问题。这些问题往往围绕着耦合性、扩展性等展开...[**查看更多**](/doc/c/Factory-Method.md)
 > <br>
 
 **【C-5】抽象工厂-Abstract Factory**
-> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★☆
+> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★☆
 > <br>**摘要**：很多时候，我们不应该被一个看起来很复杂的名词或概念所绊倒，因为往往看起来越复杂的东西其本质越简单。就像是抽象工厂模式...[**查看更多**](/doc/c/Abstract-Factory.md)
 > <br>
 
@@ -137,37 +138,37 @@
 ## 结构型模式篇
 
 **【S-1】适配器-Adaptor**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：将一个类的接口转换成客户希望的另外一个接口，适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作...[**查看更多**](/doc/s/Adapter.md)
 > <br>
 
 **【S-2】桥-Bridge**
-> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：当需要从多个维度对一个对象进行扩展时，我们可以使用桥模式来让各个维度分离，进而实现各自独立的变化...[**查看更多**](/doc/s/Bridge.md)
 > <br>
 
 **【S-3】组合-Composite**
-> **流行指数**：★★★★☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★☆☆☆
+> **流行指数**：★★★★☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★☆☆☆
 > <br>**摘要**：如果一个应用的核心模型是树形结构，那么我们就能用组合模式来表示它，组合模式就是为树形结构量身定制的...[**查看更多**](/doc/s/Composite.md)
 > <br>
 
 **【S-4】装饰器-Decorator**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★★☆
 > <br>**摘要**：在不改变原有对象结构的基础情况下，动态地给该对象增加一些额外功能的职责...[**查看更多**](/doc/s/Decorator.md)
 > <br>
 
 **【S-5】门面-Facade**
-> **流行指数**：★★★☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
+> **流行指数**：★★★☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★☆☆☆☆
 > <br>**摘要**：为子系统中的一组接口提供一个一致的界面，门面模式定义了一个高层接口，这个接口使得这一子系统更加容易使用...[**查看更多**](/doc/s/Facade.md)
 > <br>
 
 **【S-6】享元-Flyweight**
-> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★★☆☆☆&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：运用共享技术有效地支持大量细粒度的对象...[**查看更多**](/doc/s/Flyweight.md)
 > <br>
 
 **【S-7】代理-Proxy**
-> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
+> **流行指数**：★★★★★&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**难度等级**：★★★☆☆
 > <br>**摘要**：代理模式为其他对象提供一种代理以控制对这个对象的访问...[**查看更多**](/doc/s/Proxy.md)
 > <br>
 
