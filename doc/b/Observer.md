@@ -1,4 +1,4 @@
-## 观察者模式 —— don't call us, we will call you
+## <center> 行为型 - 观察者（Observer）设计模式
 ---
 
 <div align="center">
