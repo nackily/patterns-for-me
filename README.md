@@ -115,6 +115,10 @@
 > <br>**了解更多**：[探秘少有人知的访问者模式](/doc/b/Visitor.md)
 > <br>
 
+**【B-ending】关于行为型模式的讨论**
+
+从责任链模式开始，我们已经分别讨论了共计 11 个行为型的模式，他们分别是责任链（Chain Of Responsibility）、命令（Command）、解释器（Interpreter）、迭代器（Iterator）、中介者（Mediator）、备忘录（Memento）、观察者（Observer）、状态（State）、策略（Strategy）、模板方法（Template Method）和访问者（Visitor）模式。回顾所有的行为型模式，接下来我们将对他们进行横向对比，尝试探讨行为型模式的共性......更多内容[**-->关于行为型模式的讨论**](/doc/ending-of-behavioral-patterns.md)
+
 ## 创建型模式篇
 
 **【C-1】单例-Singleton**
