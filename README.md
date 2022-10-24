@@ -207,13 +207,13 @@
 
 > 该系列文章推出后，收到了不少朋友的私信，其中有一些问题是关于如何鉴别两个设计模式的。为此，我整理了几组问的最多的模式区别，如果您对其他的模式有疑问，也可以私信我，或者在 issue 中留下您的问题。
 
-[**【1】组合模式 & 装饰器模式**](/doc/difference-of-patterns.md#21-组合模式--装饰器模式)
+[**【1】组合模式 vs 装饰器模式**](/doc/difference-of-patterns.md#【21】组合模式vs装饰器模式)
 
-[**【2】组合模式 & 解释器模式**](/doc/difference-of-patterns.md#22-组合模式--解释器模式)
+[**【2】组合模式 vs 解释器模式**](/doc/difference-of-patterns.md#【22】组合模式vs解释器模式)
 
-[**【3】中介模式 & 门面模式**](/doc/difference-of-patterns.md#23-中介模式--门面模式)
+[**【3】中介模式 vs 门面模式**](/doc/difference-of-patterns.md#【23】中介模式vs门面模式)
 
-[**【4】桥模式 & 抽象工厂模式**](/doc/difference-of-patterns.md#24-桥模式--抽象工厂模式)
+[**【4】桥模式 vs 抽象工厂模式**](/doc/difference-of-patterns.md#【24】桥模式vs抽象工厂模式)
 
 
 ## 结尾篇
