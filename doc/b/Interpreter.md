@@ -146,7 +146,8 @@ public class Client {
 - **Expression**：表达式。声明一个抽象的解释操作；  
 - **TerminalExpression**：终结符表达式。终结符代表不能继续向下递归的表达式，比如权限表达式，本身即代表了一个确定的布尔值，无法继续细化；
 - **NonterminalExpression**：非终结符表达式。非终结符相当于终结符而言，代表需要继续向下递归求解的表达式（比如 and 关系表达式，并不能直接求解，需要先对前后的表达式分别求解）；
-- **Client**：负责构建（或被给定）一个特定语句的抽象语法树，该抽象语法树由** **TerminalExpression 和 NonterminalExpression 的实例嵌套组合而成。
+- **Context**：环境类，包含解释器之外的一些全局信息（在前面的案例中，`Expression#authenticate(userKey:String)`中的`userKey`就承担了环境的角色）；
+- **Client**：负责构建（或被给定）一个特定语句的抽象语法树，该抽象语法树由`TerminalExpression`和`NonterminalExpression`的实例嵌套组合而成。
 
 ## 4.3 特点
 **（1）易于扩展**
