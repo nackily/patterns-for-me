@@ -211,7 +211,7 @@
 
 [**【2】组合模式 vs 解释器模式**](/doc/difference-of-patterns.md#22组合模式vs解释器模式)
 
-[**【3】中介模式 vs 门面模式**](/doc/difference-of-patterns.md#23中介模式vs门面模式)
+[**【3】中介者模式 vs 门面模式**](/doc/difference-of-patterns.md#23中介者模式vs门面模式)
 
 [**【4】桥模式 vs 抽象工厂模式**](/doc/difference-of-patterns.md#24桥模式vs抽象工厂模式)
 
