@@ -48,7 +48,7 @@ public void button_click() {
 # 二、案例引入
 作为开发者，对 IDE 的使用应该并不陌生，如下图所示：
 <div align="center">
-   <img src="/doc/resource/command/idea格式化代码.png" width="100%"/>
+   <img src="/res/command/idea格式化代码.png" width="100%"/>
 </div>
 
 我们常常在编辑代码时，都需要对类的代码进行格式化，这很简单，通过菜单中`Code -> Reformat Code`按钮即可完成。让我们来对该应用的职责进行划分：
@@ -70,7 +70,7 @@ public void button_click() {
 按照上面的分析，我们得出这样的职责划分和工作流程：
 
 <div align="center">
-   <img src="/doc/resource/command/案例职责划分.jpg" width="80%"/>
+   <img src="/res/command/案例职责划分.jpg" width="80%"/>
 </div>
 
 我们通过对请求过程进行解耦，对请求本身进行封装，得到了一个可以向未知的对象（文档对象由应用程序指定，按钮对象并不知道由谁来响应请求）发起一个可变的请求（按钮对象调用的是 Request 的 response() 方法，但按钮对象并不知道是哪一个具体的实现）的结构，而这就是命令模式的核心。
@@ -80,7 +80,7 @@ public void button_click() {
 ### 3.1 案例类图
 这里已经为上述分析编写了一个简单的示例，提供了示例中提到的类对象，除此之外，还提供了一个客户端，用以模拟用户对菜单的点击。
 <div align="center">
-   <img src="/doc/resource/command/案例类图.jpg" width="90%"/>
+   <img src="/res/command/案例类图.jpg" width="90%"/>
 </div>
 
 该案例的类图结构如上所示，由以下部分组成。
@@ -93,10 +93,10 @@ public void button_click() {
 
 ### 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/command/代码附录.png" width="95%"/>
+   <img src="/res/command/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/command/ide)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/command/ide)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -128,7 +128,7 @@ public class Client {
 ## 4.1 结构
 命令模式的通用类图如下所示：
 <div align="center">
-   <img src="/doc/resource/command/经典命令模式类图.jpg" width="60%"/>
+   <img src="/res/command/经典命令模式类图.jpg" width="60%"/>
 </div>
 
 命令模式的参与者有如下：
@@ -214,10 +214,10 @@ public class Client {
 
 该游戏的代码参见附录。游戏的运行效果如下所示：
 <div align="center">
-   <img src="/doc/resource/command/gaming.gif" width="80%"/>
+   <img src="/res/command/gaming.gif" width="80%"/>
 </div>
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/command/ide)&emsp;[小猫摘星星代码](/src/main/java/com/aoligei/behavioral/command/game)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/command/ide)&emsp;[小猫摘星星代码](/cases-behavioral/src/main/java/com/patterns/command/game)
 
 推荐阅读文章：[Command Design Pattern in Java](https://www.journaldev.com/1624/command-design-pattern)

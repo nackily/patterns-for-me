@@ -9,7 +9,7 @@
 > 在 java-web 开发中，很多时候我们并不能将一个后台接口直接暴露给所有登录的用户。我们希望保证某些后台接口的安全，只对拥有权限的请求开放接口，并且拦截掉那些不具备权限的请求。此时，我们可以借助 spring aop 提供的特性，以自定义注解形式标注这个权限范围的限定，在请求进入接口前，检查权限。比如，对于罗列所有系统用户的列表接口来说，访问他的权限范围为：当前用户拥有管理员的角色。接口定义如下图所示：
 
 <div align="center">
-   <img src="/doc/resource/interpreter/权限校验的接口示例.png" width="60%"/>
+   <img src="/res/interpreter/权限校验的接口示例.png" width="60%"/>
 </div>
 
 这是可行的，我们只需要在请求进入这个接口之前，检查当前登录的用户，如果用户不具备管理员的角色，拦截掉这个请求即可。但真实情况是，系统中对于权限的划分，远比我们想象的复杂。我们发现，某些特定的接口在权限要求时往往呈现多样性的态势。
@@ -24,7 +24,7 @@
 
 按照这些规则，我们对于导出用户列表这个后台接口的权限范围表达式可以定义为：`(E:system.user.export-to-xlsx | E:system.user.export-to-docx) | R:admin`。此时，导出用户列表的接口定义如下所示：
 <div align="center">
-   <img src="/doc/resource/interpreter/复杂的权限校验示例.png" width="80%"/>
+   <img src="/res/interpreter/复杂的权限校验示例.png" width="80%"/>
 </div>
 
 那么，我们该如何解析这个规则表达式？并且如何对一个规则表达式进行求解呢？
@@ -38,28 +38,28 @@
 
 回顾我们定义的语法规则，其中包含了两类关于权限的表述：一类是某个具体的权限表达式（比如具备某个角色）；另一类是承上启下的组织关系（比如并且关系 ），这些组织关系由一些符号代替，这里就称呼其为符号表达式。当符号表达式在组织多个权限表达式之间的关系时，只需要先计算两个邻近的权限表达式结果，将这个结果作为一个新的权限表达式和其他的权限表达式进行组织，如此反复即可。而优先级则确定了哪些符号表达式先执行，优先级规定了求解顺序。所以，只要有了这两类表述，并且知晓各个符号表达式的优先级，就能对整个表达式进行解释求值。求值过程大致如下图所示：
 <div align="center">
-   <img src="/doc/resource/interpreter/案例执行流程.png" width="70%"/>
+   <img src="/res/interpreter/案例执行流程.png" width="70%"/>
 </div>
 
 不管是权限表达式，还是符号表达式，都具有完全一致的行为：得到一个 boolean 类型的值，从业务意义上来说，表示当前用户是否具有某个（些）权限。解释器模式建议我们对两种表达式类型进行行为统一，提供更高层次的抽象，这个抽象定义了解释表达式（片段）自身的行为。综上所述，类图结构设计如下：
 
 <div align="center">
-   <img src="/doc/resource/interpreter/案例类图.png" width="90%"/>
+   <img src="/res/interpreter/案例类图.png" width="90%"/>
 </div>
 
 > 如上类图所示，`Expression` 类为所有表达式类型的抽象，提供了鉴权的行为：`authenticate(String) boolean` ，参数为当前请求的用户 key。`PermissionExpression` 类为权限表达式，`type` 表示鉴权类型（如角色鉴权/页面元素鉴权），`auth` 表示权限 key（比如角色 admin、页面元素 system.user.export-to-docx等）。`AbstractSymbolExpression` 类为符号表达式，持有符号的前一个表达式对象和后一个表达式对象，分为 and 及 or 关系表达式。
 
 如此一来，求解表达式就只需构造一个由各种表达式构建的解释器树即可。比如表达式`(E:system.user.export-to-xlsx | E:system.user.export-to-docx) | R:admin`，对应的解释器树如下所示：
 <div align="center">
-   <img src="/doc/resource/interpreter/案例的解释器树.jpg" width="70%"/>
+   <img src="/res/interpreter/案例的解释器树.jpg" width="70%"/>
 </div>
 
 # 三、案例实现
 <div align="center">
-   <img src="/doc/resource/interpreter/代码附录.png" width="95%"/>
+   <img src="/res/interpreter/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/interpreter)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/interpreter)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -138,7 +138,7 @@ public class Client {
 
 ## 4.2 通用类图分析
 <div align="center">
-   <img src="/doc/resource/interpreter/经典解释器模式类图.jpg" width="60%"/>
+   <img src="/res/interpreter/经典解释器模式类图.jpg" width="60%"/>
 </div>
 
 解释器模式的通用类图结构如上图所示，在解释器模式中主要有如下参与者角色：
@@ -164,5 +164,5 @@ public class Client {
 在解释器模式中，我们并未提及如何构建一个抽象的语法树，这意味着解释器模式并不负责语法分析。抽象语法树可以用数据库表驱动的方式来生成，也可以采用语法分析程序（比如递归下降法）构建，甚至，可以由客户端直接构建（例如，`Client.buildExpressionForApi1()` 方法）。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/interpreter)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/interpreter)
 

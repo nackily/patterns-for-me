@@ -86,7 +86,7 @@ OK，到此为止，我们已经对包装类缓存池的机制进行了完整的
 
 ## 2.3 类图分析
 <div align="center">
-   <img src="/doc/resource/flyweight/经典享元模式类图.jpg" width="70%"/>
+   <img src="/res/flyweight/经典享元模式类图.jpg" width="70%"/>
 </div>
 
 享元模式的通用类图如上所示，包含的角色有如下：
@@ -134,7 +134,7 @@ OK，到此为止，我们已经对包装类缓存池的机制进行了完整的
 
 ## 3.2 案例类图
 <div align="center">
-   <img src="/doc/resource/flyweight/案例类图.png" width="75%"/>
+   <img src="/res/flyweight/案例类图.png" width="75%"/>
 </div>
 
 该案例的类图结构如上图所示，由以下部分组成。
@@ -146,10 +146,10 @@ OK，到此为止，我们已经对包装类缓存池的机制进行了完整的
 
 ## 3.3 代码附录
 <div align="center">
-   <img src="/doc/resource/flyweight/代码附录.png" width="95%"/>
+   <img src="/res/flyweight/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/flyweight)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-structural/src/main/java/com/patterns/flyweight)。客户端示例代码如下
 ```java
 public class Application extends JFrame implements ActionListener {
 
@@ -248,7 +248,7 @@ public class Application extends JFrame implements ActionListener {
 ```
 运行时效果截图如下：
 <div align="center">
-   <img src="/doc/resource/flyweight/运行结果截图.png" width="60%"/>
+   <img src="/res/flyweight/运行结果截图.png" width="60%"/>
 </div>
 
 在这个例子中，我们仅仅用了 5 个共享的对象就在屏幕上绘制了大量随机图像，这就是享元模式的魅力。
@@ -278,4 +278,4 @@ public class Application extends JFrame implements ActionListener {
 在前面，我们已经通过案例来说明内部状态和外部状态应该如何科学地划分，这一点相当重要。总结来说，我们使用享元模式的目的是为了减少资源的消耗，也是为了只用少量的几个对象来表达这些可被共享的状态，这个过程必须要做的就是剔除掉那些容易变化的状态。如果我们想要在对象中穷尽这些易变的状态，就必须创建更多的对象来表示，这就与我们的初衷相悖，自然也就无法实现对象复用。所以我们在对状态进行分类时，有一个常用的原则：不变的是内部状态，易变的通常是外部状态。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/flyweight)
+[回到主页](/README.md)&emsp;[案例代码](/cases-structural/src/main/java/com/patterns/flyweight)

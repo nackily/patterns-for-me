@@ -14,7 +14,7 @@
 
 ## 1.2 类图结构
 <div align="center">
-   <img src="/doc/resource/prototype/经典原型模式类图.jpg" width="50%"/>
+   <img src="/res/prototype/经典原型模式类图.jpg" width="50%"/>
 </div>
 
 原型模式的参与者有如下角色：
@@ -98,7 +98,7 @@ public class DeepClone implements Cloneable, Serializable {
 
 ## 3.2 案例类图
 <div align="center">
-   <img src="/doc/resource/prototype/案例类图.png" width="65%"/>
+   <img src="/res/prototype/案例类图.png" width="65%"/>
 </div>
 
 该案例的类图结构如上所示，类图由以下部分组成。
@@ -108,10 +108,10 @@ public class DeepClone implements Cloneable, Serializable {
 
 ## 3.3 代码附录
 <div align="center">
-   <img src="/doc/resource/prototype/代码附录.png" width="95%"/>
+   <img src="/res/prototype/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/prototype)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-creational/src/main/java/com/patterns/prototype)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws CloneNotSupportedException {
@@ -194,5 +194,5 @@ public class ArrayList<E> extends AbstractList<E>
 ```
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/creational/prototype)
+[回到主页](/README.md)&emsp;[案例代码](/cases-creational/src/main/java/com/patterns/prototype)
 

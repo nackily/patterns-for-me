@@ -9,7 +9,7 @@
 这里并不是在指责这种设计有问题，如果你看过本系列中关于门面模式的介绍，那么你或许对我们描述的场景有一些印象。在那里，我们说道：多个对象之间的较为复杂的依赖关系往往表明系统设计的足够好，因为那意味着不同的行为被拆分不同的对象中负责。让我们以一个例子来说明这种情况。
 > 在各个 IDE 中，都有设置编辑器字体的功能，在 Intellij-IDEA 中，字体设置页面如下所示：
 <div align="center">
-   <img src="/doc/resource/mediator/idea字体设置界面.png" width="60%"/>
+   <img src="/res/mediator/idea字体设置界面.png" width="60%"/>
 </div>
 
 > 在用户选择字体后，对应的编辑器框内文本字体将根据选择的内容发生变化。除此之外，针对每一种字体都提供了默认的排版设置（Typography Settings），所以在字体发生变化时，排版设置可能发生相应的变化。而在设置编辑器内文本内容的字体时，我们还需要知道用户设置的字体大小、行高等等信息。
@@ -23,7 +23,7 @@
 
 整理各个组件之间的交互逻辑后，我们得到各个组件之间的关系图如下：
 <div align="center">
-   <img src="/doc/resource/mediator/字体选择器组件关系图.jpg" width="70%"/>
+   <img src="/res/mediator/字体选择器组件关系图.jpg" width="70%"/>
 </div>
 
 我们看到，各个对象之间复杂的依赖关系错综复杂。更糟糕的是当新的组件加进来时，整个结构将变得更加难以维护。而此时就是引入中介者模式的最佳时机。
@@ -31,14 +31,14 @@
 # 二、解决方案
 中介者模式建议我们用一个中介对象来封装一系列的对象交互，在中介者对象中处理多个对象之间复杂的交互。各个对象之间不直接进行通信，由中介者对象来协调各个对象的工作。引入中介者对象后，各个组件之间的关系图将变成如下所示：
 <div align="center">
-   <img src="/doc/resource/mediator/字体选择器组件关系图-中介者模式.jpg" width="70%"/>
+   <img src="/res/mediator/字体选择器组件关系图-中介者模式.jpg" width="70%"/>
 </div>
 
 可以看出引入中介者对象之后，使得之前对象之间复杂的连接关系变得相当简单。如果要往这个模型中加入一个新的部件，我们只需要让新的部件连接到中介者对象即可。
 
 按照引入中介者对象之后模型，以字体列表中切换字体为例，用户发起的动作的交互过程如下所示：
 <div align="center">
-   <img src="/doc/resource/mediator/请求时序图.svg" width="100%"/>
+   <img src="/res/mediator/请求时序图.svg" width="100%"/>
 </div>
 
 正如我们在之前所描述的那样：中介者对象负责控制和协调各个部件之间的交互，它的存在使得各个对象之间不需要再相互引用。相比来看，中介者模式多了中介者对象，并且各个部件之间不再有显式依赖。
@@ -48,7 +48,7 @@
 
 ## 3.1 案例类图
 <div align="center">
-   <img src="/doc/resource/mediator/案例类图.jpg" width="100%"/>
+   <img src="/res/mediator/案例类图.jpg" width="100%"/>
 </div>
 
 案例的类图结构如上图所示，因篇幅原因，该类图中仅罗列出主要的方法，更详细的方法参考请完整代码。对于类图中类的解释如下：
@@ -63,10 +63,10 @@
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/mediator/代码附录.png" width="95%"/>
+   <img src="/res/mediator/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/mediator)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/mediator)。客户端示例代码如下
 ```java
 public class Application {
     public static void main(String[] args) {
@@ -97,7 +97,7 @@ public class Application {
 运行结果如下
 
 <div align="center">
-   <img src="/doc/resource/mediator/gaming.gif" width="70%"/>
+   <img src="/res/mediator/gaming.gif" width="70%"/>
 </div>
 
 # 四、中介者模式
@@ -109,7 +109,7 @@ public class Application {
 ## 4.2 类图分析
 通常来说，典型的中介者模式的类图结构如下所示：
 <div align="center">
-   <img src="/doc/resource/mediator/经典中介者类图.jpg" width="60%"/>
+   <img src="/res/mediator/经典中介者类图.jpg" width="60%"/>
 </div>
 
 中介者模式的参与者有如下：
@@ -143,4 +143,4 @@ public class Application {
 对于中介者模式来说，因为其将控制集中化，可能为系统引入一些庞大的中介对象，这使得我们在实际中使用时必须非常小心。但是其蕴含的思想却值得我们借鉴，比如我们常用的消息中间件（MQ）就与中介者模式的思想不谋而合。消息中间件的作用点之一就是解耦，正如中介者模式一样，消息的生产者并不关心由谁来消费消息，也不负责与消费者进行交互，他仅仅只是将消息发送到消息队列中，由消息对象负责将该消息转发给合适的消费者。并且，消息生产者同时也可以是另一种消息的消费者，正如在案例中描述的那样：当字体输入框中切换字体时，编辑器相应的切换自身内容的字体；而当编辑器内的内容为空时，反过来将导致字体输入框不可用。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/mediator)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/mediator)

@@ -130,7 +130,7 @@ setter 确实解决了重叠构造器方式呈现出的一些问题，并且比�
 ## 2.1 独立的建造器
 事实上，我们只需将与对象构建相关的行为独立成一个建造器对象（Builder）就可以同时利用构造器和 setter 的所有优点。一旦将对象的构建行为抽离出去，对象的职责就能更加纯粹，对象负责状态表示，构造器则负责初始化对象。我们为构造器选择 setter 方式，因为我们希望对客户端来说，在初始化对象阶段时能足够灵活；而对象则采用构造器的方式，因为我们希望对象一旦初始化完成，状态将不可随意更改。一个邮件通知对象的构建过程可能如下图所示。
 <div align="center">
-   <img src="/doc/resource/builder/建造器交互时序图.svg" width="80%"/>
+   <img src="/res/builder/建造器交互时序图.svg" width="80%"/>
 </div>
 
 并且，可以在`build()`中对缓存的所有状态进行检查，如果不满足要求，可以拒绝构造邮件通知对象。这样就能保证对象的完整性。邮件通知对象中并未提供任何改变自身状态的行为，这意味着一旦对象初始化完成，所有的状态是密封的，不可变的。这就解决了 setter 中状态的可变性问题。
@@ -142,7 +142,7 @@ setter 确实解决了重叠构造器方式呈现出的一些问题，并且比�
 ## 2.2 建造器的抽象
 现在我们已经按照同样的方法为所有的通知都定义对应的建造器：短信建造器`ShortMessageBuilder`、邮件建造器`MailBuilder`和站内信建造器`SiteLatterBuilder`。尽管他们负责构造不同的对象，并且每个对象都有不同的属性列表，但是他们却有一定的相似性。比如每一条通知都需要发信人和收信人，在短信里是手机号码，在邮件里是点子邮箱，在站内信里是用户账号；再比如每一条通知都需要信息载体，在邮件里是邮件正文，在短信里是消息内容。我们何不将所有的构建过程都放到抽象中定义？
 <div align="center">
-   <img src="/doc/resource/builder/建造器的抽象.jpg" width="60%"/>
+   <img src="/res/builder/建造器的抽象.jpg" width="60%"/>
 </div>
 
 如上图所示，我们在所有构造器之上提供了抽象建造器`Builder`，并且定义了所有的构建步骤。例如所有通知都需要的发件者`buildSender(String):void`，所有通知都需要的接收者`buildRecipient(String):void`，所有通知都需要的载体`buildBody(String):void`。
@@ -189,7 +189,7 @@ public class GenericConstructor {
 我们已经完整的分析了所有通知的对象构建过程，下面是根据上述分析的案例实现。
 ## 3.1 案例类图
 <div align="center">
-   <img src="/doc/resource/builder/案例类图.jpg" width="95%"/>
+   <img src="/res/builder/案例类图.jpg" width="95%"/>
 </div>
 
 案例的类图结构如上所示，类图由以下部分组成。
@@ -201,10 +201,10 @@ public class GenericConstructor {
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/builder/代码附录.png" width="95%"/>
+   <img src="/res/builder/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/builder/message)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-creational/src/main/java/com/patterns/builder/message)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -286,7 +286,7 @@ public class Client {
 
 ## 4.2 类图结构
 <div align="center">
-   <img src="/doc/resource/builder/通用建造者模式类图.jpg" width="50%"/>
+   <img src="/res/builder/通用建造者模式类图.jpg" width="50%"/>
 </div>
 
 建造者模式的通用类图结构如上所示，他拥有如下的角色列表。
@@ -314,7 +314,7 @@ public class Client {
 # 六、退化的建造者
 在分析意图时，我们提到建造者模式一共有两个目的，其一是对象构建和表示的分离，其二是同样的过程创建不同的产品。在实际项目中，很多时候我们只需要考虑复杂对象的构建和表示分离就够用了。那么这个时候，我们只需要为产品提供一个建造器类即可。
 <div align="center">
-   <img src="/doc/resource/builder/退化的建造者模式类图.jpg" width="50%"/>
+   <img src="/res/builder/退化的建造者模式类图.jpg" width="50%"/>
 </div>
 
 > 假如你现在正在开发一款数据采集的系统，该系统负责连接多个物联网设备，并且采集设备上传的数据。想象一下设备该如何连接呢？我们需要指定设备的ip地址，端口号，协议，版本，客户端识别号，账号密码，连接超时时间和读取超时时间等等。如此多的属性配置，正适合使用建造者模式来构建连接配置对象。
@@ -536,4 +536,4 @@ public final class BeanDefinitionBuilder {
 
 
 # 附录
-[回到主页](/README.md)&emsp;[消息通知案例代码](/src/main/java/com/aoligei/creational/builder/message)&emsp;[连接配置案例代码](/src/main/java/com/aoligei/creational/builder/conn)
+[回到主页](/README.md)&emsp;[消息通知案例代码](/cases-creational/src/main/java/com/patterns/builder/message)&emsp;[连接配置案例代码](/cases-creational/src/main/java/com/patterns/builder/conn)

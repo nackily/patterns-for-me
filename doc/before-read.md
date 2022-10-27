@@ -40,7 +40,7 @@
 
 接口中有<<interface>>标识，并且接口中的方法应为斜体（仅有声明没有实现）。
 <div align="center">
-   <img src="/doc/resource/before-read/接口示例.jpg" width="25%"/>
+   <img src="/res/before-read/接口示例.jpg" width="25%"/>
 </div>
 
 > 上图表示一个组件的接口，该组件接口中定义了两个行为，分别为添加子组件`addChildren(Component):void`，绘制自己到屏幕上`paint():void`。
@@ -49,7 +49,7 @@
 
 抽象类名和抽象方法应为斜体，非抽象方法不使用斜体。并且抽象类应以`Abstract`为命名前缀，以示区分。
 <div align="center">
-   <img src="/doc/resource/before-read/抽象类示例.jpg" width="25%"/>
+   <img src="/res/before-read/抽象类示例.jpg" width="25%"/>
 </div>
 
 > 上图表示一个抽象的树形节点类，该抽象类中维护了一个子节点列表的属性，并提供了两个方法。`addNode(AbstractTreeNode):void`方法用于将另一个树形节点对象添加到子节点列表中，提供了统一的实现，子类可根据需要决定是否重写，`countNodeSize():int`方法用于统计该属性节点的数量，是抽象方法，由子类负责实现。
@@ -58,7 +58,7 @@
 
 无特别约定。
 <div align="center">
-   <img src="/doc/resource/before-read/类示例.jpg" width="15%"/>
+   <img src="/res/before-read/类示例.jpg" width="15%"/>
 </div>
 
 > 上图表示一个用户类，提供两个用户状态，分别为姓名`name`和年龄`age`，并为其分别提供状态获取方法。`export(String):void`表示打印当前用户信息。
@@ -69,7 +69,7 @@
 
 描述一个类与另一个之间的继承关系，使用实线连接两个类，指向被继承一端使用空心三角箭头。
 <div align="center">
-   <img src="/doc/resource/before-read/继承关系.jpg" width="40%"/>
+   <img src="/res/before-read/继承关系.jpg" width="40%"/>
 </div>
 
 > 上图描述了猫`Cat`继承自动物`Animal`
@@ -78,7 +78,7 @@
 
 描述一个类与一个接口之间的实现关系，使用虚线连接类和接口，指向接口的一端使用空心三角箭头。
 <div align="center">
-   <img src="/doc/resource/before-read/实现关系.jpg" width="40%"/>
+   <img src="/res/before-read/实现关系.jpg" width="40%"/>
 </div>
 
 > 上图描述了猫`Cat`实现了叫唤接口`Brak`
@@ -87,7 +87,7 @@
 
 描述一个类实例化另一个类的对象，使用虚线连接两个类，被实例化的类一端使用普通箭头。
 <div align="center">
-   <img src="/doc/resource/before-read/实例化.jpg" width="40%"/>
+   <img src="/res/before-read/实例化.jpg" width="40%"/>
 </div>
 
 > 上图描述了`UserService`需要实例化`User`对象
@@ -96,7 +96,7 @@
 
 描述一个类将发送到自身的请求转发给另一个类的实例上，使用实线连接两个类，被委托的一端使用普通箭头。
 <div align="center">
-   <img src="/doc/resource/before-read/委托.jpg" width="55%"/>
+   <img src="/res/before-read/委托.jpg" width="55%"/>
 </div>
 
 > 上图描述了对于图形对象`Shape`的获取面积请求将转发到圆形对象`Circle`上，`Shape`类维护一个指向`Circle`类实例的引用，并在合适的时机将请求转发给这个引用对应的对象上。可在箭头上标注出引用对象的名称“circle”，也可以省略它。
@@ -107,13 +107,13 @@
 
 描述一个类与另一个类的实例对象之间整体与部分的关系，换句话说，一个对象是另一个对象的组成部分。使用实线连接这两个类，被包含的一端使用普通箭头（表示相识关系），包含的一端使用空心菱形箭头（表示聚合关系）。
 <div align="center">
-   <img src="/doc/resource/before-read/聚合-示例一.jpg" width="45%"/>
+   <img src="/res/before-read/聚合-示例一.jpg" width="45%"/>
 </div>
 
 > 上图描述了文件夹`Folder`内部维护了多个文件`File`对象
 
 <div align="center">
-   <img src="/doc/resource/before-read/聚合-示例二.jpg" width="45%"/>
+   <img src="/res/before-read/聚合-示例二.jpg" width="45%"/>
 </div>
 
 > 上图描述了汽车`Car`由引擎`Engine`、控制系统`ControlSystem`和油箱`Tank`等部分组成

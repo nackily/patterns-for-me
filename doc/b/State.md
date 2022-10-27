@@ -9,7 +9,7 @@
 > 假如我们现在正在构建一款文稿工具，这个工具可以供用户编辑文稿并发布到平台中，以便让更多用户从这份文稿中获益。一个文稿的所有状态及转换关系如下图所示：
 
 <div align="center">
-   <img src="/doc/resource/state/文稿状态及转换关系.png" width="50%"/>
+   <img src="/res/state/文稿状态及转换关系.png" width="50%"/>
 </div>
 
 
@@ -46,12 +46,12 @@ public void audit() {
 # 二、解决方案
 想要解决问题，就得先分析问题。为什么条件分支会越来越臃肿？因为对于任意一个操作，我们必须对文稿当前所处的状态进行检查。比如说撤稿操作，对于系统来说，只允许文稿当前是‘已发布’和‘已下架’的状态进行，对于其他的状态来说，这一行为都是非法的。所以，每新增一个状态，我们就不得不考虑在这个状态下，每一个操作所表现出的行为。就像下图这样：
 <div align="center">
-   <img src="/doc/resource/state/新增状态.png" width="80%"/>
+   <img src="/res/state/新增状态.png" width="80%"/>
 </div>
 
 我们发现，每个操作都为不同的状态提供了相应的表现行为。也就是说，想要解决条件分支的问题，我们必须把状态从操作中抽离出来。我们可以将状态硬编码成为一个个的状态对象，每一个状态都包含了文稿对象的所有操作，每一个状态的每一个操作中，只需要表现出文稿对象处于当前状态下的行为。这就是状态模式所关注的核心。
 <div align="center">
-   <img src="/doc/resource/state/案例类图.jpg" width="70%"/>
+   <img src="/res/state/案例类图.jpg" width="70%"/>
 </div>
 
 如上类图所示，状态接口中定义了所有对于文稿对象的操作：
@@ -67,10 +67,10 @@ public void audit() {
 
 # 三、案例实现
 <div align="center">
-   <img src="/doc/resource/state/代码附录.png" width="95%"/>
+   <img src="/res/state/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/state)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/state)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -111,7 +111,7 @@ public class Client {
 ## 4.2 类图分析
 
 <div align="center">
-   <img src="/doc/resource/state/经典状态模式类图.jpg" width="60%"/>
+   <img src="/res/state/经典状态模式类图.jpg" width="60%"/>
 </div>
 
 状态模式的类图结构如上所示，在状态模式中，有如下的参与角色：
@@ -150,4 +150,4 @@ public class Client {
 对于客户端来说，他只应和 Context 对象产生交集，客户端所有可能的行为都应实现在 Context 中。有一种情况除外，如果客户端需要使用一个状态来装配 Context，此时客户端不得不为 Context 提供一个初始的状态。一旦 Context 配置完成，它的客户端不必再和状态对象打交道。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/state)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/state)

@@ -12,7 +12,7 @@
 
 转头一想，没有买充电头的肯定不止我一个，有问题就一定有解决办法，果不其然，我翻到了有商家卖下图的转接头。转接头价格相比原装充电头完全可以接受，果断买回来，一头接上手机数据线，一头插上旧的充电头，诶这不就 OK 了嘛。
 <div align="center">
-   <img src="/doc/resource/adapter/转接头图片.png" width="30%"/>
+   <img src="/res/adapter/转接头图片.png" width="30%"/>
 </div>
 
 
@@ -26,7 +26,7 @@
 
 现在，各个参与角色之间具有如下的交互关系：
 <div align="center">
-   <img src="/doc/resource/adapter/适配过程示意图.jpg" width="60%"/>
+   <img src="/res/adapter/适配过程示意图.jpg" width="60%"/>
 </div>
 
 在这个交互关系图中，我们拥有两根数据线，两个对应的转接头，但只有一个充电头。以充电头的角度来分析，充电头提供的充电服务在经过不同的转接头后，最终由各个设备数据线接收。转接头并不提供充电服务，也不享受充电服务，由此看来，适配器就像是一个请求传递者，负责连接两个不相容的接口，并将请求从一方传递到另一方。
@@ -37,7 +37,7 @@
 ## 3.1 案例类图
 按照上面的分析，此处已经实现了这个案例，下图为案例的类图结构。
 <div align="center">
-   <img src="/doc/resource/adapter/案例类图.png" width="95%"/>
+   <img src="/res/adapter/案例类图.png" width="95%"/>
 </div>
 
 对于该类图的说明如下：
@@ -50,10 +50,10 @@
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/adapter/代码附录.png" width="95%"/>
+   <img src="/res/adapter/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/adapter)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-structural/src/main/java/com/patterns/adapter)。客户端示例代码如下
 ```java
 public class Plug {
 
@@ -91,7 +91,7 @@ public class Plug {
 ## 4.2 类图结构
 适配器模式的类图则如下所示：
 <div align="center">
-   <img src="/doc/resource/adapter/经典适配器模式类图.jpg" width="60%"/>
+   <img src="/res/adapter/经典适配器模式类图.jpg" width="60%"/>
 </div>
 
 在适配器模式中，包含有以下主要角色，我们可以将各个角色与上面的例子进行类比分析：
@@ -206,5 +206,5 @@ public class FutureTask<V> implements RunnableFuture<V> {
 综上所述，`RunnableAdapter`类采用适配器模式主要是为了使上层应用只需要统一处理`Callable`类型的接口，以便上层应用只需处理一套逻辑。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/adapter)
+[回到主页](/README.md)&emsp;[案例代码](/cases-structural/src/main/java/com/patterns/adapter)
 

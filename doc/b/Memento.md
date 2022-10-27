@@ -14,7 +14,7 @@
 ## （方案一）克隆对象保存状态
 在 Java 中，我们可以使用克隆的方式来轻松获取一个对象现场状态，需要注意的是，根据需求灵活的选择对某个属性进行深拷贝或者浅拷贝。除此之外，我们还需要一个容器，用来存储多个存档的引用，并且按照顺序对多个历史存档进行组织，这样我们就能让游戏方便的回到上一个存档点。
 <div align="center">
-   <img src="/doc/resource/memento/方案一类图.jpg" width="80%"/>
+   <img src="/res/memento/方案一类图.jpg" width="80%"/>
 </div>
 
 这个设计完全满足需求，我们不仅记录了对象（Game）的状态，并且在对象之外（SavepointHistory）中保存了该对象。用户可以选择在合适的时间存档游戏（store），并且可以在任意时间恢复游戏到上一个存档点的状态。
@@ -30,7 +30,7 @@
 
 这里，我们提供另外一种解决思路。既然存档对象的状态仅是原始对象状态的一部分，那么我们可以为原始对象中需要的部分状态属性提供一个全新的对象。按照这个思路，我们对方案一进行修改：
 <div align="center">
-   <img src="/doc/resource/memento/方案二类图.jpg" width="90%"/>
+   <img src="/res/memento/方案二类图.jpg" width="90%"/>
 </div>
 
 可以看到，状态对象中，只有我们关心的属性了，我们成功的根据需求场景对设计做出了灵活调整。单独封装类来屏蔽掉不关心的职责，也让代码在可维护性和可阅读性上有了更好的表现。看起来，一切好像都很完美。
@@ -42,7 +42,7 @@
 ## （方案三）嵌套类保证状态的封装性
 那么，是否有办法能让除了游戏对象之外的其他对象都无法访问存档点的状态属性吗？有，还不止一种。这里介绍一种使用比较多的解决办法 —— 内部类。将存档点类以内部类的方式定义在游戏类中，这样游戏类对象就可以轻易的访问存档点对象的任何属性。
 <div align="center">
-   <img src="/doc/resource/memento/方案三类图.jpg" width="80%"/>
+   <img src="/res/memento/方案三类图.jpg" width="80%"/>
 </div>
 
 如上图所示，深色部分表示他们共同定义在一个类中。在这次改动中，我们没有对他们的任何功能做出调整，但这个实现保证了除了游戏对象之外，存档点的状态属性不能被任何其他对象所访问。这很好的维护了存档点的封装性。
@@ -51,10 +51,10 @@
 
 # 三、代码附录
 <div align="center">
-   <img src="/doc/resource/memento/代码附录.png" width="95%"/>
+   <img src="/res/memento/代码附录.png" width="95%"/>
 </div>
 
-我们选择对方案三进行实现，代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/memento)。客户端示例代码如下
+我们选择对方案三进行实现，代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/memento)。客户端示例代码如下
 ```java
 public class Client {
 
@@ -114,7 +114,7 @@ public class Client {
 ## 4.1 结构
 备忘录模式的通用类图如下：
 <div align="center">
-   <img src="/doc/resource/memento/备忘录模式类图.jpg" width="60%"/>
+   <img src="/res/memento/备忘录模式类图.jpg" width="60%"/>
 </div>
 
 备忘录模式的参与者有如下：
@@ -154,8 +154,8 @@ public class Client {
 
 该游戏的代码参见附录。游戏的运行效果如下所示：
 <div align="center">
-   <img src="/doc/resource/command/gaming.gif" width="70%"/>
+   <img src="/res/command/gaming.gif" width="70%"/>
 </div>
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/memento)&emsp;[小猫摘星星代码](/src/main/java/com/aoligei/behavioral/command/game)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/memento)&emsp;[小猫摘星星代码](/cases-behavioral/src/main/java/com/patterns/command/game)

@@ -15,7 +15,7 @@
 
 模板方法模式建议我们可以把所有的步骤及先后顺序声明在一个高层类（超类）中，在高层类中定义好流程的基本算法骨架，针对某些与子类无关的步骤提供缺省的实现。对于那些与子类相关的步骤，我们将其定义为抽象方法，让各个类型自己提供差异化的实现。按照这个的原则，我们对该例子建模如下：
 <div align="center">
-   <img src="/doc/resource/template-method/案例类图.png" width="60%"/>
+   <img src="/res/template-method/案例类图.png" width="60%"/>
 </div>
 
 对于该类图的类说明如下：
@@ -27,10 +27,10 @@
 
 # 三、案例代码
 <div align="center">
-   <img src="/doc/resource/template-method/代码附录.png" width="95%"/>
+   <img src="/res/template-method/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/xxxx)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/xxxx)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -82,7 +82,7 @@ public class Client {
 ## 4.2 通用类图
 模板方法模式的通用类图结构如下所示：
 <div align="center">
-   <img src="/doc/resource/template-method/经典模板方法模式类图.jpg" width="15%"/>
+   <img src="/res/template-method/经典模板方法模式类图.jpg" width="15%"/>
 </div>
 
 模板方法模式是代码复用的一种极有效的手段，通过复用一些公共的代码，使得公用的部分变得更容易管理。一般，我们将定义算法的基本骨架的这个方法叫做**模板方法**（`AbstractClass#templateMethod()`），将抽象的方法称为**原语操作**（`AbstractClass#abstractMethod1()`、`AbstractClass#abstractMethod2()`）。
@@ -137,4 +137,4 @@ public abstract class BaseExecutor implements Executor {
 在 BaseExecutor 中，刷新语句的方法`flushStatements()`定义了算法，是模板方法；在该方法中，调用了抽象方法`doFlushStatements()`，让真正的刷新语句操作延迟到子类执行，是一个标准的模板方法模式的应用。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/template_method)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/template_method)

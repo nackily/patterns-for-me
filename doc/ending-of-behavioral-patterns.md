@@ -7,7 +7,7 @@
 
 ## 1.1 结构对比
 <div align="center">
-   <img src="/doc/resource/ending-of-behavioral/行为型模式对比图.png" width="90%"/>
+   <img src="/res/ending-of-behavioral/行为型模式对比图.png" width="90%"/>
 </div>
 
 
@@ -81,22 +81,22 @@
 
 命令模式使用一个`Command`对象来定义一个发送者和一个接收者之间的绑定关系。这样使得一个发送者`Invoker`可以和多个不同的接收者`Receiver`在一起工作，这样就解除了接收者和发送者之间的耦合关系，使得发送者更易于复用。命令模式的工作过程如下图所示。
 <div align="center">
-   <img src="/doc/resource/ending-of-behavioral/命令模式请求时序图.svg" width="60%"/>
+   <img src="/res/ending-of-behavioral/命令模式请求时序图.svg" width="60%"/>
 </div>
 
 观察者模式通过定义一个接口`Observer#update()`来通知目标对象发生的变化，从而将发送者`Observable`和接收者`Observer`解耦。观察者模式的工作过程如下所示。
 <div align="center">
-   <img src="/doc/resource/ending-of-behavioral/观察者模式请求时序图.svg" width="60%"/>
+   <img src="/res/ending-of-behavioral/观察者模式请求时序图.svg" width="60%"/>
 </div>
 
 中介者模式提供一个中介对象`Mediator`，让请求发送者`Colleague1`和请求接收者`Colleague2`之间不再直接交互。这样发送者和接收者之间便没有了依赖关系，所有的请求都经过中介对象的路由分发给相应的接收者。中介者模式的工作过程如下所示。
 <div align="center">
-   <img src="/doc/resource/ending-of-behavioral/中介者模式请求时序图.svg" width="40%"/>
+   <img src="/res/ending-of-behavioral/中介者模式请求时序图.svg" width="40%"/>
 </div>
 
 责任链模式则通过沿着一个接收者对象链路传递请求，间接的实现了请求发送者`Client`和请求接收者`ConcreteHandler`之间的解耦。责任链模式的工作过程如下所示。
 <div align="center">
-   <img src="/doc/resource/ending-of-behavioral/责任链模式请求时序图.svg" width="70%"/>
+   <img src="/res/ending-of-behavioral/责任链模式请求时序图.svg" width="70%"/>
 </div>
 
 

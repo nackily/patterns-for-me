@@ -11,7 +11,7 @@
 
 分析需求，我们知道对于一个消息通知来说，有 4 种通知方式可供选择。他们分别是：站内消息、邮件、短信和机器人语音通话。而他们的在实现上差异巨大，在很多时候我们还必须引入不同的第三方支撑才能完成。所以，在一个类中实现所有方式是不合适的。我们应该对其抽象，解耦各种实现方式。如下类图所示：
 <div align="center">
-   <img src="/doc/resource/bridge/消息通知结构设计.jpg" width="70%"/>
+   <img src="/res/bridge/消息通知结构设计.jpg" width="70%"/>
 </div>
 
 
@@ -49,12 +49,12 @@
 
 采用组合进行解耦的基本思路是，将其中一个维度解放出来，并且将与自身无关的行为委托给另一个维度实现。用案例来说，对于定时发送和邮件两个行为，拆解到两个对象中处理，邮件对象只负责推送邮件给用户这一行为；而定时发送对象只负责在未来的某个时间触发一个任务，任务的执行则委托给与自身关联的邮件对象。整个过程如下图所示：
 <div align="center">
-   <img src="/doc/resource/bridge/消息发送过程.jpg" width="60%"/>
+   <img src="/res/bridge/消息发送过程.jpg" width="60%"/>
 </div>
 
 不管是触发机制，还是通知方式，都有多个具体的实现。所以，对上面的模型中的两个维度分别抽象，我们便能得到如下的类图结构：
 <div align="center">
-   <img src="/doc/resource/bridge/案例类图.jpg" width="90%"/>
+   <img src="/res/bridge/案例类图.jpg" width="90%"/>
 </div>
 
 在这个类图结构中，客户端直接向`AbstractTriggerExecutor`（触发机制执行器）提交请求，触发执行器依赖一个`AbstractNotifer`（通知发送器）。如何触发发送消息的逻辑在`AbstractTriggerExecutor#execute()`中实现，实现类决定在合适的时机触发推送任务；`AbstractTriggerExecutor`将推送任务委托给`AbstractNotifer`执行，具体的`AbstractNotifer`在各自的`doNotify()`中实现。而这个结构就是典型的桥模式。
@@ -62,10 +62,10 @@
 # 三、案例实现
 本篇仅仅是一个例子，并不打算真正实现短信、邮件发送等功能。有兴趣的朋友可自行实现更多细节。
 <div align="center">
-   <img src="/doc/resource/bridge/代码附录.png" width="95%"/>
+   <img src="/res/bridge/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/bridge)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-structural/src/main/java/com/patterns/bridge)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws InterruptedException {
@@ -133,12 +133,12 @@ public class Client {
 
 ## 5.2 类图分析
 <div align="center">
-   <img src="/doc/resource/bridge/桥.png" width="40%"/>
+   <img src="/res/bridge/桥.png" width="40%"/>
 </div>
 
 桥模式的得名十有八九来源于它的结构，因为桥模式的结构就像是一座桥，搭建在两个维度之间。结构如下类图所示：
 <div align="center">
-   <img src="/doc/resource/bridge/经典桥模式类图.jpg" width="80%"/>
+   <img src="/res/bridge/经典桥模式类图.jpg" width="80%"/>
 </div>
 
 桥模式包含的角色有如下：
@@ -170,4 +170,4 @@ public class Client {
 1. 通过参数的方式决定，就像静态工厂一样。例如，给每一个 Implementor 提供一个与之对应的 key，通过传入的 key 决定具体创建哪一个 Implementor，当然，这种方式有一个前提：Abstraction 必须知道所有的 Implementor。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/bridge)
+[回到主页](/README.md)&emsp;[案例代码](/cases-structural/src/main/java/com/patterns/bridge)

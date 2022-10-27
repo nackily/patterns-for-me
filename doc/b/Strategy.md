@@ -44,7 +44,7 @@ public OutputStream compressFiles (String type, List<File> files) {
 
 事实上，这在面向对象中是很简单的，我们只需要给每一种压缩包格式都提供一个独立的压缩处理器对象。如此就可将多个行为分散到了不同的对象中，之后对于任何压缩处理器的修改都将在单独的对象中进行，不会影响到其他的压缩处理器。并且，我们让所有的压缩处理器都实现一个抽象的处理器`CompressStrategy`，在抽象处理器仅定义一个压缩的行为`compress()`，由各个压缩处理器负责提供响应压缩格式的实现。这样一来，他们就具有了统一的行为声明，就可以从外面实现一致的调用。如下图所示。
 <div align="center">
-   <img src="/doc/resource/strategy/压缩处理器结构.jpg" width="50%"/>
+   <img src="/res/strategy/压缩处理器结构.jpg" width="50%"/>
 </div>
 
 这正是策略模式的原型，策略模式建议我们定义一系列的算法，并将他们一个一个的封装起来。对于该例来说，不同的导出格式就对应了不同的导出算法，比如上图中的`ZipCompressor`，由它可以实现压缩成 ZIP 格式，所以它就是一个算法的封装。同时，所有算法的封装都实现自同一个抽象的行为定义`CompressStrategy#compress()`，因此他们具有同样的行为，所以他们之间是可以相互替换的。
@@ -56,7 +56,7 @@ public OutputStream compressFiles (String type, List<File> files) {
 
 按照上面的论述，我们实现的案例的类图结构如下所示。
 <div align="center">
-   <img src="/doc/resource/strategy/案例类图.png" width="90%"/>
+   <img src="/res/strategy/案例类图.png" width="90%"/>
 </div>
 
 在该类图结构中：
@@ -67,10 +67,10 @@ public OutputStream compressFiles (String type, List<File> files) {
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/strategy/代码附录.png" width="95%"/>
+   <img src="/res/strategy/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/strategy)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/strategy)。客户端示例代码如下
 ```java
 public class Client {
 
@@ -124,7 +124,7 @@ public class Client {
 
 ## 4.2 通用结构分析
 <div align="center">
-   <img src="/doc/resource/strategy/经典策略模式类图.jpg" width="60%"/>
+   <img src="/res/strategy/经典策略模式类图.jpg" width="60%"/>
 </div>
 
 策略模式的类图通常如上所示，其主要有以下三个角色。
@@ -265,6 +265,6 @@ public class DefaultSqlSession implements SqlSession {
 ```
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/strategy)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/strategy)
 
 

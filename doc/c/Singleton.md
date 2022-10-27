@@ -14,7 +14,7 @@
 
 ## 1.3 类图结构
 <div align="center">
-   <img src="/doc/resource/singleton/经典单例模式类图.jpg" width="30%"/>
+   <img src="/res/singleton/经典单例模式类图.jpg" width="30%"/>
 </div>
 
 单例模式的通用类图结构如下所示，在单例模式中，提供了一个自身的实例对象（`Singleton#instance`）以及一个可获取该实例对象的行为（`Singleton#getInstance():Singleton`）。并且，任何时候，单例类不应该将构造方法暴露给外部，不允许在该类自身以外的地方创建新的对象。
@@ -245,4 +245,4 @@ public class PreventSerializeDestroySingleton implements Serializable {
 为什么添加一个“readResolve”的方法就能保证有且仅有一个实例呢？简单来说，就是当我们反序列化时，在 readObject() 方法会去检查这个类有没有一个名字为“readResolve”的方法，如果有，则以这个方法的返回作为反序列化后得到的对象；如果没有这样的方法，则重新创建一个对象。
 
 # 附录
-[回到主页](/README.md)    [案例代码](/src/main/java/com/aoligei/creational/singleton)
+[回到主页](/README.md)    [案例代码](/cases-creational/src/main/java/com/patterns/singleton)

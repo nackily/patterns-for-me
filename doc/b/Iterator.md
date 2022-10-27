@@ -8,7 +8,7 @@
 
 对于 数组结构 和 树结构 来说，我们可以按照下图的方式遍历其内部维护的元素（左：数组，右：树）：
 <div align="center">
-   <img src="/doc/resource/iterator/数组和树遍历图.jpg" width="90%"/>
+   <img src="/res/iterator/数组和树遍历图.jpg" width="90%"/>
 </div>
 
 对于不同的数据来说，遍历的方式可能是不同的。比如上图中的 数组结构 和 树结构 ，遍历他们的方式可能如下代码片段所示。
@@ -41,7 +41,7 @@ public void foreachTree(Tree rootNode) {
 
 有一种方式能让外部遍历到所有的内部元素，那就是内部元素对外界完全透明。但这明显行不通，内部元素对外界透明意味着失去了对象的封装性，对象的安全性会大打折扣（例如 `java.util.ArrayList`，内部维护了一个对象数组，但却无法从外部拿到这个数组的引用）。我们需要一种遍历内部元素的方式，并且还要保证容器维护的内部元素不直接暴露出来。
 <div align="center">
-   <img src="/doc/resource/iterator/ArrayList内部结构.jpg" width="50%"/>
+   <img src="/res/iterator/ArrayList内部结构.jpg" width="50%"/>
 </div>
 
 **（问题二）不同的数据结构遍历方式不一样**
@@ -52,7 +52,7 @@ public void foreachTree(Tree rootNode) {
 
 对于同一种数据结构来说，有时用户希望按照不同的顺序来遍历他们。比如对于列表（数组、链表等）来说，大多数时间我们都能按照先后顺序逐个访问其内部元素，但是有些特殊情况下，却希望顺序是颠倒过来的（先进入列表的元素后访问）；甚至极端情况下，还要求访问元素的顺序是随机的。需求永远是无止境的，我们无法预知所有可能的情况，我们能做的就是提供通用的遍历方式，并且支持扩展新的遍历方式。下图中列举了对于树形结构的两种遍历方式。
 <div align="center">
-   <img src="/doc/resource/iterator/树的不同遍历方式.jpg" width="85%"/>
+   <img src="/res/iterator/树的不同遍历方式.jpg" width="85%"/>
 </div>
 
 # 二、解决方案
@@ -61,7 +61,7 @@ public void foreachTree(Tree rootNode) {
 迭代器模式能完美的解决上面的所有问题，并且它还在其他方面展现出了令人欣喜的特性。迭代器模式鼓励我们将对容器的遍历过程从容器对象中解放出来，放入到一个迭代器对象中。比如，对于一个 ArrayList （基于数组的列表）类中元素的遍历动作，可借助于一个 ArrayListIterator（数组列表迭代器）进行。他们之间的关系如下图所示：
 
 <div align="center">
-   <img src="/doc/resource/iterator/ArrayList和Iterator关系.jpg" width="50%"/>
+   <img src="/res/iterator/ArrayList和Iterator关系.jpg" width="50%"/>
 </div>
 
 > 在上图中，ArrayListIterator 是一个针对于 ArrayList 的迭代器类，当用户希望遍历已有的 arrayList 对象时，需要实例化一个迭代器对象（arrayListIterator）。`currentPos`标记即将访问的下一个元素在数组中的索引，初始为 0（表示从数组中第一个元素开始遍历）。`hasNext()`方法返回是否还有下一个待访问的元素，当数组中的所有元素都已被访问过时，返回 false；否则，返回 true。`getNextElement()`方法用于返回下一个元素，该操作将让`currentPos`向前推进，指向下一个未访问的元素。周而复始，直至`currentPos`的值等于`ArrayList#size()`，此时就已完成了对所有元素的遍历。 
@@ -70,7 +70,7 @@ public void foreachTree(Tree rootNode) {
 在前面我们说过，不同的容器对于其内部元素组织方式可能完全不一样，这意味着我们无法仅用一个迭代器对象来遍历所有的容器类型。换句话说，不同的数据结构应该有与之对应的迭代器对象。基于数组的列表使用迭代器类 ArrayListIterator，基于链表的列表使用迭代器类 LinkedListIterator，基于散列表+列表组织的键值对使用迭代器类 HashMapIterator ，多路树使用迭代器类 TreeIterator，等等。此时，我们应该对迭代器进行抽象，在对所有迭代器的抽象中（Iterator）定义统一的行为，例如`getNextElement()`、`hasNext()`。如下所示：
 
 <div align="center">
-   <img src="/doc/resource/iterator/迭代器类图演进过程（一）.jpg" width="90%"/>
+   <img src="/res/iterator/迭代器类图演进过程（一）.jpg" width="90%"/>
 </div>
 
 > 事实上，容器（Container）的层级关系远比上图中描述的复杂，这个图仅仅只是演示数据结构的丰富性的一个例子而已。毕竟，这里我们讨论的重点是迭代器而非容器，所以不会花时间去解释容器应该有哪些。
@@ -80,7 +80,7 @@ public void foreachTree(Tree rootNode) {
 这个问题牵涉了两个对象层次，一个是容器对象层次，它用于维护内部元素；一个是迭代器对象层次，它用于遍历容器的内部元素。如果你已经看过了本系列的其他模式，那么你应该知道如何描述在两个维度上的特定组合，没错，就是[工厂方法（Factory Method）](/doc/creational/FactoryMethod.md)。 好了，让我们将创建迭代器的过程加入到类图结构中去。
 
 <div align="center">
-   <img src="/doc/resource/iterator/迭代器类图演进过程（二）.jpg" width="85%"/>
+   <img src="/res/iterator/迭代器类图演进过程（二）.jpg" width="85%"/>
 </div>
 
 > 在如上的类图结构中，每一个容器类都需要实现`createIterator()`方法，在该方法中返回一个特定类型的迭代器。比如在`ArrayList#createIterator()`方法中，将返回类型为 ArrayListIterator 类型的迭代器（`return new ArrayListItrator(this)`）。每一个迭代器依赖于一个容器对象，以便迭代器在工作中时，能访问到所有的内部元素。每一个迭代器对象自己决定采用哪种顺序进行遍历，但都需提供`hasNext()`方法用以判断是否已遍历完成，提供`getNextElement()`方法获取下一个元素并且将遍历过程向后推进。
@@ -92,7 +92,7 @@ public void foreachTree(Tree rootNode) {
 
 引入迭代器模式后，我们可以对所有的数据类型采用同样的遍历方式。就像下图中的示例代码一样：
 <div align="center">
-  <img src="/doc/resource/iterator/迭代器示例代码.png" width="40%"/>
+  <img src="/res/iterator/迭代器示例代码.png" width="40%"/>
 </div>
 
 **问题 ==>> 遍历方法应该支持扩展**
@@ -115,7 +115,7 @@ public void foreachTree(Tree rootNode) {
 我已经实现了该案例，为了在阅读代码时有一个清晰的结构脉络，这里先介绍一下该案例的类图结构。
 
 <div align="center">
-   <img src="/doc/resource/iterator/案例类图.png" width="80%"/>
+   <img src="/res/iterator/案例类图.png" width="80%"/>
 </div>
 
 案例的类图结构如上图所示，对于类图中的类的解释如下：
@@ -128,10 +128,10 @@ public void foreachTree(Tree rootNode) {
 
 ## 3.3 代码附录
 <div align="center">
-   <img src="/doc/resource/iterator/代码附录.png" width="95%"/>
+   <img src="/res/iterator/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/iterator)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/iterator)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -209,7 +209,7 @@ public class Client {
 典型迭代器模式的类图结构如下所示：
 
 <div align="center">
-   <img src="/doc/resource/iterator/经典迭代器模式类图.jpg" width="80%"/>
+   <img src="/res/iterator/经典迭代器模式类图.jpg" width="80%"/>
 </div>
 
 迭代器模式的参与者有如下：
@@ -309,4 +309,4 @@ public static void main(String[] args) {
 在本章的案例实现中，我们在封装性和扩展性之间选择了封装性。回顾我们在案例中基于链表实现的列表（LinkedList0），我们使用了一个内部类（LinkedIterator）来实现了链表的迭代器。如果某天需要在外部定义一个全新的迭代器类，有可能我们需要为列表增加一些方法（例如访问链表头的方法：`getHead():Node<E>`），以便我们能初始化迭代器对象。值得一提的是，JDK 实现的 ArrayList、LinkedList 等在这个问题上，作出了和我们同样的选择。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/iterator)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/iterator)

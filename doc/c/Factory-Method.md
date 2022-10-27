@@ -17,7 +17,7 @@
 
 类图如下所示：
 <div align="center">
-   <img src="/doc/resource/factory-method/案例之存储器结构.png" width="40%"/>
+   <img src="/res/factory-method/案例之存储器结构.png" width="40%"/>
 </div>
 
 将存储器看作是产品，那么客户端在需要时根据需求创建具体的产品。例如将对象转换为json格式并存储在磁盘的代码如下所示：
@@ -96,7 +96,7 @@ public class Client {
 ## 2.1 案例类图
 按着上面的分析进行实现，我们得到如下的类图结构：
 <div align="center">
-   <img src="/doc/resource/factory-method/案例类图.png" width="90%"/>
+   <img src="/res/factory-method/案例类图.png" width="90%"/>
 </div>
 
 在工厂接口（`FormatSaveFactory`）中，定义了一个创建产品的行为（`createSaver()`）。对于每一种具体的产品（例如`JsonSaver`），提供一个与之对应的工厂（例如`JsonSaveFactory`）。在这样的结构中，新增一种产品类型，我们只需要新增一个产品实现类，和一个匹配的产品工厂即可。无需改动现有的类。
@@ -111,10 +111,10 @@ public class Client {
 
 # 三、案例实现
 <div align="center">
-   <img src="/doc/resource/factory-method/代码附录.png" width="95%"/>
+   <img src="/res/factory-method/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/factory_method)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-creational/src/main/java/com/patterns/factory_method)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws Exception {
@@ -170,7 +170,7 @@ public class DTO {
 ```
 生成的文件如下图所示：
 <div align="center">
-   <img src="/doc/resource/factory-method/运行结果.png" width="20%"/>
+   <img src="/res/factory-method/运行结果.png" width="20%"/>
 </div>
 
 # 四、工厂方法模式
@@ -185,7 +185,7 @@ public class DTO {
 
 ## 4.2 类图结构
 <div align="center">
-   <img src="/doc/resource/factory-method/经典工厂方法模式类图.jpg" width="50%"/>
+   <img src="/res/factory-method/经典工厂方法模式类图.jpg" width="50%"/>
 </div>
 
 工厂方法模式的类图结构如上图所示。在工厂方法模式中，有如下的角色列表：
@@ -273,4 +273,4 @@ public interface FactoryBean<T> {
 ```
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/creational/factory_method)
+[回到主页](/README.md)&emsp;[案例代码](/cases-creational/src/main/java/com/patterns/factory_method)

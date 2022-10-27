@@ -25,7 +25,7 @@
 # 二、模式鉴别
 ## 【2.1】组合模式vs装饰器模式
 <div align="center">
-   <img src="/doc/resource/difference/组合vs装饰器.png" width="60%"/>
+   <img src="/res/difference/组合vs装饰器.png" width="60%"/>
 </div>
 
 组合模式和装饰器模式的通用类图结构如上图所示，从类图组成上看，他们均包含有抽象组件`Component`、具体组件（`ConcreteComponent`、`Leaf`）和聚合对象（`Composite`、`Decorator`）的角色。从功能上看，他们都能实现对象的递归组合。当装饰器模式中装饰器仅有一个时，我们可以省略抽象的装饰器，此时装饰器模式和组合模式的类图几乎一模一样。
@@ -34,7 +34,7 @@
 
 ## 【2.2】组合模式vs解释器模式
 <div align="center">
-   <img src="/doc/resource/difference/组合vs解释器.png" width="60%"/>
+   <img src="/res/difference/组合vs解释器.png" width="60%"/>
 </div>
 
 组合模式与解释器模式的结构差不多，这并不是巧合，事实上，我们可以认为**解释器模式中的某些部分**是组合模式的实例。在上面我们提到组合模式是为了将一系列对象聚集成树形结构，以此来表示“部分-整体”的关系。譬如汽车由发动机、轮胎、车座等部件组成，而发动机又由燃料系统、启动系统、点火系统和冷却系统等组成，此时所有的对象就组成了一棵树。如果汽车代表“整体”，那么发动机、轮胎、车座等部件就是“部分”；如果发动机作为“整体”，那么燃料系统、启动系统等才是“部分”。
@@ -47,7 +47,7 @@
 
 ## 【2.3】中介者模式vs门面模式
 <div align="center">
-   <img src="/doc/resource/difference/中介者vs门面.png" width="60%"/>
+   <img src="/res/difference/中介者vs门面.png" width="60%"/>
 </div>
 
 中介者模式和门面模式都通过增加一个中间对象来对系统解耦，中介者模式通过增加中介者对象`Mediator`来封装多个相互依赖的对象之间的交互，门面模式则提供了门面对象`Facade`来降低客户端在使用子系统时的复杂程度。
@@ -58,7 +58,7 @@
 
 ## 【2.4】桥模式vs抽象工厂模式
 <div align="center">
-   <img src="/doc/resource/difference/桥vs抽象工厂.png" width="75%"/>
+   <img src="/res/difference/桥vs抽象工厂.png" width="75%"/>
 </div>
 
 桥模式和抽象工厂模式本来没有共性，桥模式专注于分离抽象部分和实现部分，实际上我们所指的抽象部分和实现部分指的是对象的多个维度，关于这一点在[《多个维度之间的解耦 —— 桥模式》](/doc/s/Bridge.md)一篇中已经详细讨论过，此处不再赘述。而抽象工厂的目的在于创建一系列产品，并且更重要的是每组产品之间是相关或者相互依赖的。

@@ -2,7 +2,7 @@
 ---
 
 <div align="center">
-   <img src="/doc/resource/composite/树.png" width="60%"/>
+   <img src="/res/composite/树.png" width="60%"/>
 </div>
 
 如果一个应用的核心模型是树形结构，那么我们就能用组合模式来表示它，组合模式就是为树形结构量身定制的。接下来，我们通过一个例子来展开组合模式的学习。
@@ -41,12 +41,12 @@ public void destroyVirus(Folder f) {
 
 一般出现条件分支的地方就有可能出现多个行为，按照最少职责原则，我们应该针对于不同的文件类型，提供不同的对象予以表示；并且应对这些对象的行为进行统一，让其表现出相同的行为。简单来说，就是分别对图片格式和文本格式提供类`ImageFile`和`TextFile`，并且让他们都继承自抽象的`File`，并根据自身特点实现杀毒的行为。按照这个原则，得到以下的类图：
 <div align="center">
-   <img src="/doc/resource/composite/案例推导方案类图.jpg" width="70%"/>
+   <img src="/res/composite/案例推导方案类图.jpg" width="70%"/>
 </div>
 
 将目光聚集杀毒的方法上，我们发现：不论是文件夹还是文件，都提供了同样的方法签名，那么我们就可以针对于他们抽象出更加统一的行为。如下类图所示：
 <div align="center">
-   <img src="/doc/resource/composite/案例最终方案类图.jpg" width="70%"/>
+   <img src="/res/composite/案例最终方案类图.jpg" width="70%"/>
 </div>
 
 如上，我们将文件和文件夹的杀毒行为进行统一，对于文件夹的杀毒就是对下层的所有文件进行杀毒。文件夹维护了一个下层列表，对于列表中的元素，可以是文件夹类型，也可以是文件类型。另外提供了给列表添加元素的方法，对应着在文件夹下新增文件（或文件夹）的功能。对于新增一种文件类型来说，也只是新增一个`AbstractFile`的实现类，并且在需要的地方创建该实现类的实例即可。
@@ -57,10 +57,10 @@ OK，到这里我们已经实现了组合模式，这个类图这个就是组合
 
 # 三、案例实现
 <div align="center">
-   <img src="/doc/resource/composite/代码附录.png" width="95%"/>
+   <img src="/res/composite/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/composite)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-structural/src/main/java/com/patterns/composite)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -138,14 +138,14 @@ public class Client {
 
 所谓的更安全的组合模式，是指顶层接口（与客户端直接交互的接口）中只包含共有的行为，对于差异化的行为不应出现在顶层接口中，通用类图如下。
 <div align="center">
-   <img src="/doc/resource/composite/更安全的组合模式.jpg" width="60%"/>
+   <img src="/res/composite/更安全的组合模式.jpg" width="60%"/>
 </div>
 
 **更透明的组合模式**
 
 更透明的组合模式是指，顶层接口中不仅包含共有的行为，也包含有差异化的行为（比如给当前组件注册子组件、移除子组件等），通用类图如下。
 <div align="center">
-   <img src="/doc/resource/composite/更透明的组合模式.jpg" width="60%"/>
+   <img src="/res/composite/更透明的组合模式.jpg" width="60%"/>
 </div>
 
 **两种实现的对比**
@@ -244,5 +244,5 @@ public class CompositeCacheManager implements CacheManager, InitializingBean {
 可以看出，`CompositeCacheManager`使用了组合模式，并且采用的是更安全的组合模式。使用`CompositeCacheManager`我们可以让我们的项目同时支持多个缓存管理器，既可以用本地缓存，也可以用分布式缓存，还可以实现其他的缓存支持。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/composite)
+[回到主页](/README.md)&emsp;[案例代码](/cases-structural/src/main/java/com/patterns/composite)
 

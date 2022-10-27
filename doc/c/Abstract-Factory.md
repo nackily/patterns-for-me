@@ -14,7 +14,7 @@
 
 在那篇文章中，我们通过一步步的阐述，使用工厂方法模式为系统进行了建模。得到的整个类图结构如下图所示：
 <div align="center">
-   <img src="/doc/resource/factory-method/案例类图.png" width="90%"/>
+   <img src="/res/factory-method/案例类图.png" width="90%"/>
 </div>
 
 对该类图结构的概述如下：
@@ -33,7 +33,7 @@
 
 在上述需求中，并未对原来的需求进行变更，而是在原来的基础上进行了扩展了新的功能。除了支持将对象持久化到文件外，还要支持将文件中的数据还原成对象。这很简单，因为前半部分我们已经实现了，现在只需要依样画葫芦，照着前半部分的模型复刻后半部分就可以了。系统的完整类图如下所示。
 <div align="center">
-   <img src="/doc/resource/abstract-factory/案例解决方案一类图.jpg" width="80%"/>
+   <img src="/res/abstract-factory/案例解决方案一类图.jpg" width="80%"/>
 </div>
 
 在这个类图结构中，分为两部分，一部分是 Java 对象写入磁盘，为上半部分深色背景的结构；另一个是磁盘文件还原为 Java 对象，为下半部分浅色背景的结构。同`AbstractFormatSaver`一样，`AbstractFormatLoader`也提供了三个完全与之相反的方法：
@@ -66,7 +66,7 @@ Object obj = loader.loadAndResolve("key", toSaveObject.getClass());
 
 基于这个思路，我们只需要对系统的结构进行一个小的调整：将同一系列的产品的生产合并到一个工厂中实现。这样客户端就能通过一个工厂生产出具有相关性的产品，这些产品为同一系列，可以搭配使用。
 <div align="center">
-   <img src="/doc/resource/abstract-factory/案例类图.png" width="90%"/>
+   <img src="/res/abstract-factory/案例类图.png" width="90%"/>
 </div>
 
 如上图所示，为每一个系列的产品提供一个工厂，该工厂即可生产这一系列的产品，区别于工厂方法模式只能生产单个产品。例如，xml 系列的产品，可以由`XmlFactory`生产，包括有`XmlSaver`和`XmlLoader`。客户端在使用时，只需要获取到具体的工厂，即可调用`FormatFactory`提供的生产方法，获取对应的产品。像上面类图中的结构，提供了一个对外的工厂接口，这个接口中定义了创建一系列产品的方法；而每种系列的工厂实现这个接口，负责创建这个系列的产品，这就是抽象工厂模式。
@@ -75,10 +75,10 @@ Object obj = loader.loadAndResolve("key", toSaveObject.getClass());
 在深入讨论抽象工厂模式之前，我们先对上面的案例进行实现。因为该案例延伸自工厂方法模式中使用的案例，所以，部分代码（包括有`AbstractFormatSaver`、`JsonSaver`和`XmlSaver`）直接引用自工厂方法模式的代码。
 
 <div align="center">
-   <img src="/doc/resource/abstract-factory/代码附录.png" width="95%"/>
+   <img src="/res/abstract-factory/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/creational/abstract_factory)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-creational/src/main/java/com/patterns/abstract_factory)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) throws Exception {
@@ -152,7 +152,7 @@ public class DTO {
 ```
 运行生成的文件如下图所示：
 <div align="center">
-   <img src="/doc/resource/abstract-factory/运行结果.png" width="20%"/>
+   <img src="/res/abstract-factory/运行结果.png" width="20%"/>
 </div>
 
 # 四、抽象工厂模式
@@ -166,7 +166,7 @@ public class DTO {
 
 ## 4.2 类图分析
 <div align="center">
-   <img src="/doc/resource/abstract-factory/经典抽象工厂模式类图.jpg" width="80%"/>
+   <img src="/res/abstract-factory/经典抽象工厂模式类图.jpg" width="80%"/>
 </div>
 
 抽象工厂模式的类图结构如上所示，其有如下的参与者列表：
@@ -196,5 +196,5 @@ public class DTO {
 有时候客户端只需要使用一个具体的工厂，此时，我们可以在应用程序初始化阶段加载具体的工厂。比如在上面构建 UI 界面的例子中，应用程序在启动时，操作系统就已经确定，此时，对于所有的实现工厂来说，只有与当前操作系统一致的那个工厂才具有实际意义。所以，我们可以在应用程序初始化时就根据当前的操作系统环境加载与之对应的工厂。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/creational/abstract_factory)
+[回到主页](/README.md)&emsp;[案例代码](/cases-creational/src/main/java/com/patterns/abstract_factory)
 

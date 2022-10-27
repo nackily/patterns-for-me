@@ -2,7 +2,7 @@
 ---
 
 <div align="center">
-   <img src="/doc/resource/observer/Don't-call-us.png" width="50%"/>
+   <img src="/res/observer/Don't-call-us.png" width="50%"/>
 </div>
 
 在《编程导论（Java）》一书中，有一句非常著名的好莱坞法则：Don't call us, we'll call you。这原本是在描述 Java 语言的回调机制的，我暂且将其引用在此处，因为这句话所包含的思想与观察者模式的理念不谋而合。以下，我将通过一个例子展开讨论观察者模式。
@@ -31,17 +31,17 @@
 
 按照上面的分析，我们对整个过程进行建模，得出的类图结构如下所示：
 <div align="center">
-   <img src="/doc/resource/observer/案例类图.png" width="60%"/>
+   <img src="/res/observer/案例类图.png" width="60%"/>
 </div>
 
 在该类图结构中，对顾客进行了抽象，统一称呼为观察者（`Observer`），分为个人性质的顾客（`Person`）和组织性质的顾客（`Organization`）。他们都可被添加（`register()`）到水果店的通知列表中（`FruitShop#observers`），在有水果上新（`newest()`）时，将通知（`notifyObservers()`）所有关注着的顾客。在顾客接收通知（`accept()`）时，参数中包含水果店的上新内容。
 
 # 三、代码实现
 <div align="center">
-   <img src="/doc/resource/observer/代码附录.png" width="95%"/>
+   <img src="/res/observer/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/observer)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/observer)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -101,7 +101,7 @@ public class Client {
 ## 4.2 类图结构
 观察者模式描述了一种解决方案，这种解决方案在解决不同的实际问题时，会根据不同的场景作出相应的调整。抓住思想，跳出结构，就像武侠小说里描绘的那样，武学的最高境界在于意，而非形。如果你在其他的文章中看到了不一样的类图结构，不用为类图之间的结构差别感到疑惑。
 <div align="center">
-   <img src="/doc/resource/observer/经典观察者模式类图.jpg" width="70%"/>
+   <img src="/res/observer/经典观察者模式类图.jpg" width="70%"/>
 </div>
 
 观察者模式的参与角色有如下列表：
@@ -154,7 +154,7 @@ public class Client {
 
 在讨论这个问题之前，我们先了解一下，什么是推，什么是拉。所谓的推是指，在被观察的对象发生状态改变时，在通知的时候将变化的状态在参数中传递给所有观察者。比如`Observer.update(state:Object)`方法中的 state 就是变化的状态，这个过程就像是被观察的对象主动将状态变化推送到观察者。所以到目前为止，我们在文章中用的都是推的模型。那么什么又是拉模型呢？
 <div align="center">
-   <img src="/doc/resource/observer/观察者模式类图变种.jpg" width="60%"/>
+   <img src="/res/observer/观察者模式类图变种.jpg" width="60%"/>
 </div>
 
 上图就是拉模型，拉模型在收到通知后会主动向被观察对象拉取状态变化。为了满足主动拉取这一行为，我们不得不对类图结构进行调整，调整的内容我已在图中用不同的颜色区分。总体来说，改变的主要内容有增加获取状态的方法（`getState()`），观察者依赖了被观察的对象。
@@ -168,6 +168,6 @@ public class Client {
 在 jdk 中，已经提供了观察者模式的实现，他们分别是`java.util.Observer`和`java.util.Observable`。其中，Observable 就是被观察对象的模板类，已经提供了注册/注销/通知等核心方法，并且该类已经保证了线程安全。
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/observer)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/observer)
 
 

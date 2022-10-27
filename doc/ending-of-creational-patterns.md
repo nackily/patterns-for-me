@@ -3,7 +3,7 @@
 
 我们已经完整的介绍了 5 种创建型模式，他们分别是单例（Singleton）模式、原型（Prototype）模式、建造者（Builder）模式、工厂方法（Factory Method）模式和抽象工厂（Abstract Factory）模式。正如他们所属的分类名称一样，这几个模式都与对象的创建密切相关，但他们之间仍然有较大的区别，这些区别可能来自于类图结构、目的和所强调的侧重点等方面。
 <div align="center">
-   <img src="/doc/resource/ending-of-creational/创建型模式对比图.png" width="90%"/>
+   <img src="/res/ending-of-creational/创建型模式对比图.png" width="90%"/>
 </div>
 
 上图为所有创建型模式的类图结构（简化版）汇总图。

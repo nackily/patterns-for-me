@@ -17,7 +17,7 @@
 
 我们该如何描述购物车内商品所使用的优惠呢？或许可以按照优惠类型进行分类，并为其提供特定的优惠计算器对象表示。比如我们可以将优惠分为使用`满减计算器`、`抵用计算器`和`折扣计算器`。但同时，我们也要考虑多种优惠的组合，由此衍生出来有：`满减&抵用计算器`、`满减&折扣计算器`、`抵用&折扣计算器`、`满减&抵用&折扣计算器`。
 <div align="center">
-   <img src="/doc/resource/decorator/优惠类型扩展示意图.png" width="60%"/>
+   <img src="/res/decorator/优惠类型扩展示意图.png" width="60%"/>
 </div>
 
 此时，我们似乎意识到一些如下的问题。
@@ -57,7 +57,7 @@
 
 正如我们在问题中描述的那样，优惠的先后顺序可能影响最终的价格，所以价格计算的步骤是预定义且不允许修改的，否则我们将得到错误的最终结果。而对于任意一个组合优惠来说，最终的价格就是优惠的顺序叠加。如上表所示，一个优惠组合的价格计算可以总结为：从当前的最终价格中扣除即将优惠的价格，而当前的最终价格等于前一个优惠的最终价格扣钱前一个优惠的价格。这样说可能有些绕，或许下面的图更有助于理解。
 <div align="center">
-   <img src="/doc/resource/decorator/商品价格计算过程.png" width="80%"/>
+   <img src="/res/decorator/商品价格计算过程.png" width="80%"/>
 </div>
 
 正如该计算过程图所示，商品的最终价格从商品的原始总价一步一步的计算得出。如果我们有办法将每一次优惠的价格计算都封装在对象内部处理，并且各个对象可以相互替换，那剩下的两个问题也都能迎刃而解。
@@ -74,17 +74,17 @@
 ## 3.1 案例类图
 按照上诉的分析，我们得到如下的类图结构。
 <div align="center">
-   <img src="/doc/resource/decorator/案例类图.png" width="90%"/>
+   <img src="/res/decorator/案例类图.png" width="90%"/>
 </div>
 
 在该类图中，`CostCalculator`表示抽象的费用计算器，定义了两个行为，分别是优惠的描述`description()`和计算费用`finalCost()`。`ShoppingCart`代表购物车，除了实现`CostCalculator`中定义的行为外，还有添加商品`addGoods()`和获取商品列表的详细信息`getDetails()`，`GoodDetail`为商品类。`AbstractCostDecorator`为抽象的优惠计算器，统一定义了所有优惠计算器所需的依赖`calculator`，三个实现类分别是折扣计算器`DiscountDecorator`、满减计算器`FullDiscountDecorator`和抵用计算器`VoucherDecorator`。在满减计算器中，提供了获取当前总金额是否跨过满减门槛的方法`aboveThreshold()`。
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/decorator/代码附录.png" width="95%"/>
+   <img src="/res/decorator/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/decorator)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-structural/src/main/java/com/patterns/decorator)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -134,7 +134,7 @@ public class Client {
 ## 4.2 类图结构
 让我们看一下更加通用的装饰器模式的类图结构：
 <div align="center">
-   <img src="/doc/resource/decorator/经典装饰器模式类图.jpg" width="50%"/>
+   <img src="/res/decorator/经典装饰器模式类图.jpg" width="50%"/>
 </div>
 
 装饰器模式的参与角色如下：
@@ -161,17 +161,17 @@ public class Client {
 **（1）java.io.InputStream**
 
 <div align="center">
-   <img src="/doc/resource/decorator/InputStream.png" width="70%"/>
+   <img src="/res/decorator/InputStream.png" width="70%"/>
 </div>
 
 **（2）javax.servlet.ServletRequestWrapper**
 
 <div align="center">
-   <img src="/doc/resource/decorator/ServletRequestWrapper.png" width="80%"/>
+   <img src="/res/decorator/ServletRequestWrapper.png" width="80%"/>
 </div>
 
 ServletRequestWrapper是ServletRequest接口的装饰器实现，开发者可以继承ServletRequestWrapper去扩展原有的ServletRequest。
 
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/decorator)
+[回到主页](/README.md)&emsp;[案例代码](/cases-structural/src/main/java/com/patterns/decorator)

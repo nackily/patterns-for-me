@@ -68,7 +68,7 @@ public class ATMApplication {
 
 责任链模式建议我们将一块一块的逻辑（分配 100 元纸币、分配 50 元纸币等）封装成为多个对象，并且将这些对象按照顺序进行组织，成为一个处理请求对象的链条。这样我们就可以将请求投递给链条，请求在链条中按照顺序逐个传递，每一个处理对象可选择对请求处理或者不处理。此时出钞的过程如下图所示：
 <div align="center">
-   <img src="/doc/resource/chain-of-responsibility/出钞过程示意图.jpg" width="90%"/>
+   <img src="/res/chain-of-responsibility/出钞过程示意图.jpg" width="90%"/>
 </div>
 
 从上图中，我们看出所有的组件（处理器）都有着两个共同的特点：分配对于面额的纸币、连接着后继处理器（尾处理器除外）。为了使所有的组件去差异化，我们应该对组件进行抽象，这样我们就可以使任意一个组件成为某个组件的后继，甚至可以随意调换他们之间的顺序。
@@ -78,17 +78,17 @@ public class ATMApplication {
 ## 3.1 案例类图
 按照上面的思路，我们对系统进行重构，新的类图结构如下图所示。
 <div align="center">
-   <img src="/doc/resource/chain-of-responsibility/案例类图.jpg" width="100%"/>
+   <img src="/res/chain-of-responsibility/案例类图.jpg" width="100%"/>
 </div>
 
 > 在应用启动时，通过`AbstractPaperPasCurrencyAllocator.nextAllocator()`提前构造好链路【`RMB100Allocator -> RMB50Allocator -> RMB10Allocator` 】。当用户发起兑换现金的请求后，请求首先到达 100 元的分配处理器。在该处理器分配完毕后，会根据请求中剩余的金额（`CurrencyRequest.toAllocateAmount`）决定是否继续向后继处理器传递请求，如此往复。直到请求从链路中脱离时，应用开始出钞（`CurrencyRequest.cashOut()`），如果全部金额正常分配，则为用户提供现金，否则告知用户系统无法提供本次服务。
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/chain-of-responsibility/代码附录.png" width="95%"/>
+   <img src="/res/chain-of-responsibility/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)。ATM 应用示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-behavioral/src/main/java/com/patterns/chain_of_responsibility)。ATM 应用示例代码如下
 ```java
 public class ATMApplication {
 
@@ -133,7 +133,7 @@ public class ATMApplication {
 ## 4.2 类图分析
 
 <div align="center">
-   <img src="/doc/resource/chain-of-responsibility/经典责任链模式类图.jpg" width="60%"/>
+   <img src="/res/chain-of-responsibility/经典责任链模式类图.jpg" width="60%"/>
 </div>
 
 责任链模式的类图结构如上所示，在责任链模式中，有如下的参与角色：
@@ -186,7 +186,7 @@ public class ATMApplication {
 在责任链模式的类图分析处，我们提到 Handler 不一定非要提供一个设置后继处理器的接口。我们可以把链路的维护职责独立出来，这也是责任链模式的一个变种实现。这个变种的类图结构如下：
 
 <div align="center">
-   <img src="/doc/resource/chain-of-responsibility/责任链模式变种类图.jpg" width="80%"/>
+   <img src="/res/chain-of-responsibility/责任链模式变种类图.jpg" width="80%"/>
 </div>
 
 在这个类图结构中，整个链路由 HandlerChain 负责维护，提供了增加处理器，删除处理器等方法。除此之外，HandlerChain 本身也实现了处理器接口，在它的处理方法（handle）中，也负责请求在整个链路中的传递。它内部维护了当前的处理器在整个链路中的索引，在客户端发起一个请求后：
@@ -205,7 +205,7 @@ public class ATMApplication {
 在 servlet 规范中，约定了可以通过 Filter 在请求进入容器后，执行 Servlet.service() 方法之前，对 web 资源进行过滤，权限鉴别等处理。在 tomcat 启动时，会加载所有的过滤器信息。在 tomcat 收到请求时，再加载整个过滤器的链路，然后请求执行过滤器的链条，等请求从链路中脱离后，才会进入真正的业务接口。工作过程如下图所示：
 
 <div align="center">
-   <img src="/doc/resource/chain-of-responsibility/Filter工作过程示意图.jpg" width="80%"/>
+   <img src="/res/chain-of-responsibility/Filter工作过程示意图.jpg" width="80%"/>
 </div>
 
 在 tomcat 中，每一个 Filter 都是一个处理器，该处理器不仅能处理请求，还能处理响应。如上图，对于 request 来说，链路的结构为 FilterA ->  FilterB -> FilterC，而对于响应来说，链路的结构为  FilterC ->  FilterB -> FilterA。这种双向处理的思想很经典，经常能在各个框架中看到类似的实现。那么，是如何实现的呢？下面将简单分析一下源码。
@@ -361,7 +361,7 @@ public final class ApplicationFilterChain implements FilterChain {
 netty 中的 pipeline 则采用了双向链表的形式来组织所有处理器。netty 在设计上认为，对于入站的数据来说（收到的数据），给链路中的所有处理器都提供一个处理机会，出站同理（这里讨论的是 channel 提供的写出方法，对于 context 提供的并不适用）。在 netty 中，处理器的结构示意图如下：
 
 <div align="center">
-   <img src="/doc/resource/chain-of-responsibility/netty处理器结构示意图.jpg" width="90%"/>
+   <img src="/res/chain-of-responsibility/netty处理器结构示意图.jpg" width="90%"/>
 </div>
 
 netty 中，所有的处理器都继承自 ChannelHandler 接口，由该接口衍生出 ChannelInboundHandler 和 ChannelOutboundHandler，分别是入站数据处理器和出站数据处理器。他们分别为数据的入站和出站服务，当数据入站时，只有链路上的入站处理器会得到处理的机会；出站同理。
@@ -450,4 +450,4 @@ abstract class AbstractChannelHandlerContext implements
 
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/behavioral/chain_of_responsibility)
+[回到主页](/README.md)&emsp;[案例代码](/cases-behavioral/src/main/java/com/patterns/chain_of_responsibility)

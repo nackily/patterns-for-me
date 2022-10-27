@@ -11,7 +11,7 @@
 
 然后，此时有一个外部系统，需要与现有的系统进行交互（为了区分，我们将现有的系统称呼为子系统）。外部系统和子系统之间的依赖关系很可能就如下图这样：
 <div align="center">
-   <img src="/doc/resource/facade/子系统与外部系统依赖关系.jpg" width="90%"/>
+   <img src="/res/facade/子系统与外部系统依赖关系.jpg" width="90%"/>
 </div>
 
 > 上面图没有实际的意义，只是为了演示两个复杂系统之间对接的情况，图本身没有表达任何现实意义。
@@ -27,7 +27,7 @@
 # 二、解决方案
 既然使用方抱怨交互太复杂，那么我就简化子系统的交互逻辑，把这个简化后的逻辑提取到单独的类中去实现，这就是门面模式所要解决的问题。门面模式建议我们隐藏内部交互的复杂性，为外部提供一个统一的交互入口，这个交互入口应尽可能的简单，以此降低客户端使用时的难度。
 <div align="center">
-   <img src="/doc/resource/facade/引入门面模式后依赖关系.jpg" width="90%"/>
+   <img src="/res/facade/引入门面模式后依赖关系.jpg" width="90%"/>
 </div>
 
 对比前后两张图，在使用门面模式后：
@@ -52,17 +52,17 @@ OK，到此为止，我们已经了解了门面模式所有核心的内容，是
 ## 3.2 结构分析
 该例子对应的类图结构如下图所示：
 <div align="center">
-   <img src="/doc/resource/facade/案例类图.png" width="95%"/>
+   <img src="/res/facade/案例类图.png" width="95%"/>
 </div>
 
 上面的类图结构看起来比较复杂，但大部分都不是本文的重点，我们的重点是图中的`ModelFacade`那部分。`ModelFacade`表示了案例中的中控面板，也就是一个门面。图中处于深色背景部分的对象都隐藏在该门面后，由他们负责完成了一系列的工作。对于用户（客户端）来说，只需要从中控面板中已提供的几种模式中进行选择，就可以切换到与之对应的房间效果。
 
 ## 3.2 代码附录
 <div align="center">
-   <img src="/doc/resource/facade/代码附录.png" width="95%"/>
+   <img src="/res/facade/代码附录.png" width="95%"/>
 </div>
 
-代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/facade)。客户端示例代码如下
+代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-structural/src/main/java/com/patterns/facade)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -148,4 +148,4 @@ public class Client {
 
 
 # 附录
-[回到主页](/README.md)&emsp;[案例代码](/src/main/java/com/aoligei/structural/facade)
+[回到主页](/README.md)&emsp;[案例代码](/cases-structural/src/main/java/com/patterns/facade)

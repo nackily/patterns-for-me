@@ -22,7 +22,7 @@
 ## 1.2 代理的关系
 通过上面的梳理，我们得到如下的角色和他们之间的关系图：
 <div align="center">
-   <img src="/doc/resource/proxy/代理关系示意图.jpg" width="50%"/>
+   <img src="/res/proxy/代理关系示意图.jpg" width="50%"/>
 </div>
 
 总结来说，代理主要包括 4 个角色，他们分别是：代理协议、代理人、被代理人和第三人，代理人和被代理人通过签订代理协议的方式来约定代理的权限范围，这样一来，被代理人和第三人之间的法律事务就可以由代理人出现解决，我们认为被代理人将自身相关的法律权益和责任委托给代理人了。
@@ -43,7 +43,7 @@
 
 ## 2.2 类图分析
 <div align="center">
-   <img src="/doc/resource/proxy/代理模式类图.jpg" width="70%"/>
+   <img src="/res/proxy/代理模式类图.jpg" width="70%"/>
 </div>
 
 在类图结构中，共有 4 种角色，对各个角色的分析如下：
@@ -65,10 +65,10 @@
 > 具体做法是，为图像对象提供一个代理对象，在真正需要展示图像的时候才去加载图像（代理类的绘制方法中才去初始化真实的图片对象），这样就可以避免在初始化图像对象时就不得不加载图像的尴尬境地。
 
 <div align="center">
-   <img src="/doc/resource/proxy/虚拟代理代码附录.png" width="95%"/>
+   <img src="/res/proxy/虚拟代理代码附录.png" width="95%"/>
 </div>
 
-该案例的代码层次及类说明如上所示，更多内容请参考[案例代码](/src/main/java/com/aoligei/structural/proxy/virtual_proxy)。客户端示例代码如下
+该案例的代码层次及类说明如上所示，更多内容请参考[案例代码](/cases-structural/src/main/java/com/patterns/proxy/virtual_proxy)。客户端示例代码如下
 ```java
 public class Client {
     public static void main(String[] args) {
@@ -111,7 +111,7 @@ public class Client {
 > 这实际上已经超出了代理模式所表述的场景了，因为代理方和被代理方已经不属于同一个 JVM实例 的管辖范围了。在本地服务调用远程服务接口时，本地服务的代理对象代理的是远程服务（另一个 JVM实例）上的对象。举例来说，远程服务上有一个接口 Api，该接口会返回一些数据 Data；在本地服务上，我们也提供了一个拥有 Api 方法的代理对象，在该方法中通过网络转发到远程服务的 Api 方法上执行，并将结果返回到本地的代理对象。
 
 <div align="center">
-   <img src="/doc/resource/proxy/远程代理交互过程.svg" width="50%"/>
+   <img src="/res/proxy/远程代理交互过程.svg" width="50%"/>
 </div>
 
 远程代理的时序图如上所示，代理层作为客户端和远程接口之间的桥梁，为客户端隐藏了复杂的网络交互细节。这种思想在 web 开发中被广泛应用，比如现今的`HTTP远程调用`和`RPC远程调用`技术，使得开发者可以像使用本地方法一样调用远端接口。
@@ -119,7 +119,7 @@ public class Client {
 ## 3.4 缓存请求的结果
 代理可以对于重复请求所对应的结果进行缓存，对于相同的请求来说，第一次获取结果并放入缓存中，之后的请求可以从缓存中直接获取，而不必再次向被代理对象转发请求。在获取结果的过程开销很大时（比如请求的数据来源于传统数据库，获取结果意味着与数据库交互），代理对于系统的提升是质的飞越。 缓存代理的时序图如下所示
 <div align="center">
-   <img src="/doc/resource/proxy/缓存代理时序图.svg" width="40%"/>
+   <img src="/res/proxy/缓存代理时序图.svg" width="40%"/>
 </div>
 
 ## 3.5 真实对象的引用计数
@@ -147,13 +147,13 @@ public class Client {
 
 因为 jdk 的动态代理有一个缺点——只能代理接口（Interface）。如果目标类没有实现接口，那么就无法使用 jdk 的动态代理。而 cglib 则可以支持类的动态代理，这意味着使用 cglib 即便目标类没有接口，同样可以代理类中的目标方法。下图是两种代理实现的类图对比。
 <div align="center">
-   <img src="/doc/resource/proxy/两种动态代理对比.jpg" width="90%"/>
+   <img src="/res/proxy/两种动态代理对比.jpg" width="90%"/>
 </div>
 
 ## 4.3 动态代理示例
 这里，我们以 jdk 动态代理为例，演示如何使用 jdk 的动态代理，cglib 的动态代理有兴趣的同学可自行查阅资料。更多关于动态代理的实现原理我已整理并放在代码注释中。
 <div align="center">
-   <img src="/doc/resource/proxy/JDK代理代码附录.png" width="95%"/>
+   <img src="/res/proxy/JDK代理代码附录.png" width="95%"/>
 </div>
 
 客户端示例代码如下
@@ -194,4 +194,4 @@ public class Client {
 
 
 # 附录
-[回到主页](/README.md)&emsp;[延迟对象初始化案例](/src/main/java/com/aoligei/structural/proxy/virtual_proxy)&emsp;[JDK动态代理示例](/src/main/java/com/aoligei/structural/proxy/jdk_proxy)
+[回到主页](/README.md)&emsp;[延迟对象初始化案例](/cases-structural/src/main/java/com/patterns/proxy/virtual_proxy)&emsp;[JDK动态代理示例](/cases-structural/src/main/java/com/patterns/proxy/jdk_proxy)
