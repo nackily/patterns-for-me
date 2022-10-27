@@ -2,37 +2,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.aoligei</groupId>
-    <artifactId>patterns-for-me</artifactId>
+    <groupId>com.patterns</groupId>
+    <artifactId>cases</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.1</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.10.2</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- 解压缩.7z格式-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tukaani</groupId>
-            <artifactId>xz</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-    </dependencies>
-
     <properties>
+        <cases-code.version>1.0.1</cases-code.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <java.version>1.8</java.version>
+        <jackson-databind.version>2.10.2</jackson-databind.version>
+        <commons-compress.version>1.9</commons-compress.version>
+        <xz.version>1.4</xz.version>
     </properties>
+
+    <modules>
+        <module>cases-behavioral</module>
+        <module>cases-creational</module>
+        <module>cases-structural</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- jackson-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- 解压缩.7z格式-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${commons-compress.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tukaani</groupId>
+                <artifactId>xz</artifactId>
+                <version>${xz.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
