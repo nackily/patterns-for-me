@@ -1,4 +1,10 @@
-## 设计模式之于我
+# 设计模式之于我
+
+<p align="center">
+    <img alt="Number-of-words" src="https://img.shields.io/badge/number%20of%20words-13w%2B-orange"/>
+    <img alt="reference" src="https://img.shields.io/badge/reference-%E3%80%8ADesign%20Patterns%20--%20Elements%20of%20Reusable%20Object--Oriented%20Software%E3%80%8B-brightgreen"/>
+</p>
+
 ---
 
 2021 年下半年的某个夜里，我接到同事打来的电话，他希望我帮忙解决一个技术问题。这个问题本身并不复杂，麻烦的是他在翻看底层源码时，被里面的复杂关系搞的晕头转向。虽然作者已经使用`Decorator`结尾来表明相关类使用了装饰器模式，但显然我工作四年多的同事并不知道这一点。我问他之前有学习过设计模式吗？他告诉我之前尝试学习过，但书籍里的理论过于深奥，网上的资料又是抄来抄去，慢慢的就放弃了。这样的情况我已经遇到不止一次了，很多有工作经验的同事在面向对象设计能力上的欠缺让我有些惊讶，他们要么不愿意花时间丰富自己，要么就抱怨设计模式是那么隐晦、那么难以理解，以至于他们总是被拒之门外。
